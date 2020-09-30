@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const MainPage = (props) => {
-
   const {countOffers} = props;
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
