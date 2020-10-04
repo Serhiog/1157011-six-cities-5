@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import React, {Fragment} from "react";
+import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import MainPage from "../main-page/main-page";
 import EmptyMainPage from "../empty-main-page/empty-main-page";
@@ -10,7 +10,7 @@ import EmptyFavorites from "../empty-favorites/empty-favorites";
 import Offer from "../offer/offer";
 
 const App = (props) => {
-  const { countOffers } = props;
+  const {countOffers} = props;
 
   return (
     <BrowserRouter>
@@ -18,7 +18,7 @@ const App = (props) => {
         <Route exact path="/">
           <MainPage countOffers={countOffers} />
         </Route>
-        <Route exact path="/empty-main">
+        <Route exact path="/main-empty">
           <EmptyMainPage />
         </Route>
         <Route exact path="/login">
@@ -27,17 +27,27 @@ const App = (props) => {
         <Route exact path="/offer-not-logged">
           <OfferNotLogged />
         </Route>
-        <Route exact path="/offer">
-          <Offer />
-        </Route>
+        <Route path="/offer/:id?" exact component={Offer} />
         <Route exact path="/favorites">
           <Favorites />
         </Route>
-        <Route exact path="/empty-favorites">
+        <Route exact path="/favorites-empty">
           <EmptyFavorites />
         </Route>
+        <Route
+          render={() => (
+            <Fragment>
+              <h1>
+                404.
+                <br />
+                <small>Page not found</small>
+              </h1>
+              <Link to="/">Go to main page</Link>
+            </Fragment>
+          )}
+        />
       </Switch>
-    </BrowserRouter>
+    </BrowserRouter >
 
   );
 };
