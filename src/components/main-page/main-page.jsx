@@ -5,7 +5,7 @@ const MainPage = (props) => {
   const {countOffers} = props;
 
   return (
-    <div className="page page--gray page--main">
+    <div className="page page--gray page--main">2
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
