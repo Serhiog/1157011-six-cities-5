@@ -1,5 +1,5 @@
-import React, {Fragment} from "react";
-import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
+import React, { Fragment } from "react";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import MainPage from "../main-page/main-page";
 import EmptyMainPage from "../empty-main-page/empty-main-page";
@@ -10,13 +10,15 @@ import EmptyFavorites from "../empty-favorites/empty-favorites";
 import Offer from "../offer/offer";
 
 const App = (props) => {
-  const {countOffers} = props;
-
+  const { countOffers, offers } = props;
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MainPage countOffers={countOffers} />
+          <MainPage
+            countOffers={countOffers}
+            offers={offers}
+          />
         </Route>
         <Route exact path="/main-empty">
           <EmptyMainPage />
@@ -54,6 +56,7 @@ const App = (props) => {
 
 App.propTypes = {
   countOffers: PropTypes.number.isRequired,
+  offers: PropTypes.array.isRequired,
 };
 
 export default App;
