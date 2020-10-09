@@ -9,7 +9,7 @@ class Card extends PureComponent {
   render() {
     const { offer, handleOfferCard } = this.props;
     return (
-      < article className="cities__place-card place-card" onMouseOver={(evt) => handleOfferCard(evt.target)}>
+      < article className="cities__place-card place-card" onMouseOver={(evt) => handleOfferCard(evt.target.closest(`.cities__place-card`))}>
         {offer.isPremium ?
           <div className="place-card__mark">
             <span>Premium</span>
