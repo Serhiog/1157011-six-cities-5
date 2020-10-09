@@ -6,12 +6,14 @@ import OfferCard from "../offer-card/offer-card";
 class OffersList extends PureComponent {
   constructor(props) {
     super(props);
+    this.state = null;
   }
   render() {
     const { offers } = this.props;
-    // const handleOfferCard = (card) => {
-    //   console.log(card);
-    // }
+    const handleOfferCard = (activeCard) => {
+      this.setState({ activeCard });
+      console.log(this.state);
+    };
 
     return (
       <div className="cities__places-list places__list tabs__content">
@@ -19,6 +21,7 @@ class OffersList extends PureComponent {
           <OfferCard
             key={i}
             offer={offer}
+            handleOfferCard={handleOfferCard}
           />)}
       </div>
     );
