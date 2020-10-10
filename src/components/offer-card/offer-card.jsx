@@ -1,15 +1,16 @@
-import React, { PureComponent } from "react";
-import { PropTypes4Offer } from "../../consts";
+import React from "react";
+import { PropTypes4Offer } from "../../propConsts";
 import PropTypes from "prop-types";
 
-class Card extends PureComponent {
+class Card extends React.Component {
   constructor(props) {
     super(props);
   }
+
   render() {
-    const { offer, handleOfferCard } = this.props;
+    const { offer, offerId, handleOfferCard } = this.props;
     return (
-      < article className="cities__place-card place-card" onMouseOver={(evt) => handleOfferCard(evt.target.closest(`.cities__place-card`))}>
+      < article data-id={offerId} className="cities__place-card place-card" onMouseOver={(evt) => handleOfferCard(evt.target.closest(`.cities__place-card`).dataset.id)}>
         {offer.isPremium ?
           <div className="place-card__mark">
             <span>Premium</span>
@@ -17,7 +18,7 @@ class Card extends PureComponent {
           : ``}
         <div className="cities__image-wrapper place-card__image-wrapper">
           <a href="#">
-            <img className="place-card__image" src={offer.photos} width={260} height={200} alt="Place image" />
+            <img className="place-card__image" src={offer.photos[0]} width={260} height={200} alt="Place image" />
           </a>
         </div>
         <div className="place-card__info">
@@ -49,8 +50,9 @@ class Card extends PureComponent {
   }
 }
 Card.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
+  offer: PropTypes.shape(PropTypes4Offer),
   handleOfferCard: PropTypes.func.isRequired,
+  offerId: PropTypes.number.isRequired,
 };
 
 export default Card;

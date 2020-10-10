@@ -1,10 +1,10 @@
 import React from "react";
-import { PropTypes4Offer } from "../../consts";
+import { PropTypes4Offer } from "../../propConsts";
 import PropTypes from "prop-types";
-import OffersList from "../offers-list/offers-list";
+import OfferList from "../offers-list/offer-list";
 
 const MainPage = (props) => {
-  const { countOffers, offers } = props;
+  const { offers } = props;
   return (
     <div className="page page--gray page--main">2
       <header className="header">
@@ -71,7 +71,7 @@ const MainPage = (props) => {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{countOffers} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -93,7 +93,7 @@ const MainPage = (props) => {
                   <option className="places__option" value="top-rated">Top rated first</option>
                 </select>
               </form>
-              <OffersList
+              <OfferList
                 offers={offers}
               />
             </section>
@@ -108,8 +108,7 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  countOffers: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)) // Нужно ли здесь их проверять через PropsTypes ? Бть может передать в offer-card и там их проверить ?
+  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer))
 };
 
 export default MainPage;

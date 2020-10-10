@@ -4,19 +4,17 @@ import PropTypes from "prop-types";
 import MainPage from "../main-page/main-page";
 import EmptyMainPage from "../empty-main-page/empty-main-page";
 import Login from "../login/login";
-import OfferNotLogged from "../offer-not-logged/offer-not-logged";
 import Favorites from "../favorites/favorites";
 import EmptyFavorites from "../empty-favorites/empty-favorites";
 import Offer from "../offer/offer";
 
 const App = (props) => {
-  const { countOffers, offers } = props;
+  const { offers } = props;
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
           <MainPage
-            countOffers={countOffers}
             offers={offers}
           />
         </Route>
@@ -27,9 +25,13 @@ const App = (props) => {
           <Login />
         </Route>
         <Route exact path="/offer-not-logged">
-          <OfferNotLogged />
+          <Offer
+            noLogged={true}
+            offer={offers[0]}
+          />
         </Route>
-        <Route path="/offer/:id?" exact component={Offer} />
+        <Route path="/offer/:id?" exact component={Offer}
+        />
         <Route exact path="/favorites">
           <Favorites />
         </Route>
@@ -55,7 +57,6 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  countOffers: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
 };
 

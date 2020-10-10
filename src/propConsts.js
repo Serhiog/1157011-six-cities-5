@@ -12,5 +12,7 @@ export const PropTypes4Offer = {
   review: PropTypes.string.isRequired,
   rooms: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
-
+  id: PropTypes.number.isRequired,
+  ownerPhoto: PropTypes.string.isRequired,
+  ownerName: PropTypes.string.isRequired,
 }

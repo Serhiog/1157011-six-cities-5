@@ -1,19 +1,33 @@
 export default [
   {
-    type: `flat`,
+    type: `Flat`,
     price: 740,
     maxCopacity: 3,
-    features: [`wi-fi`, `tv`, `parking`, `Coffee machine`, `Dishwasher`],
-    photos: [`http://lorempixel.com/260/200/city/`],
+    features: [`wi-fi`, `tv`, `parking`, `Coffee machine`, `Dishwasher`, `breakfast`, `live music`],
+    photos: [`http://lorempixel.com/260/198/city/`, `http://lorempixel.com/260/200/city/`, `http://lorempixel.com/260/199/city/`, `http://lorempixel.com/260/203/city/`, `http://lorempixel.com/260/202/city/`, `http://lorempixel.com/260/201/city/`],
     description: `In deserunt voluptate est eiusmod cillum excepteur magna reprehenderit amet ut est.`,
     review: `Sit proident Lorem enim magna qui nostrud irure reprehenderit Lorem elit do.`,
     isPremium: false,
     rating: `80%`,
     rooms: 3,
-    aboutOwner: `Cupidatat ad incididunt ea aute esse officia ipsum aliquip amet dolore magna.`
+    aboutOwner: `Cupidatat ad incididunt ea aute esse officia ipsum aliquip amet dolore magna.`,
+    ownerPhoto: `http://lorempixel.com/74/74/people/`,
+    ownerName: `Pandemia`,
+    reviews: [
+      [
+        {
+          name: `Rudolf`,
+          photo: `http://lorempixel.com/54/54/people/`,
+          rating: `77%`,
+          message: `Consequat eiusmod dolor anim ea anim mollit do voluptate labore deserunt est laborum excepteur culpa.`,
+          date: new Date(),
+        }
+      ]
+    ],
+    id: 1,
   },
   {
-    type: `house`,
+    type: `House`,
     price: 1380,
     maxCopacity: 7,
     features: [`wi-fi`, `tv`, `parking`, `breakfasts`, `elevator`, `security`, `Coffee machine`, `Dishwasher`],
@@ -23,10 +37,24 @@ export default [
     isPremium: true,
     rating: `30%`,
     rooms: 6,
-    aboutOwner: `Proident in labore in eiusmod anim excepteur aliquip do ipsum minim incididunt.`
+    aboutOwner: `Proident in labore in eiusmod anim excepteur aliquip do ipsum minim incididunt.`,
+    ownerPhoto: `http://lorempixel.com/400/201/people/`,
+    ownerName: `Vasya`,
+    reviews: [
+      [
+        {
+          name: `Rudolf`,
+          photo: `http://lorempixel.com/54/54/people/`,
+          rating: `77%`,
+          message: `Consequat eiusmod dolor anim ea anim mollit do voluptate labore deserunt est laborum excepteur culpa.`,
+          date: `12/01/19`
+        }
+      ]
+    ],
+    id: 2,
   },
   {
-    type: `hostel`,
+    type: `Hostel`,
     price: 250,
     maxCopacity: 1,
     features: [`wi-fi`, `Dishwasher`],
@@ -36,10 +64,24 @@ export default [
     isPremium: false,
     rating: `75%`,
     rooms: 1,
-    aboutOwner: `Exercitation incididunt esse esse sit laborum pariatur fugiat voluptate consectetur sunt magna aliqua mollit nulla.`
+    aboutOwner: `Exercitation incididunt esse esse sit laborum pariatur fugiat voluptate consectetur sunt magna aliqua mollit nulla.`,
+    ownerPhoto: `http://lorempixel.com/400/199/people/`,
+    ownerName: `Petro`,
+    reviews: [
+      [
+        {
+          name: `Rudolf`,
+          photo: `http://lorempixel.com/54/54/people/`,
+          rating: `77%`,
+          message: `Consequat eiusmod dolor anim ea anim mollit do voluptate labore deserunt est laborum excepteur culpa.`,
+          date: `12/01/19`
+        }
+      ]
+    ],
+    id: 3,
   },
   {
-    type: `bungalo`,
+    type: `Bungalo`,
     price: 500,
     maxCopacity: 2,
     features: [`nature`],
@@ -49,6 +91,20 @@ export default [
     isPremium: false,
     rating: `90%`,
     rooms: 0,
-    aboutOwner: `Fugiat pariatur sit enim excepteur do nulla.`
+    aboutOwner: `Fugiat pariatur sit enim excepteur do nulla.`,
+    ownerPhoto: `http://lorempixel.com/400/198/people/`,
+    ownerName: `Anton`,
+    reviews: [
+      [
+        {
+          name: `Rudolf`,
+          photo: `http://lorempixel.com/54/54/people/`,
+          rating: `77%`,
+          message: `Consequat eiusmod dolor anim ea anim mollit do voluptate labore deserunt est laborum excepteur culpa.`,
+          date: `12/01/19`
+        }
+      ]
+    ],
+    id: 4,
   }
 ];
