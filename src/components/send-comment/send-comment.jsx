@@ -4,24 +4,33 @@ class SendComment extends React.Component {
   constructor(props) {
     super(props);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleLengthMessage = this.handleLengthMessage.bind(this);
     this.state = {
       comment: ``,
-      rate: 0,
+      rating: 0
     };
-    this.yyy = false;
   }
 
   handleFormSubmit(evt) {
     evt.preventDefault();
+    const data = new FormData(evt.target);
+    this.setState({
+      comment: data.get(`review`),
+      rating: data.get(`rating`)
+    });
+  }
+
+  handleLengthMessage(evt) {
+    evt.preventDefault();
     if (evt.target.value.length >= 50) {
-      console.log(`mas 50`);
-      this.yyy = true;
+      console.log(`mas >50`);
     }
+
   }
 
   render() {
     return (
-      <form className="reviews__form form" action="#" method="post">
+      <form onSubmit={this.handleFormSubmit} className="reviews__form form" action="#" method="post">
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
           <input className="form__rating-input visually-hidden" name="rating" id="5-stars" type="radio" defaultValue={5} />
@@ -45,10 +54,10 @@ class SendComment extends React.Component {
             <svg className="form__star-image" width={37} height={33}><use xlinkHref="#icon-star" /></svg>
           </label>
         </div>
-        <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" defaultValue={""} onChange={this.handleFormSubmit} />
+        <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" defaultValue={""} onChange={this.handleLengthMessage} />
         <div className="reviews__button-wrapper">
           <p className="reviews__help">To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.</p>
-          <button className="reviews__submit form__submit button" type="submit">Submit</button>
+          <button className="reviews__submit form__submit button" type="submit" >Submit</button>
         </div>
       </form>
     );
