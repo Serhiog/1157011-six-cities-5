@@ -1,6 +1,7 @@
 import React from "react";
-import { PropTypes4Offer } from "../../propConsts";
+import {PropTypes4Offer} from "../../propConsts";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 class Card extends React.Component {
   constructor(props) {
@@ -8,8 +9,10 @@ class Card extends React.Component {
   }
 
   render() {
-    const { offer, offerId, handleOfferCard } = this.props;
+    const {offer, offerId, handleOfferCard} = this.props;
+
     return (
+
       < article data-id={offerId} className="cities__place-card place-card" onMouseOver={(evt) => handleOfferCard(evt.target.closest(`.cities__place-card`).dataset.id)}>
         {offer.isPremium ?
           <div className="place-card__mark">
@@ -17,9 +20,13 @@ class Card extends React.Component {
           </div>
           : ``}
         <div className="cities__image-wrapper place-card__image-wrapper">
-          <a href="#">
+          <Link
+            to={{
+              pathname: `/offer/`,
+            }}
+          >
             <img className="place-card__image" src={offer.photos[0]} width={260} height={200} alt="Place image" />
-          </a>
+          </Link>
         </div>
         <div className="place-card__info">
           <div className="place-card__price-wrapper">
@@ -36,16 +43,17 @@ class Card extends React.Component {
           </div>
           <div className="place-card__rating rating">
             <div className="place-card__stars rating__stars">
-              <span style={{ width: offer.rating }} />
+              <span style={{width: offer.rating}} />
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
           <h2 className="place-card__name">
-            <a href="#">{offer.description}</a>
+            <a href="#" >{offer.description}</a>
           </h2>
           <p className="place-card__type">{offer.type}</p>
         </div>
       </article >
+
     );
   }
 }

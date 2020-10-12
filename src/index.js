@@ -5,8 +5,8 @@ import offers from "./mocks/offers";
 
 
 ReactDOM.render(
-  <App
-    offers={offers}
-  />,
-  document.querySelector(`#root`)
+    <App
+      offers={offers}
+    />,
+    document.querySelector(`#root`)
 );
