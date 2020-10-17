@@ -1,8 +1,8 @@
 import React from "react";
 import FavoriteItem from "../favorites-items/favorite-item";
 import PropTypes from "prop-types";
-import {PropTypes4Offer} from "../../propConsts";
-import {Link} from "react-router-dom";
+import { PropTypes4Offer } from "../../propConsts";
+import { Link } from "react-router-dom";
 
 class Favorites extends React.Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class Favorites extends React.Component {
   }
 
   render() {
-    const {offers} = this.props;
+    const { offers } = this.props;
 
     return (
       <div className="page">
@@ -74,7 +74,7 @@ class Favorites extends React.Component {
   }
 }
 Favorites.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes4Offer).isRequired,
+  offers: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes4Offer)).isRequired,
 };
 
 export default Favorites;
