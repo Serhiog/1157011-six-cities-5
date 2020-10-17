@@ -1,7 +1,6 @@
 import moment from "moment";
 
 export const convertRatingToStars = (ratePercentage) => {
-
   const rate = ratePercentage.split(`%`).join(``);
   if (rate >= 0 && rate <= 30) {
     return 2;
@@ -12,6 +11,7 @@ export const convertRatingToStars = (ratePercentage) => {
   } else if (rate >= 88 && rate <= 100) {
     return 5;
   }
+  return true;
 };
 
 export const convertReviewDate = (date) => {

@@ -19,16 +19,26 @@ class Favorites extends React.Component {
             <div className="header__wrapper">
               <div className="header__left">
                 <Link className="header__logo-link" to={`/`}>
-                  <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
+                  <img
+                    className="header__logo"
+                    src="img/logo.svg"
+                    alt="6 cities logo"
+                    width={81}
+                    height={41}
+                  />
                 </Link>
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <Link className="header__nav-link header__nav-link--profile" to='/login'>
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                    <Link
+                      className="header__nav-link header__nav-link--profile"
+                      to="/login"
+                    >
+                      <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                      <span className="header__user-name user__name">
+                        Oliver.conner@gmail.com
+                      </span>
                     </Link>
                   </li>
                 </ul>
@@ -42,10 +52,7 @@ class Favorites extends React.Component {
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
                 {offers.map((offer) => (
-                  <FavoriteItem
-                    key={offer.id}
-                    offer={offer}
-                  />
+                  <FavoriteItem key={offer.id} offer={offer} />
                 ))}
               </ul>
             </section>
@@ -53,16 +60,21 @@ class Favorites extends React.Component {
         </main>
         <footer className="footer container">
           <a className="footer__logo-link" href="main.html">
-            <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width={64} height={33} />
+            <img
+              className="footer__logo"
+              src="img/logo.svg"
+              alt="6 cities logo"
+              width={64}
+              height={33}
+            />
           </a>
         </footer>
-      </div >
-
+      </div>
     );
   }
 }
-FavoriteItem.propTypes = {
-  offers: PropTypes.shape(PropTypes4Offer),
+Favorites.propTypes = {
+  offers: PropTypes.arrayOf(PropTypes4Offer).isRequired,
 };
 
 export default Favorites;
