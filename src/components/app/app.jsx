@@ -15,6 +15,7 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <Switch>
+
         <Route exact path="/"
           render={({history}) => (
             < MainPage
@@ -49,11 +50,11 @@ const App = (props) => {
         </Route>
 
         <Route exact path="/offer/:id?"
-          render={({history}) => (
+          render={({}) => (
             < Offer
               noLogged={false}
               offer={offers[0]}
-              history={history}
+              // history={history}
             />
           )}
         />

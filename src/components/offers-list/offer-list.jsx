@@ -27,6 +27,7 @@ class OfferList extends React.Component {
             offer={offer}
             handleOfferCard={this.handleOfferCard}
             offerId={offer.id}
+            // зачем передаю проп ниже ??
             checkedOfferId={this.state.activeCardId}
           />)}
 

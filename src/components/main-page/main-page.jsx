@@ -2,13 +2,17 @@ import React from "react";
 import {PropTypes4Offer} from "../../propConsts";
 import PropTypes from "prop-types";
 import OfferList from "../offers-list/offer-list";
+import Map from "../map/map";
 
 const MainPage = (props) => {
-
   const {offers, goToFavorites} = props;
-  const unicCities = [...new Set(offers.map((offer) => {
-    return offer.city;
-  }))];
+  const unicCities = [
+    ...new Set(
+        offers.map((offer) => {
+          return offer.city;
+        })
+    ),
+  ];
 
   return (
     <div className="page page--gray page--main">
@@ -16,17 +20,31 @@ const MainPage = (props) => {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link header__logo-link--active" href="#">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
+              <a
+                className="header__logo-link header__logo-link--active"
+                href="#"
+              >
+                <img
+                  className="header__logo"
+                  src="img/logo.svg"
+                  alt="6 cities logo"
+                  width={81}
+                  height={41}
+                />
               </a>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#" onClick={goToFavorites}>
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                  <a
+                    className="header__nav-link header__nav-link--profile"
+                    href="#"
+                    onClick={goToFavorites}
+                  >
+                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                    <span className="header__user-name user__name">
+                      Oliver.conner@gmail.com
+                    </span>
                   </a>
                 </li>
               </ul>
@@ -40,11 +58,13 @@ const MainPage = (props) => {
           <section className="locations container">
             <ul className="locations__list tabs__list">
               {unicCities.map((unicCity, i) => {
-                return <li key={i} className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>{unicCity}</span>
-                  </a>
-                </li>;
+                return (
+                  <li key={i} className="locations__item">
+                    <a className="locations__item-link tabs__item" href="#">
+                      <span>{unicCity}</span>
+                    </a>
+                  </li>
+                );
               })}
             </ul>
           </section>
@@ -53,7 +73,9 @@ const MainPage = (props) => {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+              <b className="places__found">
+                {offers.length} places to stay in Amsterdam
+              </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -62,25 +84,40 @@ const MainPage = (props) => {
                     <use xlinkHref="#icon-arrow-select" />
                   </svg>
                 </span>
-                <ul className="places__options places__options--custom places__options--opened">
+                {
+                  // Ниже закомментировал не понятно для чего мешающий список
+                  /* <ul className="places__options places__options--custom places__options--opened">
                   <li className="places__option places__option--active" tabIndex={0}>Popular</li>
                   <li className="places__option" tabIndex={0}>Price: low to high</li>
                   <li className="places__option" tabIndex={0}>Price: high to low</li>
                   <li className="places__option" tabIndex={0}>Top rated first</li>
-                </ul>
+                </ul> */
+                }
                 <select className="places__sorting-type" id="places-sorting">
-                  <option className="places__option" value="popular" defaultValue="">Popular</option>
-                  <option className="places__option" value="to-high">Price: low to high</option>
-                  <option className="places__option" value="to-low">Price: high to low</option>
-                  <option className="places__option" value="top-rated">Top rated first</option>
+                  <option
+                    className="places__option"
+                    value="popular"
+                    defaultValue=""
+                  >
+                    Popular
+                  </option>
+                  <option className="places__option" value="to-high">
+                    Price: low to high
+                  </option>
+                  <option className="places__option" value="to-low">
+                    Price: high to low
+                  </option>
+                  <option className="places__option" value="top-rated">
+                    Top rated first
+                  </option>
                 </select>
               </form>
-              <OfferList
-                offers={offers}
-              />
+              <OfferList offers={offers} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <section className="cities__map map">
+                <Map offers={offers} />
+              </section>
             </div>
           </div>
         </div>
