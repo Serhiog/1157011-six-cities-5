@@ -50,7 +50,7 @@ const App = (props) => {
         </Route>
 
         <Route exact path="/offer/:id?"
-          render={({history}) => (
+          render={({}) => (
             < Offer
               noLogged={false}
               offer={offers[0]}

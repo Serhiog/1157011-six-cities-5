@@ -1,6 +1,6 @@
 import React from "react";
 import {PropTypes4Offer} from "../../propConsts";
-import PropTypes, {func} from "prop-types";
+import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
 const Card = (props) => {
