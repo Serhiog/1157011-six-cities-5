@@ -1,5 +1,5 @@
 import React from "react";
-import { MaxLengthMessage } from "../../consts";
+import {MaxLengthMessage} from "../../consts";
 
 class SendComment extends React.Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class SendComment extends React.Component {
   }
 
   render() {
-    const { blockSendBtn: condition } = this.state;
+    const {blockSendBtn: condition} = this.state;
 
     return (
       <form
@@ -145,7 +145,7 @@ class SendComment extends React.Component {
         />
         <div className="reviews__button-wrapper">
           <p className="reviews__help">
-            To submit review please make sure to set{" "}
+            To submit review please make sure to set{` `}
             <span className="reviews__star">rating</span> and describe your stay
             with at least <b className="reviews__text-amount">50 characters</b>.
           </p>

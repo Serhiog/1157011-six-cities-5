@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { PropTypes4Offer } from "../../propConsts";
+import {PropTypes4Offer} from "../../propConsts";
 
 const FavoriteItem = (props) => {
-  const { offer } = props;
+  const {offer} = props;
 
   return (
     <li className="favorites__locations-items">
@@ -49,7 +49,7 @@ const FavoriteItem = (props) => {
             </div>
             <div className="place-card__rating rating">
               <div className="place-card__stars rating__stars">
-                <span style={{ width: offer.rating }} />
+                <span style={{width: offer.rating}} />
                 <span className="visually-hidden">Rating</span>
               </div>
             </div>

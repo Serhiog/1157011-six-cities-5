@@ -1,11 +1,11 @@
 import React from "react";
 import FavoriteItem from "../favorites-items/favorite-item";
 import PropTypes from "prop-types";
-import { PropTypes4Offer } from "../../propConsts";
-import { Link } from "react-router-dom";
+import {PropTypes4Offer} from "../../propConsts";
+import {Link} from "react-router-dom";
 
 const Favorites = (props) => {
-  const { offers } = props;
+  const {offers} = props;
 
   return (
     <div className="page">

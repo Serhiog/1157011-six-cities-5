@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { PropTypes4Offer } from "../../propConsts";
-import { convertRatingToStars, convertReviewDate } from "../../utils";
+import {PropTypes4Offer} from "../../propConsts";
+import {convertRatingToStars, convertReviewDate} from "../../utils";
 import SendComment from "../send-comment/send-comment";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import MainPage from "../main-page/main-page";
 
 const Offer = (props) => {
-  const { noLogged, offer } = props;
+  const {noLogged, offer} = props;
 
   return (
     <div className="page">
@@ -92,7 +92,7 @@ const Offer = (props) => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{ width: offer.rating }} />
+                  <span style={{width: offer.rating}} />
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">
@@ -155,7 +155,7 @@ const Offer = (props) => {
               </div>
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">
-                  Reviews ·{" "}
+                  Reviews ·{` `}
                   <span className="reviews__amount">
                     {offer.reviews.length}
                   </span>
@@ -181,7 +181,7 @@ const Offer = (props) => {
                         <div className="reviews__info">
                           <div className="reviews__rating rating">
                             <div className="reviews__stars rating__stars">
-                              <span style={{ width: review.rating }} />
+                              <span style={{width: review.rating}} />
                               <span className="visually-hidden">Rating</span>
                             </div>
                           </div>
@@ -242,7 +242,7 @@ const Offer = (props) => {
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{ width: `80%` }} />
+                      <span style={{width: `80%`}} />
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -288,7 +288,7 @@ const Offer = (props) => {
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{ width: `80%` }} />
+                      <span style={{width: `80%`}} />
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -334,7 +334,7 @@ const Offer = (props) => {
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{ width: `100%` }} />
+                      <span style={{width: `100%`}} />
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>

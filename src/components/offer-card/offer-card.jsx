@@ -1,10 +1,10 @@
 import React from "react";
-import { PropTypes4Offer } from "../../propConsts";
-import PropTypes, { func } from "prop-types";
-import { Link } from "react-router-dom";
+import {PropTypes4Offer} from "../../propConsts";
+import PropTypes, {func} from "prop-types";
+import {Link} from "react-router-dom";
 
 const Card = (props) => {
-  const { offer, offerId, handleOfferCard } = props;
+  const {offer, offerId, handleOfferCard} = props;
 
   return (
     <article
@@ -51,7 +51,7 @@ const Card = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: offer.rating }} />
+            <span style={{width: offer.rating}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
