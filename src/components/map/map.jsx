@@ -24,6 +24,7 @@ class Map extends React.Component {
       marker: true,
     });
 
+    
     map.setView(city, zoom);
 
     leaflet
