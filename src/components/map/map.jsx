@@ -4,6 +4,7 @@ import ".../../leaflet/dist/leaflet.css";
 import {PropTypes4Offer} from "../../propConsts";
 import PropTypes from "prop-types";
 
+
 class Map extends React.Component {
   constructor(props) {
     super(props);
@@ -13,11 +14,11 @@ class Map extends React.Component {
     const {offers} = this.props;
 
     const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
+      iconUrl: `/img/pin.svg`,
       iconSize: [30, 30],
     });
 
-    const city = [52.38333, 4.9];
+    const city = offers[0].coordinatos;
 
     const zoom = 12;
 
@@ -45,12 +46,15 @@ class Map extends React.Component {
   }
 
   render() {
-    return <div id="map" style={{height: `100%`}} />;
+    const {mapSize} = this.props;
+    return <div id="map" style={{height: mapSize}} />;
   }
 }
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
+  mapSize: PropTypes.string
 };
+
 
 export default Map;

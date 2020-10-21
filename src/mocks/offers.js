@@ -23,6 +23,13 @@ export default [
         rating: `77%`,
         message: `Consequat eiusmod dolor anim ea anim mollit do voluptate labore deserunt est laborum excepteur culpa.`,
         date: new Date(),
+      },
+      {
+        name: `Samuil`,
+        photo: `https://picsum.photos/54/54`,
+        rating: `84%`,
+        message: `Consequat eiusmod dolor anim ea anim mollit do voluptate labore deserunt est laborum excepteur culpa.`,
+        date: new Date(),
       }
 
     ],
@@ -48,7 +55,7 @@ export default [
     reviews: [
 
       {
-        name: `Rudolf`,
+        name: `Jack`,
         photo: `https://picsum.photos/54/53`,
         rating: `77%`,
         message: `Consequat eiusmod dolor anim ea anim mollit do voluptate labore deserunt est laborum excepteur culpa.`,
@@ -77,7 +84,7 @@ export default [
     ownerName: `Petro`,
     reviews: [
       {
-        name: `Rudolf`,
+        name: `Elena`,
         photo: `https://picsum.photos/54/55`,
         rating: `77%`,
         message: `Consequat eiusmod dolor anim ea anim mollit do voluptate labore deserunt est laborum excepteur culpa.`,
@@ -105,7 +112,7 @@ export default [
     ownerName: `Anton`,
     reviews: [
       {
-        name: `Rudolf`,
+        name: `Petro`,
         photo: `https://picsum.photos/54/52`,
         rating: `77%`,
         message: `Consequat eiusmod dolor anim ea anim mollit do voluptate labore deserunt est laborum excepteur culpa.`,

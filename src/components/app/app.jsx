@@ -54,6 +54,7 @@ const App = (props) => {
             < Offer
               noLogged={false}
               offer={offers[0]}
+              offers={offers}
               // history={history}
             />
           )}
