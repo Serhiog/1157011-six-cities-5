@@ -4,15 +4,21 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
 const Card = (props) => {
-  const {offer, offerId, handleOfferCard} = props;
+  const {
+    offer,
+    offerId,
+    handleOfferCard,
+    classNameArticle,
+    classNameImageWrapper,
+  } = props;
 
   const renderCard = () => {
     return (
       <article
         data-id={offerId}
-        className="cities__place-card place-card"
+        className={`${classNameArticle} place-card `}
         onMouseOver={(evt) =>
-          handleOfferCard(evt.target.closest(`.cities__place-card`).dataset.id)
+          handleOfferCard(evt.target.closest(`.${classNameArticle}`).dataset.id)
         }
       >
         {offer.isPremium && (
@@ -21,7 +27,7 @@ const Card = (props) => {
           </div>
         )}
 
-        <div className="cities__image-wrapper place-card__image-wrapper">
+        <div className={`${classNameImageWrapper} place-card__image-wrapper`}>
           <Link to="/offer/">
             <img
               className="place-card__image"
@@ -68,8 +74,8 @@ const Card = (props) => {
 
 Card.propTypes = {
   offer: PropTypes.shape(PropTypes4Offer),
-  handleOfferCard: PropTypes.func.isRequired,
-  offerId: PropTypes.number.isRequired,
+  handleOfferCard: PropTypes.func,
+  offerId: PropTypes.number,
 };
 
 export default Card;
