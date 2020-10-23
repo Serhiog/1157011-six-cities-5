@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {PropTypes4Offer} from "../../propConsts";
+import { PropTypes4Offer } from "../../propConsts";
+import { connect } from "react-redux";
+import { ActionCreator } from "../../store/action";
 import NearbyOffer from "../nearby-offer/nearby-offer";
-import withMouseOverActiveCard from "../../hocs/mouse-over-active-card";
 
-const NearbyOffersList = ({offers, handleOfferCard}) => {
+const NearbyOffersList = ({ offers, handleOfferCard }) => {
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
@@ -28,4 +29,11 @@ NearbyOffersList.propTypes = {
   handleOfferCard: PropTypes.func,
 };
 
-export default withMouseOverActiveCard(NearbyOffersList);
+const mapDispatchToProps = (dispatch) => ({
+  handleOfferCard(activeCardId) {
+    dispatch(ActionCreator.handleOfferCard(activeCardId));
+  },
+});
+
+export { NearbyOffersList };
+export default connect(undefined, mapDispatchToProps)(NearbyOffersList);

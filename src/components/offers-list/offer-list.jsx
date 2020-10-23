@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {PropTypes4Offer} from "../../propConsts";
+import { PropTypes4Offer } from "../../propConsts";
 import OfferCard from "../offer-card/offer-card";
-import withMouseOverActiveCard from "../../hocs/mouse-over-active-card";
+import { connect } from "react-redux";
+import {ActionCreator} from "../../store/action";
 
-const OfferList = ({offers, handleOfferCard, checkedOfferId}) => {
+const OfferList = ({ offers, handleOfferCard }) => {
+
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
@@ -52,8 +54,6 @@ const OfferList = ({offers, handleOfferCard, checkedOfferId}) => {
             offerId={offer.id}
             classNameArticle={`cities__place-card`}
             classNameImageWrapper={`cities__image-wrapper`}
-            // зачем передаю проп ниже ??
-            checkedOfferId={checkedOfferId}
           />
         ))}
       </div>
@@ -64,6 +64,14 @@ const OfferList = ({offers, handleOfferCard, checkedOfferId}) => {
 OfferList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
   handleOfferCard: PropTypes.func,
-  checkedOfferId: PropTypes.string,
 };
-export default withMouseOverActiveCard(OfferList);
+
+
+const mapDispatchToProps = (dispatch) => ({
+  handleOfferCard(activeCardId) {
+    dispatch(ActionCreator.handleOfferCard(activeCardId));
+  },
+});
+
+export { OfferList };
+export default connect(undefined, mapDispatchToProps)(OfferList);

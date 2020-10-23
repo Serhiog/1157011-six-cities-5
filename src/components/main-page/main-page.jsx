@@ -1,20 +1,19 @@
 import React from "react";
-import {PropTypes4Offer} from "../../propConsts";
+import { PropTypes4Offer } from "../../propConsts";
 import PropTypes from "prop-types";
 import OfferList from "../offers-list/offer-list";
 import Map from "../map/map";
-import {MapSizes} from "../../consts";
+import { MapSizes } from "../../consts";
 
-const MainPage = (props) => {
-  const {offers, goToFavorites} = props;
+const MainPage = ({ offers, goToFavorites }) => {
+
   const unicCities = [
     ...new Set(
-        offers.map((offer) => {
-          return offer.city;
-        })
+      offers.map((offer) => {
+        return offer.city;
+      })
     ),
   ];
-
 
   return (
     <div className="page page--gray page--main">
@@ -76,7 +75,7 @@ const MainPage = (props) => {
             <OfferList offers={offers} />
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map offers={offers} mapSize={MapSizes.mainPage}/>
+                <Map offers={offers} mapSize={MapSizes.mainPage} />
               </section>
             </div>
           </div>

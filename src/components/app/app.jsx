@@ -1,5 +1,5 @@
-import React, {Fragment} from "react";
-import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
+import React, { Fragment } from "react";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import MainPage from "../main-page/main-page";
 import EmptyMainPage from "../empty-main-page/empty-main-page";
@@ -7,18 +7,19 @@ import Login from "../login/login";
 import Favorites from "../favorites/favorites";
 import EmptyFavorites from "../empty-favorites/empty-favorites";
 import Offer from "../offer/offer";
-import {PropTypes4Offer} from "../../propConsts";
+import { PropTypes4Offer } from "../../propConsts";
+import { connect } from "react-redux";
 
-const App = (props) => {
-  const {offers} = props;
+const App = ({ offers }) => {
 
   return (
     <BrowserRouter>
       <Switch>
-
-        <Route exact path="/"
-          render={({history}) => (
-            < MainPage
+        <Route
+          exact
+          path="/"
+          render={({ history }) => (
+            <MainPage
               goToFavorites={() => history.push(`/favorites`)}
               offers={offers}
             />
@@ -34,24 +35,22 @@ const App = (props) => {
         </Route>
 
         <Route exact path="/offer-not-logged">
-          <Offer
-            noLogged={true}
-            offer={offers[0]}
-          />
+          <Offer noLogged={true} offer={offers[0]} />
         </Route>
 
         <Route exact path="/favorites">
-          <Favorites
-            offers={offers} />
+          <Favorites offers={offers} />
         </Route>
 
         <Route exact path="/favorites-empty">
           <EmptyFavorites />
         </Route>
 
-        <Route exact path="/offer/:id?"
+        <Route
+          exact
+          path="/offer/:id?"
           render={({}) => (
-            < Offer
+            <Offer
               noLogged={false}
               offer={offers[0]}
               offers={offers}
@@ -72,15 +71,18 @@ const App = (props) => {
             </Fragment>
           )}
         />
-
       </Switch>
-    </BrowserRouter >
-
+    </BrowserRouter>
   );
 };
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer))
+  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  offers: state.offerList,
+});
+
+export { App };
+export default connect(mapStateToProps)(App);

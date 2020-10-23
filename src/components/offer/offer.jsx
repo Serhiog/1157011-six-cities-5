@@ -1,16 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {PropTypes4Offer} from "../../propConsts";
-import {convertRatingToStars} from "../../utils";
-import {Link} from "react-router-dom";
+import { PropTypes4Offer } from "../../propConsts";
+import { convertRatingToStars } from "../../utils";
+import { Link } from "react-router-dom";
 import MainPage from "../main-page/main-page";
 import ReviewList from "../review-list/review-list";
 import Map from "../map/map";
-import {MapSizes} from "../../consts";
+import { MapSizes } from "../../consts";
 import NearbyOffersList from "../nearby-offers-list/nearby-offers-list";
 
-const Offer = (props) => {
-  const {noLogged, offer, offers} = props;
+const Offer = ({ noLogged, offer, offers }) => {
   return (
     <div className="page">
       <header className="header">
@@ -94,7 +93,7 @@ const Offer = (props) => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: offer.rating}} />
+                  <span style={{ width: offer.rating }} />
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">
@@ -163,7 +162,7 @@ const Offer = (props) => {
           </section>
         </section>
         <div className="container">
-          <NearbyOffersList offers={offers.slice(0, 3)}/>
+          <NearbyOffersList offers={offers.slice(0, 3)} />
         </div>
       </main>
     </div>
