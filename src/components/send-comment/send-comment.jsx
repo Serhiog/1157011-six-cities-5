@@ -1,6 +1,7 @@
 import React from "react";
-import { connect } from "react-redux";
-import { ActionCreator } from "../../store/action";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
+import PropTypes from "prop-types";
 
 const SendComment = ({
   blockSendBtn,
@@ -138,5 +139,11 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export { SendComment };
+SendComment.propTypes = {
+  blockSendBtn: PropTypes.bool,
+  handleFormSubmit: PropTypes.func,
+  handleLengthMessage: PropTypes.func,
+};
+
+export {SendComment};
 export default connect(mapStateToProps, mapDispatchToProps)(SendComment);

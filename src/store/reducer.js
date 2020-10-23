@@ -1,14 +1,14 @@
 import Offers from "../mocks/offers";
-import { extend } from "../utils";
-import { ActionType } from "../store/action";
+import {extend} from "../utils";
+import {ActionType} from "../store/action";
 
 const initialState = {
-  city: `Moscow`,
-  activeCardId: null,
-  offerList: Offers,
   comment: ``,
   rating: 0,
   blockSendBtn: true,
+  city: `Moscow`,
+  activeCardId: null,
+  offerList: Offers,
 };
 
 const reducer = (state = initialState, action) => {
@@ -28,4 +28,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export { reducer };
+export {reducer};

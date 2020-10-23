@@ -1,7 +1,7 @@
 import React from "react";
-import { PropTypes4Offer } from "../../propConsts";
+import {PropTypes4Offer} from "../../propConsts";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const Card = ({offer, offerId, handleOfferCard, classNameArticle, classNameImageWrapper}) => {
   const renderCard = () => {
@@ -48,7 +48,7 @@ const Card = ({offer, offerId, handleOfferCard, classNameArticle, classNameImage
           </div>
           <div className="place-card__rating rating">
             <div className="place-card__stars rating__stars">
-              <span style={{ width: offer.rating }} />
+              <span style={{width: offer.rating}} />
               <span className="visually-hidden">Rating</span>
             </div>
           </div>

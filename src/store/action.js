@@ -1,4 +1,4 @@
-import { MaxLengthMessage } from "../consts";
+import {MaxLengthMessage} from "../consts";
 
 export const ActionType = {
   MOUSE_OVER: `MOUSE_OVER`,

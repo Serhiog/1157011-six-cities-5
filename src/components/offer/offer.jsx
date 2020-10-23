@@ -1,15 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { PropTypes4Offer } from "../../propConsts";
-import { convertRatingToStars } from "../../utils";
-import { Link } from "react-router-dom";
+import {PropTypes4Offer} from "../../propConsts";
+import {convertRatingToStars} from "../../utils";
+import {Link} from "react-router-dom";
 import MainPage from "../main-page/main-page";
 import ReviewList from "../review-list/review-list";
 import Map from "../map/map";
-import { MapSizes } from "../../consts";
+import {MapSizes} from "../../consts";
 import NearbyOffersList from "../nearby-offers-list/nearby-offers-list";
 
-const Offer = ({ noLogged, offer, offers }) => {
+const Offer = ({noLogged, offer, offers}) => {
   return (
     <div className="page">
       <header className="header">
@@ -93,7 +93,7 @@ const Offer = ({ noLogged, offer, offers }) => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{ width: offer.rating }} />
+                  <span style={{width: offer.rating}} />
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">

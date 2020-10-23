@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { PropTypes4Offer } from "../../propConsts";
+import {PropTypes4Offer} from "../../propConsts";
 import OfferCard from "../offer-card/offer-card";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 
-const OfferList = ({ offers, handleOfferCard }) => {
+const OfferList = ({offers, handleOfferCard}) => {
 
   return (
     <section className="cities__places places">
@@ -73,5 +73,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export { OfferList };
+export {OfferList};
 export default connect(undefined, mapDispatchToProps)(OfferList);

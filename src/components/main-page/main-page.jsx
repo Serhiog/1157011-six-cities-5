@@ -1,17 +1,17 @@
 import React from "react";
-import { PropTypes4Offer } from "../../propConsts";
+import {PropTypes4Offer} from "../../propConsts";
 import PropTypes from "prop-types";
 import OfferList from "../offers-list/offer-list";
 import Map from "../map/map";
-import { MapSizes } from "../../consts";
+import {MapSizes} from "../../consts";
 
-const MainPage = ({ offers, goToFavorites }) => {
+const MainPage = ({offers, goToFavorites}) => {
 
   const unicCities = [
     ...new Set(
-      offers.map((offer) => {
-        return offer.city;
-      })
+        offers.map((offer) => {
+          return offer.city;
+        })
     ),
   ];
 

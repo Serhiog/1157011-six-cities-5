@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { PropTypes4Offer } from "../../propConsts";
-import { connect } from "react-redux";
-import { ActionCreator } from "../../store/action";
+import {PropTypes4Offer} from "../../propConsts";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
 import NearbyOffer from "../nearby-offer/nearby-offer";
 
-const NearbyOffersList = ({ offers, handleOfferCard }) => {
+const NearbyOffersList = ({offers, handleOfferCard}) => {
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
@@ -35,5 +35,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export { NearbyOffersList };
+export {NearbyOffersList};
 export default connect(undefined, mapDispatchToProps)(NearbyOffersList);

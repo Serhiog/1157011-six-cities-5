@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import React, {Fragment} from "react";
+import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import MainPage from "../main-page/main-page";
 import EmptyMainPage from "../empty-main-page/empty-main-page";
@@ -7,10 +7,10 @@ import Login from "../login/login";
 import Favorites from "../favorites/favorites";
 import EmptyFavorites from "../empty-favorites/empty-favorites";
 import Offer from "../offer/offer";
-import { PropTypes4Offer } from "../../propConsts";
-import { connect } from "react-redux";
+import {PropTypes4Offer} from "../../propConsts";
+import {connect} from "react-redux";
 
-const App = ({ offers }) => {
+const App = ({offers}) => {
 
   return (
     <BrowserRouter>
@@ -18,7 +18,7 @@ const App = ({ offers }) => {
         <Route
           exact
           path="/"
-          render={({ history }) => (
+          render={({history}) => (
             <MainPage
               goToFavorites={() => history.push(`/favorites`)}
               offers={offers}
@@ -84,5 +84,5 @@ const mapStateToProps = (state) => ({
   offers: state.offerList,
 });
 
-export { App };
+export {App};
 export default connect(mapStateToProps)(App);
