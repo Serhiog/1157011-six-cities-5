@@ -4,17 +4,9 @@ import PropTypes from "prop-types";
 import OfferList from "../offers-list/offer-list";
 import Map from "../map/map";
 import {MapSizes} from "../../consts";
+import CitiesList from "../cities-list/cities-list";
 
 const MainPage = ({offers, goToFavorites}) => {
-
-  const unicCities = [
-    ...new Set(
-        offers.map((offer) => {
-          return offer.city;
-        })
-    ),
-  ];
-
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -55,21 +47,7 @@ const MainPage = ({offers, goToFavorites}) => {
       </header>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              {unicCities.map((unicCity, i) => {
-                return (
-                  <li key={i} className="locations__item">
-                    <a className="locations__item-link tabs__item" href="#">
-                      <span>{unicCity}</span>
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
-        </div>
+        <CitiesList/>
         <div className="cities">
           <div className="cities__places-container container">
             <OfferList offers={offers} />

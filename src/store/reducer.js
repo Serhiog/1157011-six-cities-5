@@ -9,6 +9,13 @@ const initialState = {
   city: `Moscow`,
   activeCardId: null,
   offerList: Offers,
+  unicCities: [
+    ...new Set(
+        Offers.map((offer) => {
+          return offer.city;
+        })
+    ),
+  ],
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,7 +29,15 @@ const reducer = (state = initialState, action) => {
         blockSendBtn: action.messageLength,
       });
     case ActionType.SEND_COMMENT:
-      return extend(state, {});
+      return extend(state, {
+        rating: action.rating,
+        comment: action.comment,
+      });
+    case ActionType.SELECT_CITY:
+      return extend(state, {
+        city: action.city,
+        offerList: action.offerList
+      });
   }
 
   return state;

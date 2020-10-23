@@ -1,9 +1,11 @@
 import {MaxLengthMessage} from "../consts";
+import Offers from "../mocks/offers";
 
 export const ActionType = {
   MOUSE_OVER: `MOUSE_OVER`,
   SEND_COMMENT: `SEND_COMMENT`,
   CHECKING_COMMENT: `CHECKING_COMMENT`,
+  SELECT_CITY: `SELECT_CITY`,
 };
 
 export const ActionCreator = {
@@ -25,6 +27,16 @@ export const ActionCreator = {
     return {
       type: ActionType.CHECKING_COMMENT,
       messageLength: evt.target.value.length >= MaxLengthMessage ? false : true,
+    };
+  },
+  handleCity: (evt) => {
+    const city = evt.target.closest(`.locations__item-link`).dataset.city;
+    return {
+      type: ActionType.SELECT_CITY,
+      city,
+      offerList: Offers.filter((offer) => {
+        return offer.city === city;
+      }),
     };
   },
 };
