@@ -132,10 +132,14 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   handleFormSubmit(evt) {
-    dispatch(ActionCreator.handleFormSubmit(evt));
+    evt.preventDefault();
+    const data = new FormData(evt.target);
+    dispatch(ActionCreator.handleFormSubmit(data));
   },
   handleLengthMessage(evt) {
-    dispatch(ActionCreator.handleLengthMessage(evt));
+    evt.preventDefault();
+    const messageLength = evt.target.value.length;
+    dispatch(ActionCreator.handleLengthMessage(messageLength));
   },
 });
 

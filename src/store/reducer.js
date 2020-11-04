@@ -1,28 +1,24 @@
 import Offers from "../mocks/offers";
 import {extend} from "../utils";
 import {ActionType} from "../store/action";
+import {cities} from "../consts";
 
 const initialState = {
   comment: ``,
   rating: 0,
   blockSendBtn: true,
-  city: `Moscow`,
-  activeCardId: null,
+  city: null,
+  payload: null,
   offerList: Offers,
-  unicCities: [
-    ...new Set(
-        Offers.map((offer) => {
-          return offer.city;
-        })
-    ),
-  ],
+  unicCities: cities,
+  currentSort: `Popular`,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.MOUSE_OVER:
       return extend(state, {
-        activeCardId: action.activeCardId,
+        payload: action.payload,
       });
     case ActionType.CHECKING_COMMENT:
       return extend(state, {
@@ -36,11 +32,16 @@ const reducer = (state = initialState, action) => {
     case ActionType.SELECT_CITY:
       return extend(state, {
         city: action.city,
-        offerList: action.offerList
+      });
+    case ActionType.SELECT_SORT:
+      return extend(state, {
+        currentSort: action.currentSort,
+      });
+    default:
+      return extend(state, {
+        currentSort: initialState.currentSort,
       });
   }
-
-  return state;
 };
 
 export {reducer};

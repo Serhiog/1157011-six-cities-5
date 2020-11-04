@@ -1,12 +1,10 @@
 import React from "react";
-import {PropTypes4Offer} from "../../propConsts";
 import PropTypes from "prop-types";
 import OfferList from "../offers-list/offer-list";
 import Map from "../map/map";
-import {MapSizes} from "../../consts";
 import CitiesList from "../cities-list/cities-list";
 
-const MainPage = ({offers, goToFavorites}) => {
+const MainPage = ({goToFavorites}) => {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -47,13 +45,13 @@ const MainPage = ({offers, goToFavorites}) => {
       </header>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <CitiesList/>
+        <CitiesList />
         <div className="cities">
           <div className="cities__places-container container">
-            <OfferList offers={offers} />
+            <OfferList />
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map offers={offers} mapSize={MapSizes.mainPage} />
+                <Map />
               </section>
             </div>
           </div>
@@ -64,7 +62,6 @@ const MainPage = ({offers, goToFavorites}) => {
 };
 
 MainPage.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
   goToFavorites: PropTypes.func,
 };
 

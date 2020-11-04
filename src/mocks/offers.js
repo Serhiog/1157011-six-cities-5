@@ -1,6 +1,6 @@
 export default [
   {
-    city: `Moscow`,
+    city: `Paris`,
     coordinatos: [52.3909553943508, 4.85309666406198],
     type: `Flat`,
     price: 740,
@@ -43,7 +43,7 @@ export default [
     id: 1,
   },
   {
-    city: `Cancun`,
+    city: `Cologne`,
     coordinatos: [52.369553943508, 4.85309666406198],
     type: `House`,
     price: 1380,
@@ -80,7 +80,7 @@ export default [
     id: 2,
   },
   {
-    city: `Berlin`,
+    city: `Brussels`,
     coordinatos: [52.3909553943508, 4.929309666406198],
     type: `Hostel`,
     price: 250,
@@ -108,7 +108,7 @@ export default [
     id: 3,
   },
   {
-    city: `Paris`,
+    city: `Amsterdam`,
     coordinatos: [52.3809553943508, 4.939309666406198],
     type: `Bungalo`,
     price: 500,
@@ -136,7 +136,7 @@ export default [
     id: 4,
   },
   {
-    city: `Kiev`,
+    city: `Hamburg`,
     coordinatos: [52.4109553943508, 4.85309666406198],
     type: `Flat`,
     price: 740,
@@ -179,7 +179,7 @@ export default [
     id: 5,
   },
   {
-    city: `Istambul`,
+    city: `Dusseldorf`,
     coordinatos: [52.4009553943508, 4.85309666406198],
     type: `Flat`,
     price: 740,

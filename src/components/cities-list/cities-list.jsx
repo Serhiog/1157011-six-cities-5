@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {PropTypes4Offer} from "../../propConsts";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
+import {getFiltredByCityOffers, getUnicOfferNames} from "../../store/selectors";
+
 
 const CitiesList = ({unicCities, handleCity}) => {
   return (
@@ -35,12 +36,14 @@ CitiesList.propTypes = {
 };
 
 const mapToStateProps = (state) => ({
-  unicCities: state.unicCities,
+  unicCities: getUnicOfferNames(state),
+  offers: getFiltredByCityOffers(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   handleCity(evt) {
-    dispatch(ActionCreator.handleCity(evt));
+    const city = evt.target.closest(`.locations__item-link`).dataset.city;
+    dispatch(ActionCreator.handleCity(city));
   },
 });
 

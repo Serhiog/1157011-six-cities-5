@@ -3,7 +3,10 @@ import leaflet from "leaflet";
 import ".../../leaflet/dist/leaflet.css";
 import {PropTypes4Offer} from "../../propConsts";
 import PropTypes from "prop-types";
-
+import {MapSizes} from "../../consts";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
+import {getOffers} from "../../store/selectors";
 
 class Map extends React.Component {
   constructor(props) {
@@ -11,10 +14,14 @@ class Map extends React.Component {
   }
 
   componentDidMount() {
-    const {offers} = this.props;
-
+    const {offers, payload} = this.props;
     const icon = leaflet.icon({
       iconUrl: `/img/pin.svg`,
+      iconSize: [30, 30],
+    });
+
+    const iconActive = leaflet.icon({
+      iconUrl: `/img/pin-active.svg`,
       iconSize: [30, 30],
     });
 
@@ -23,7 +30,7 @@ class Map extends React.Component {
     const zoom = 12;
 
     const map = leaflet.map(`map`, {
-      center: this.city,
+      center: city,
       zoom,
       zoomControl: false,
       marker: true,
@@ -40,21 +47,37 @@ class Map extends React.Component {
       )
       .addTo(map);
 
-    offers.filter((filter) => {
-      leaflet.marker(filter.coordinatos, {icon}).addTo(map);
+    offers.forEach((offer) => {
+      if (offer.id === payload) {
+        leaflet.marker(offer.coordinatos, {icon: iconActive}).addTo(map);
+      } else {
+        leaflet.marker(offer.coordinatos, {icon}).addTo(map);
+      }
     });
   }
 
   render() {
-    const {mapSize} = this.props;
-    return <div id="map" style={{height: mapSize}} />;
+    return <div id="map" style={{height: MapSizes.mainPage}} />;
   }
 }
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
-  mapSize: PropTypes.string
+  mapSize: PropTypes.string,
+  payload: PropTypes.number
 };
 
+const mapToStateProps = (state) => ({
+  payload: state.payload,
+  offers: getOffers(state),
+});
 
-export default Map;
+const mapDispatchToProps = (dispatch) => ({
+  handleCity(evt) {
+    const city = evt.target.closest(`.locations__item-link`).dataset.city;
+    dispatch(ActionCreator.handleCity(city));
+  },
+});
+
+export {Map};
+export default connect(mapToStateProps, mapDispatchToProps)(Map);
