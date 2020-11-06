@@ -2,7 +2,7 @@ import {SortingTypes, actualOfferIndex} from "../consts";
 import {convertRatingToStars} from "../utils";
 
 export const getOffers = (state) => {
-  return state.offerList;
+  return state.offers.offerList;
 };
 
 export const getCurrentOffer = (state) => {
@@ -12,11 +12,11 @@ export const getCurrentOffer = (state) => {
 };
 
 export const getCurrentSort = (state) => {
-  return state.currentSort;
+  return state.offers.currentSort;
 };
 
 export const getCurrentCity = (state) => {
-  return state.city;
+  return state.offers.city;
 };
 
 export const getSortedOffers = (state) => {

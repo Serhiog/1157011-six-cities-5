@@ -8,7 +8,7 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 import {getOffers} from "../../store/selectors";
 
-class Map extends React.Component {
+class Map extends React.PureComponent {
   constructor(props) {
     super(props);
   }
@@ -48,7 +48,7 @@ class Map extends React.Component {
       .addTo(map);
 
     offers.forEach((offer) => {
-      if (offer.id === payload) {
+      if (+offer.id === +payload) {
         leaflet.marker(offer.coordinatos, {icon: iconActive}).addTo(map);
       } else {
         leaflet.marker(offer.coordinatos, {icon}).addTo(map);
@@ -64,11 +64,11 @@ class Map extends React.Component {
 Map.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
   mapSize: PropTypes.string,
-  payload: PropTypes.number
+  payload: PropTypes.string
 };
 
 const mapToStateProps = (state) => ({
-  payload: state.payload,
+  payload: state.offers.payload,
   offers: getOffers(state),
 });
 

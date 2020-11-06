@@ -127,7 +127,7 @@ const SendComment = ({
 };
 
 const mapStateToProps = (state) => ({
-  blockSendBtn: state.blockSendBtn,
+  blockSendBtn: state,
 });
 
 const mapDispatchToProps = (dispatch) => ({

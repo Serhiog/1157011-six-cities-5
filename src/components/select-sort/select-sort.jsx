@@ -36,7 +36,7 @@ SelectSort.propTypes = {
 };
 
 const mapToStateProps = (state) => ({
-  unicCities: state.unicCities,
+  unicCities: state.offers.unicCities,
 });
 
 const mapDispatchToProps = (dispatch) => ({
