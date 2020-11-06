@@ -178,6 +178,7 @@ Offer.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
 };
 
+
 const mapToStateProps = (state) => ({
   actualOffer: getCurrentOffer(state),
   offers: getNearbyOffers(state),
