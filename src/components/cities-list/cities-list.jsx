@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
-import {getFiltredByCityOffers, getUnicOfferNames} from "../../store/selectors";
+import {getUnicOfferNames} from "../../store/selectors";
 
 
 const CitiesList = ({unicCities, handleCity}) => {
@@ -37,7 +37,6 @@ CitiesList.propTypes = {
 
 const mapToStateProps = (state) => ({
   unicCities: getUnicOfferNames(state),
-  offers: getFiltredByCityOffers(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

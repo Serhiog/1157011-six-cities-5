@@ -44,8 +44,11 @@ export const getSortedOffers = (state) => {
   }
 };
 
-export const getNearByOffers = (state) => {
-  return getOffers(state).slice(0, 3);
+export const getNearbyOffers = (state) => {
+  // const checkedOffer = state.offers.hoveredOfferId;
+  // const excludeElement = [...getOffers(state).slice(checkedOffer, getOffers(state).length)];
+  const excludeElementd = getOffers(state).slice(0, 3);
+  return excludeElementd;
 };
 
 export const getUnicOfferNames = (state) => {
@@ -58,10 +61,8 @@ export const getUnicOfferNames = (state) => {
 };
 
 export const getFiltredByCityOffers = (state) => {
-  return getOffers(state).reduce((accum, offer) => {
-    if (offer.city === getCurrentCity(state)) {
-      accum.push(offer);
-    }
-    return accum;
-  }, []);
+  const currentCity = getCurrentCity(state);
+  return getSortedOffers(state).filter(
+      (offer) => !currentCity || offer.city === currentCity
+  );
 };

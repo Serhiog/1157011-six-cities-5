@@ -5,14 +5,14 @@ import OfferCard from "../offer-card/offer-card";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 import SelectSort from "../select-sort/select-sort";
-import {getSortedOffers} from "../../store/selectors";
+import {getFiltredByCityOffers, getCurrentCity} from "../../store/selectors";
 
-const OfferList = ({offers, handleOfferCard}) => {
+const OfferList = ({offers, handleOfferCard, city}) => {
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">
-        {offers.length} places to stay in Amsterdam
+        {offers.length} places to stay in {city}
       </b>
       <SelectSort />
       <div className="cities__places-list places__list tabs__content">
@@ -34,11 +34,12 @@ const OfferList = ({offers, handleOfferCard}) => {
 OfferList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
   handleOfferCard: PropTypes.func,
+  city: PropTypes.string,
 };
 
-
 const mapToStateProps = (state) => ({
-  offers: getSortedOffers(state),
+  city: getCurrentCity(state),
+  offers: getFiltredByCityOffers(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

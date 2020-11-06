@@ -5,17 +5,18 @@ import {cities} from "../consts";
 
 const initialState = {
   city: null,
-  payload: null,
+  hoveredOfferId: null,
   offerList: Offers,
   unicCities: cities,
   currentSort: `Popular`,
+  offers: null
 };
 
 export const offerReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.MOUSE_OVER:
       return extend(state, {
-        payload: action.payload,
+        hoveredOfferId: action.payload,
       });
     case ActionType.SELECT_CITY:
       return extend(state, {

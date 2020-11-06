@@ -7,10 +7,10 @@ import ReviewList from "../review-list/review-list";
 import Map from "../map/map";
 import NearbyOffersList from "../nearby-offers-list/nearby-offers-list";
 import {connect} from "react-redux";
-import {getCurrentOffer} from "../../store/selectors";
+import {getCurrentOffer, getNearbyOffers} from "../../store/selectors";
 import {PropTypes4Offer} from "../../propConsts";
 
-const Offer = ({noLogged = true, actualOffer}) => {
+const Offer = ({noLogged = true, actualOffer, offers}) => {
   return (
     <div className="page">
       <header className="header">
@@ -161,28 +161,27 @@ const Offer = ({noLogged = true, actualOffer}) => {
             </div>
           </div>
           <section className="property__map map">
-            <Map offers={[actualOffer]} />
+            <Map offers={offers} />
           </section>
         </section>
         <div className="container">
-          <NearbyOffersList
-            actualOffer={actualOffer}/>
+          <NearbyOffersList offers={offers} actualOffer={actualOffer} />
         </div>
       </main>
     </div>
   );
 };
 
-
 Offer.propTypes = {
   noLogged: PropTypes.bool,
-  actualOffer: PropTypes.shape(PropTypes4Offer)
+  actualOffer: PropTypes.shape(PropTypes4Offer),
+  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
 };
 
 const mapToStateProps = (state) => ({
   actualOffer: getCurrentOffer(state),
+  offers: getNearbyOffers(state),
 });
-
 
 export {Offer};
 export default connect(mapToStateProps)(Offer);
