@@ -1,65 +1,38 @@
 import React, {Fragment} from "react";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
-import PropTypes from "prop-types";
 import MainPage from "../main-page/main-page";
 import EmptyMainPage from "../empty-main-page/empty-main-page";
 import Login from "../login/login";
 import Favorites from "../favorites/favorites";
 import EmptyFavorites from "../empty-favorites/empty-favorites";
 import Offer from "../offer/offer";
-import {PropTypes4Offer} from "../../propConsts";
 
-const App = (props) => {
-  const {offers} = props;
-
+const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-
-        <Route exact path="/"
+        <Route
+          exact
+          path="/"
           render={({history}) => (
-            < MainPage
-              goToFavorites={() => history.push(`/favorites`)}
-              offers={offers}
-            />
+            <MainPage goToFavorites={() => history.push(`/favorites`)} />
           )}
         />
-
         <Route exact path="/main-empty">
           <EmptyMainPage />
         </Route>
-
         <Route exact path="/login">
           <Login />
         </Route>
-
-        <Route exact path="/offer-not-logged">
-          <Offer
-            noLogged={true}
-            offer={offers[0]}
-          />
-        </Route>
-
         <Route exact path="/favorites">
-          <Favorites
-            offers={offers} />
+          <Favorites />
         </Route>
-
         <Route exact path="/favorites-empty">
           <EmptyFavorites />
         </Route>
-
-        <Route exact path="/offer/:id?"
-          render={({}) => (
-            < Offer
-              noLogged={false}
-              offer={offers[0]}
-              offers={offers}
-              // history={history}
-            />
-          )}
-        />
-
+        <Route exact path="/offer/:id?">
+          <Offer />
+        </Route>
         <Route
           render={() => (
             <Fragment>
@@ -72,15 +45,9 @@ const App = (props) => {
             </Fragment>
           )}
         />
-
       </Switch>
-    </BrowserRouter >
-
+    </BrowserRouter>
   );
-};
-
-App.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer))
 };
 
 export default App;

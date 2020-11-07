@@ -5,7 +5,7 @@ import {PropTypes4Offer} from "../../propConsts";
 import {Link} from "react-router-dom";
 
 const Favorites = (props) => {
-  const {offers} = props;
+  const {offers = []} = props;
 
   return (
     <div className="page">

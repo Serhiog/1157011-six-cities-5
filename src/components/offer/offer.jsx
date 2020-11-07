@@ -1,16 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {PropTypes4Offer} from "../../propConsts";
 import {convertRatingToStars} from "../../utils";
 import {Link} from "react-router-dom";
 import MainPage from "../main-page/main-page";
 import ReviewList from "../review-list/review-list";
 import Map from "../map/map";
-import {MapSizes} from "../../consts";
 import NearbyOffersList from "../nearby-offers-list/nearby-offers-list";
+import {connect} from "react-redux";
+import {getCurrentOffer, getNearbyOffers} from "../../store/selectors";
+import {PropTypes4Offer} from "../../propConsts";
 
-const Offer = (props) => {
-  const {noLogged, offer, offers} = props;
+const Offer = ({noLogged = true, actualOffer, offers}) => {
   return (
     <div className="page">
       <header className="header">
@@ -54,13 +54,13 @@ const Offer = (props) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {offer.photos.map((photo, i) => {
+              {actualOffer.photos.map((photo, i) => {
                 return (
                   <div key={i} className="property__image-wrapper">
                     <img
                       className="property__image"
                       src={photo}
-                      alt={offer.description}
+                      alt={actualOffer.description}
                     />
                   </div>
                 );
@@ -69,7 +69,7 @@ const Offer = (props) => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {offer.premium ? (
+              {actualOffer.premium ? (
                 <div className="property__mark">
                   <span>Premium</span>
                 </div>
@@ -77,7 +77,7 @@ const Offer = (props) => {
                 ``
               )}
               <div className="property__name-wrapper">
-                <h1 className="property__name">{offer.description}</h1>
+                <h1 className="property__name">{actualOffer.description}</h1>
                 <button
                   className="property__bookmark-button button"
                   type="button"
@@ -94,32 +94,32 @@ const Offer = (props) => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: offer.rating}} />
+                  <span style={{width: actualOffer.rating}} />
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">
-                  {convertRatingToStars(offer.rating)}
+                  {convertRatingToStars(actualOffer.rating)}
                 </span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {offer.type}
+                  {actualOffer.type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  {offer.rooms} Bedrooms
+                  {actualOffer.rooms} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max {offer.maxCopacity} adults
+                  Max {actualOffer.maxCopacity} adults
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">€{offer.price}</b>
+                <b className="property__price-value">€{actualOffer.price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {offer.features.map((feature, i) => {
+                  {actualOffer.features.map((feature, i) => {
                     return (
                       <li key={i} className="property__inside-item">
                         {feature}
@@ -134,13 +134,15 @@ const Offer = (props) => {
                   <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
                     <img
                       className="property__avatar user__avatar"
-                      src={offer.ownerPhoto}
+                      src={actualOffer.ownerPhoto}
                       width={74}
                       height={74}
                       alt="Host avatar"
                     />
                   </div>
-                  <span className="property__user-name">{offer.ownerName}</span>
+                  <span className="property__user-name">
+                    {actualOffer.ownerName}
+                  </span>
                 </div>
                 <div className="property__description">
                   <p className="property__text">
@@ -155,15 +157,15 @@ const Offer = (props) => {
                   </p>
                 </div>
               </div>
-              <ReviewList offer={offer} offers={offers} />
+              <ReviewList offer={actualOffer} />
             </div>
           </div>
           <section className="property__map map">
-            <Map offers={offers.slice(0, 3)} mapSize={MapSizes.offerPage} />
+            <Map offers={offers} />
           </section>
         </section>
         <div className="container">
-          <NearbyOffersList offers={offers.slice(0, 3)}/>
+          <NearbyOffersList offers={offers} actualOffer={actualOffer} />
         </div>
       </main>
     </div>
@@ -172,8 +174,15 @@ const Offer = (props) => {
 
 Offer.propTypes = {
   noLogged: PropTypes.bool,
-  offer: PropTypes.shape(PropTypes4Offer),
+  actualOffer: PropTypes.shape(PropTypes4Offer),
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
 };
 
-export default Offer;
+
+const mapToStateProps = (state) => ({
+  actualOffer: getCurrentOffer(state),
+  offers: getNearbyOffers(state),
+});
+
+export {Offer};
+export default connect(mapToStateProps)(Offer);

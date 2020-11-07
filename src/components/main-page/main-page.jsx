@@ -1,21 +1,14 @@
 import React from "react";
-import {PropTypes4Offer} from "../../propConsts";
 import PropTypes from "prop-types";
 import OfferList from "../offers-list/offer-list";
 import Map from "../map/map";
-import {MapSizes} from "../../consts";
+import CitiesList from "../cities-list/cities-list";
+import {PropTypes4Offer} from "../../propConsts";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
+import {getSortedOffers} from "../../store/selectors";
 
-const MainPage = (props) => {
-  const {offers, goToFavorites} = props;
-  const unicCities = [
-    ...new Set(
-        offers.map((offer) => {
-          return offer.city;
-        })
-    ),
-  ];
-
-
+const MainPage = ({goToFavorites, offers}) => {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -56,27 +49,13 @@ const MainPage = (props) => {
       </header>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              {unicCities.map((unicCity, i) => {
-                return (
-                  <li key={i} className="locations__item">
-                    <a className="locations__item-link tabs__item" href="#">
-                      <span>{unicCity}</span>
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
-        </div>
+        <CitiesList />
         <div className="cities">
           <div className="cities__places-container container">
-            <OfferList offers={offers} />
+            <OfferList offers={offers}/>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map offers={offers} mapSize={MapSizes.mainPage}/>
+                <Map offers={offers}/>
               </section>
             </div>
           </div>
@@ -87,8 +66,21 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
   goToFavorites: PropTypes.func,
+  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
 };
 
-export default MainPage;
+
+const mapToStateProps = (state) => ({
+  offers: getSortedOffers(state),
+  // city: getCurrentCity(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  handleOfferCard(payload) {
+    dispatch(ActionCreator.handleOfferCard(payload));
+  },
+});
+
+export {MainPage};
+export default connect(mapToStateProps, mapDispatchToProps)(MainPage);

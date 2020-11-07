@@ -3,15 +3,7 @@ import {PropTypes4Offer} from "../../propConsts";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
-const Card = (props) => {
-  const {
-    offer,
-    offerId,
-    handleOfferCard,
-    classNameArticle,
-    classNameImageWrapper,
-  } = props;
-
+const Card = ({offer, offerId, handleOfferCard, classNameArticle, classNameImageWrapper}) => {
   const renderCard = () => {
     return (
       <article

@@ -17,3 +17,7 @@ export const convertRatingToStars = (ratePercentage) => {
 export const convertReviewDate = (date) => {
   return moment(date).format(`MMMM YYYY`);
 };
+
+export const extend = (a, b) => {
+  return Object.assign({}, a, b);
+};
