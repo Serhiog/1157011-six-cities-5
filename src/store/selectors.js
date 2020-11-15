@@ -54,6 +54,9 @@ export const getNearbyOffers = createSelector(getOffers, (offers) => {
 });
 
 export const getUnicOfferNames = createSelector(getOffers, (offers) => {
+  if ((!offers.length)) {
+    return [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+  }
   return offers.reduce((unicNamesList, offer) => {
     if (offer.city) {
       unicNamesList.push(offer.city);
@@ -61,7 +64,6 @@ export const getUnicOfferNames = createSelector(getOffers, (offers) => {
     return [...new Set(unicNamesList)];
   }, []);
 });
-
 
 export const getFiltredByCityOffers = createSelector(
     getCurrentCity,
