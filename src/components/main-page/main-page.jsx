@@ -3,12 +3,8 @@ import PropTypes from "prop-types";
 import OfferList from "../offers-list/offer-list";
 import Map from "../map/map";
 import CitiesList from "../cities-list/cities-list";
-import {PropTypes4Offer} from "../../propConsts";
-import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
-import {getSortedOffers} from "../../store/selectors";
 
-const MainPage = ({goToFavorites, offers}) => {
+const MainPage = ({goToFavorites}) => {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -52,10 +48,10 @@ const MainPage = ({goToFavorites, offers}) => {
         <CitiesList />
         <div className="cities">
           <div className="cities__places-container container">
-            <OfferList offers={offers}/>
+            <OfferList />
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map offers={offers}/>
+                <Map/>
               </section>
             </div>
           </div>
@@ -67,20 +63,6 @@ const MainPage = ({goToFavorites, offers}) => {
 
 MainPage.propTypes = {
   goToFavorites: PropTypes.func,
-  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
 };
 
-
-const mapToStateProps = (state) => ({
-  offers: getSortedOffers(state),
-  // city: getCurrentCity(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  handleOfferCard(payload) {
-    dispatch(ActionCreator.handleOfferCard(payload));
-  },
-});
-
-export {MainPage};
-export default connect(mapToStateProps, mapDispatchToProps)(MainPage);
+export default MainPage;

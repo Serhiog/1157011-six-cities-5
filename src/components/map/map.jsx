@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import {MapSizes} from "../../consts";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
+import {getOffers} from "../../store/selectors";
 
 class Map extends React.PureComponent {
   constructor(props) {
@@ -14,14 +15,9 @@ class Map extends React.PureComponent {
   }
 
   componentDidMount() {
-    const {offers, hoveredOfferId} = this.props;
+    const {offers} = this.props;
     const icon = leaflet.icon({
       iconUrl: `/img/pin.svg`,
-      iconSize: [30, 30],
-    });
-
-    const iconActive = leaflet.icon({
-      iconUrl: `/img/pin-active.svg`,
       iconSize: [30, 30],
     });
 
@@ -48,16 +44,11 @@ class Map extends React.PureComponent {
       .addTo(this.map);
 
     offers.forEach((offer) => {
-      if (+offer.id === +hoveredOfferId) {
-        leaflet.marker(offer.coordinatos, {icon: iconActive}).addTo(this.map);
-      } else {
-        leaflet.marker(offer.coordinatos, {icon}).addTo(this.map);
-      }
+      leaflet.marker(offer.coordinatos, {icon}).addTo(this.map);
     });
   }
 
   componentDidUpdate() {
-    this.map.remove();
     const {offers, hoveredOfferId} = this.props;
     const icon = leaflet.icon({
       iconUrl: `/img/pin.svg`,
@@ -68,30 +59,6 @@ class Map extends React.PureComponent {
       iconUrl: `/img/pin-active.svg`,
       iconSize: [30, 30],
     });
-
-    const city = offers.find((offer) => {
-      return +offer.id === +hoveredOfferId;
-    });
-
-    const zoom = 12;
-
-    this.map = leaflet.map(`map`, {
-      center: city.coordinatos,
-      zoom,
-      zoomControl: false,
-      marker: true,
-    });
-
-    this.map.setView(city.coordinatos, zoom);
-
-    leaflet
-      .tileLayer(
-          `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
-          {
-            attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`,
-          }
-      )
-      .addTo(this.map);
 
     offers.forEach((offer) => {
       if (+offer.id === +hoveredOfferId) {
@@ -107,15 +74,9 @@ class Map extends React.PureComponent {
   }
 }
 
-Map.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
-  mapSize: PropTypes.string,
-  hoveredOfferId: PropTypes.string,
-};
-
 const mapToStateProps = (state) => ({
+  offers: getOffers(state),
   hoveredOfferId: state.offers.hoveredOfferId,
-  // offers: getFiltredByCityOffers(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -124,6 +85,12 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.handleCity(city));
   },
 });
+
+Map.propTypes = {
+  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
+  mapSize: PropTypes.string,
+  hoveredOfferId: PropTypes.string,
+};
 
 export {Map};
 export default connect(mapToStateProps, mapDispatchToProps)(Map);
