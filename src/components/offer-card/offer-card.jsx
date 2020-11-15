@@ -17,7 +17,7 @@ const Card = ({offer, offerId, handleOfferCard, nearby}) => {
           <span>Premium</span>
         </div>
       )}
-      
+
       <div
         className={`${
           nearby ? `near-places__image-wrapper` : `cities__image-wrapper`
