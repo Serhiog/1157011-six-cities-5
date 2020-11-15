@@ -5,8 +5,6 @@ export const MapSizes = {
   offerPage: `579px`,
 };
 
-export const cities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
-
 export const SortingTypes = {
   toHigh: `to-high`,
   toLow: `to-low`,

@@ -10,8 +10,7 @@ const NearbyOffer = ({offer, handleOfferCard}) => {
       offer={offer}
       handleOfferCard={handleOfferCard}
       offerId={offer.id}
-      classNameArticle={`near-places__card`}
-      classNameImageWrapper={`near-places__image-wrapper`}
+      nearby={true}
     />
   );
 };

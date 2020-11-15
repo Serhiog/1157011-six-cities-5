@@ -22,8 +22,6 @@ const OfferList = ({offers, handleOfferCard, city}) => {
             offer={offer}
             handleOfferCard={handleOfferCard}
             offerId={offer.id}
-            classNameArticle={`cities__place-card`}
-            classNameImageWrapper={`cities__image-wrapper`}
           />
         ))}
       </div>

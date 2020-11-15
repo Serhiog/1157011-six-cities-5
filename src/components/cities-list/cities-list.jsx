@@ -4,8 +4,7 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 import {getUnicOfferNames} from "../../store/selectors";
 
-
-const CitiesList = ({unicCities, handleCity}) => {
+let CitiesList = ({unicCities, handleCity}) => {
   return (
     <div className="tabs">
       <section className="locations container">

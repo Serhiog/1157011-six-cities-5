@@ -1,13 +1,11 @@
 import Offers from "../mocks/offers";
 import {extend} from "../utils";
 import {ActionType} from "./action";
-import {cities} from "../consts";
 
 const initialState = {
   city: null,
   hoveredOfferId: null,
   offerList: Offers,
-  unicCities: cities,
   currentSort: `Popular`,
   offers: null
 };

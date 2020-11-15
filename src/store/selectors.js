@@ -1,15 +1,16 @@
 import {SortingTypes, actualOfferIndex} from "../consts";
 import {convertRatingToStars} from "../utils";
+import {createSelector} from "reselect";
 
 export const getOffers = (state) => {
   return state.offers.offerList;
 };
 
-export const getCurrentOffer = (state) => {
-  return getOffers(state).find((offer) => {
+export const getCurrentOffer = createSelector(getOffers, (offers) => {
+  return offers.find((offer) => {
     return offer.id === actualOfferIndex;
   });
-};
+});
 
 export const getCurrentSort = (state) => {
   return state.offers.currentSort;
@@ -19,50 +20,53 @@ export const getCurrentCity = (state) => {
   return state.offers.city;
 };
 
-export const getSortedOffers = (state) => {
-  const sortedOffers = [...getOffers(state)];
-  switch (getCurrentSort(state)) {
-    case SortingTypes.toHigh:
-      return sortedOffers.sort((a, b) => {
-        return a.price - b.price;
-      });
-    case SortingTypes.toLow:
-      return sortedOffers.sort((a, b) => {
-        return b.price - a.price;
-      });
-    case SortingTypes.popular:
-      return sortedOffers;
-    case SortingTypes.topRated:
-      return sortedOffers.sort((a, b) => {
-        return (
-          +convertRatingToStars(b.rating) - +convertRatingToStars(a.rating)
-        );
-      });
+export const getSortedOffers = createSelector(
+    getOffers,
+    getCurrentSort,
+    (offers, currentSort) => {
+      const superOffers = [...offers];
+      switch (currentSort) {
+        case SortingTypes.toHigh:
+          return superOffers.sort((a, b) => {
+            return a.price - b.price;
+          });
+        case SortingTypes.toLow:
+          return superOffers.sort((a, b) => {
+            return b.price - a.price;
+          });
+        case SortingTypes.popular:
+          return superOffers;
+        case SortingTypes.topRated:
+          return superOffers.sort((a, b) => {
+            return (
+              +convertRatingToStars(b.rating) - +convertRatingToStars(a.rating)
+            );
+          });
 
-    default:
-      return sortedOffers;
-  }
-};
+        default:
+          return superOffers;
+      }
+    }
+);
 
-export const getNearbyOffers = (state) => {
-  // const checkedOffer = state.offers.hoveredOfferId;
-  // const excludeElement = [...getOffers(state).slice(checkedOffer, getOffers(state).length)];
-  const excludeElementd = getOffers(state).slice(0, 3);
-  return excludeElementd;
-};
+export const getNearbyOffers = createSelector(getOffers, (offers) => {
+  return offers.slice(0, 3);
+});
 
-export const getUnicOfferNames = (state) => {
-  return getOffers(state).reduce((unicNamesList, offer) => {
+export const getUnicOfferNames = createSelector(getOffers, (offers) => {
+  return offers.reduce((unicNamesList, offer) => {
     if (offer.city) {
       unicNamesList.push(offer.city);
     }
     return [...new Set(unicNamesList)];
   }, []);
-};
+});
 
-export const getFiltredByCityOffers = (state) => {
-  const currentCity = getCurrentCity(state);
-  return getSortedOffers(state).filter(
-      (offer) => !currentCity || offer.city === currentCity
-  );
-};
+
+export const getFiltredByCityOffers = createSelector(
+    getCurrentCity,
+    getSortedOffers,
+    (city, offers) => {
+      return offers.filter((offer) => !city || offer.city === city);
+    }
+);
