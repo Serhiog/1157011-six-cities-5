@@ -7,9 +7,7 @@ const Card = ({offer, offerId, handleOfferCard, nearby}) => {
   return (
     <article
       data-id={offerId}
-      className={`${
-        nearby ? `near-places__card` : `cities__place-card`
-      } place-card `}
+      className={`${ nearby ? `near-places__card` : `cities__place-card`} place-card `}
       onMouseOver={(evt) =>
         handleOfferCard(evt.target.closest(`.${nearby ? `near-places__card` : `cities__place-card`}`).dataset.id)
       }
@@ -19,7 +17,7 @@ const Card = ({offer, offerId, handleOfferCard, nearby}) => {
           <span>Premium</span>
         </div>
       )}
-
+      
       <div
         className={`${
           nearby ? `near-places__image-wrapper` : `cities__image-wrapper`

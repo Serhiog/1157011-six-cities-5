@@ -3,8 +3,12 @@ import PropTypes from "prop-types";
 import OfferList from "../offers-list/offer-list";
 import Map from "../map/map";
 import CitiesList from "../cities-list/cities-list";
+import MainEmpty from "../main-empty/main-empty";
+import {connect} from "react-redux";
+import {getOffers} from "../../store/selectors";
+import {PropTypes4Offer} from "../../propConsts";
 
-const MainPage = ({goToFavorites}) => {
+const MainPage = ({goToFavorites, offers}) => {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -43,19 +47,24 @@ const MainPage = ({goToFavorites}) => {
           </div>
         </div>
       </header>
-      <main className="page__main page__main--index">
+      <main
+        className={`${ !offers.length ? `page__main--index-empty` : ``} page__main page__main--index `}>
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList />
-        <div className="cities">
-          <div className="cities__places-container container">
-            <OfferList />
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map/>
-              </section>
+        {!offers.length ? (
+          <MainEmpty />
+        ) : (
+          <div className="cities">
+            <div className="cities__places-container container">
+              <OfferList />
+              <div className="cities__right-section">
+                <section className="cities__map map">
+                  <Map />
+                </section>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </main>
     </div>
   );
@@ -63,6 +72,12 @@ const MainPage = ({goToFavorites}) => {
 
 MainPage.propTypes = {
   goToFavorites: PropTypes.func,
+  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
 };
 
-export default MainPage;
+const mapToStateProps = (state) => ({
+  offers: getOffers(state),
+});
+
+export {MainPage};
+export default connect(mapToStateProps)(MainPage);
