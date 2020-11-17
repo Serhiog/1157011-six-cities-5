@@ -72,3 +72,4 @@ export const getFiltredByCityOffers = createSelector(
       return offers.filter((offer) => !city || offer.city === city);
     }
 );
+
