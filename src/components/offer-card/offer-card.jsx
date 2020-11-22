@@ -26,7 +26,7 @@ const Card = ({offer, offerId, handleOfferCard, nearby}) => {
         <Link to="/offer/">
           <img
             className="place-card__image"
-            src={offer.photos[0]}
+            src={offer.images[0]}
             width={260}
             height={200}
             alt="Place image"

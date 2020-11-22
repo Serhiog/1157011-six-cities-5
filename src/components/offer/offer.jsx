@@ -7,7 +7,7 @@ import ReviewList from "../review-list/review-list";
 import Map from "../map/map";
 import NearbyOffersList from "../nearby-offers-list/nearby-offers-list";
 import {connect} from "react-redux";
-import {getCurrentOffer, getNearbyOffers} from "../../store/selectors";
+import {getCurrentOffer, getNearbyOffers} from "../../store/offers/selectors";
 import {PropTypes4Offer} from "../../propConsts";
 
 const Offer = ({noLogged = true, actualOffer, offers}) => {

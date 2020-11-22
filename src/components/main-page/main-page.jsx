@@ -5,7 +5,7 @@ import Map from "../map/map";
 import CitiesList from "../cities-list/cities-list";
 import MainEmpty from "../main-empty/main-empty";
 import {connect} from "react-redux";
-import {getOffers} from "../../store/selectors";
+import {getOffers} from "../../store/offers/selectors";
 import {PropTypes4Offer} from "../../propConsts";
 
 const MainPage = ({goToFavorites, offers}) => {
