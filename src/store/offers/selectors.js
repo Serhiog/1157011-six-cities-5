@@ -1,5 +1,4 @@
 import { SortingTypes, actualOfferIndex } from "../../consts";
-import { convertRatingToStars } from "../../utils";
 import { createSelector } from "reselect";
 import uniqBy from "lodash/uniqBy";
 

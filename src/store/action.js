@@ -48,6 +48,11 @@ export const loadHotels = (hotels) => ({
   payload: hotels,
 });
 
+export const loadReviews = (reviews) => ({
+  type: ActionType.LOAD_REVIEWS,
+  payload: reviews,
+});
+
 // export const userLogged = (log) => ({
 //   type: ActionType.USER_LOGGED,
 //   payload: log,

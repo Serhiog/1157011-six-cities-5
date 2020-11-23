@@ -7,12 +7,12 @@ import {Provider} from "react-redux";
 import rootReducer from "./store/rootReducer";
 import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
-import {fetchHotelsList} from "./store/api-actions";
+import {fetchHotelsList, fetchHotelReviews} from "./store/api-actions";
 import {loadHotels} from "./store/action";
 // import {redirect} from "./store/middlewares/redirect";
 
 const api = createAPI(() =>
-  store.dispatch(loadHotels(`LOAD_HOTELS`))
+  store.dispatch(loadHotels(`LOAD_HOTELS`)),
 );
 
 const store = createStore(
@@ -25,6 +25,7 @@ const store = createStore(
 
 Promise.all([
   store.dispatch(fetchHotelsList()),
+ // store.dispatch(fetchHotelReviews(`01`)),
   // store.dispatch(checkAuth()),
 ]).then(() => {
   ReactDOM.render(

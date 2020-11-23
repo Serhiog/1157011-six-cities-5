@@ -55,7 +55,6 @@ class Map extends React.PureComponent {
           icon,
         })
         .addTo(this.map);
-      // marker.addTo(this.map);
       this.markers.push(marker);
     });
   }
@@ -89,7 +88,6 @@ class Map extends React.PureComponent {
     const zoom = selectedCity.location.zoom;
 
     this.map.setView(center, zoom);
-    console.log('map offers: ', offers);
     offers.forEach((offer) => {
       let marker;
       if (+offer.id === +hoveredOfferId) {
@@ -107,7 +105,6 @@ class Map extends React.PureComponent {
           )
           .addTo(this.map);
       }
-     // marker.addTo(this.map);
       this.markers.push(marker);
     });
   }
@@ -134,6 +131,7 @@ Map.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
   mapSize: PropTypes.string,
   hoveredOfferId: PropTypes.string,
+  selectedCity: PropTypes.object,
 };
 
 export { Map };

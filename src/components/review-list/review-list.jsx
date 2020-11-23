@@ -4,7 +4,7 @@ import Review from "../review/review";
 import PropTypes from "prop-types";
 import {PropTypes4Offer} from "../../propConsts";
 
-const ReviewList = ({offer}) => {
+const ReviewList = ({ offer }) => {
 
   const reviews = offer.reviews;
 
@@ -15,7 +15,7 @@ const ReviewList = ({offer}) => {
         <span className="reviews__amount">{reviews.length}</span>
       </h2>
       <ul className="reviews__list">
-        <Review reviewList={reviews}/>
+        {/* <Review reviewList={reviews}/> */}
       </ul>
       <SendComment />
     </section>

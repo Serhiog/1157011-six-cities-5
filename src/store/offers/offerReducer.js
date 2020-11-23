@@ -1,4 +1,3 @@
-
 import { extend } from "../../utils";
 import { ActionType } from "../action";
 
@@ -7,6 +6,7 @@ const initialState = {
   hoveredOfferId: null,
   offerList: [],
   currentSort: `Popular`,
+  comments: [],
 };
 
 export const offerReducer = (state = initialState, action) => {
@@ -26,7 +26,11 @@ export const offerReducer = (state = initialState, action) => {
     case ActionType.LOAD_HOTELS:
       return extend(state, {
         offerList: action.payload,
-        city: action.payload[0].city.name
+        city: action.payload[0].city.name,
+      });
+    case ActionType.LOAD_REVIEWS:
+      return extend(state, {
+        comments: action.payload
       });
     default:
       return extend(state, {

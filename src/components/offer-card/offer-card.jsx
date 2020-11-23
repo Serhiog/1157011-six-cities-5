@@ -1,18 +1,24 @@
 import React from "react";
-import {PropTypes4Offer} from "../../propConsts";
+import { PropTypes4Offer } from "../../propConsts";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const Card = ({offer, offerId, handleOfferCard, nearby}) => {
+const Card = ({ offer, offerId, handleOfferCard, nearby }) => {
   return (
     <article
       data-id={offerId}
-      className={`${ nearby ? `near-places__card` : `cities__place-card`} place-card `}
+      className={`${
+        nearby ? `near-places__card` : `cities__place-card`
+      } place-card `}
       onMouseOver={(evt) =>
-        handleOfferCard(evt.target.closest(`.${nearby ? `near-places__card` : `cities__place-card`}`).dataset.id)
+        handleOfferCard(
+          evt.target.closest(
+            `.${nearby ? `near-places__card` : `cities__place-card`}`
+          ).dataset.id
+        )
       }
     >
-      {offer.isPremium && (
+      {offer.is_premium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
@@ -26,10 +32,10 @@ const Card = ({offer, offerId, handleOfferCard, nearby}) => {
         <Link to="/offer/">
           <img
             className="place-card__image"
-            src={offer.images[0]}
+            src={offer.preview_image}
             width={260}
             height={200}
-            alt="Place image"
+            alt={offer.title}
           />
         </Link>
       </div>
@@ -48,7 +54,7 @@ const Card = ({offer, offerId, handleOfferCard, nearby}) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: offer.rating}} />
+            <span style={{ width: offer.rating * 10}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
