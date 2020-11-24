@@ -3,9 +3,14 @@ import FavoriteItem from "../favorites-items/favorite-item";
 import PropTypes from "prop-types";
 import {PropTypes4Offer} from "../../propConsts";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {fetchFavoriteOffersList} from "../../store/api-actions";
+import {AuthorizationStatus} from "../../consts";
 
-const Favorites = (props) => {
-  const {offers = []} = props;
+const Favorites = ({favoriteOffers, isLogged, email}) => {
+  // useEffect(() => {
+  //   getFavoriteOffers();
+  // }, []);
 
   return (
     <div className="page">
@@ -32,7 +37,7 @@ const Favorites = (props) => {
                   >
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                     <span className="header__user-name user__name">
-                      Oliver.conner@gmail.com
+                      { isLogged === AuthorizationStatus.AUTH ? email : `Sign In`}
                     </span>
                   </Link>
                 </li>
@@ -41,18 +46,26 @@ const Favorites = (props) => {
           </div>
         </div>
       </header>
-      <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              {offers.map((offer) => (
-                <FavoriteItem key={offer.id} offer={offer} />
-              ))}
-            </ul>
-          </section>
-        </div>
-      </main>
+      {favoriteOffers.length === 0 ? (
+        <main className="page__main page__main--favorites page__main--favorites-empty">
+          <div className="page__favorites-container container">
+            <section className="favorites favorites--empty">
+              <h1 className="visually-hidden">Favorites (empty)</h1>
+              <div className="favorites__status-wrapper">
+                <b className="favorites__status">Nothing yet saved.</b>
+                <p className="favorites__status-description">
+                  Save properties to narrow down search or plan yor future
+                  trips.
+                </p>
+              </div>
+            </section>
+          </div>
+        </main>
+      ) : (
+        <FavoriteItem
+          offers={favoriteOffers}
+        />
+      )}
       <footer className="footer container">
         <a className="footer__logo-link" href="main.html">
           <img
@@ -70,6 +83,23 @@ const Favorites = (props) => {
 
 Favorites.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
+  favoriteOffers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  getFavoriteOffers: PropTypes.func.isRequired,
+  isLogged: PropTypes.bool.isRequired,
+  email: PropTypes.string.isRequired,
 };
 
-export default Favorites;
+const mapStateToProps = (state) => ({
+  favoriteOffers: state.offers.favoriteOffers,
+  isLogged: state.user.authorizationStatus,
+  email: state.user.email
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getFavoriteOffers() {
+    dispatch(fetchFavoriteOffersList());
+  },
+});
+
+export {Favorites};
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

@@ -5,7 +5,7 @@ import OfferCard from "../offer-card/offer-card";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 import SelectSort from "../select-sort/select-sort";
-import {getFiltredByCityOffers, getCurrentCity} from "../../store/selectors";
+import {getFiltredByCityOffers, getCurrentCity} from "../../store/offers/selectors";
 
 const OfferList = ({offers, handleOfferCard, city}) => {
   return (

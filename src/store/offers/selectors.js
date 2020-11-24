@@ -1,6 +1,6 @@
-import {SortingTypes, actualOfferIndex} from "../consts";
-import {convertRatingToStars} from "../utils";
+import {SortingTypes, actualOfferIndex} from "../../consts";
 import {createSelector} from "reselect";
+import uniqBy from "lodash/uniqBy";
 
 export const getOffers = (state) => {
   return state.offers.offerList;
@@ -38,9 +38,7 @@ export const getSortedOffers = createSelector(
           return superOffers;
         case SortingTypes.topRated:
           return superOffers.sort((a, b) => {
-            return (
-              +convertRatingToStars(b.rating) - +convertRatingToStars(a.rating)
-            );
+            return b.rating - a.rating;
           });
 
         default:
@@ -53,23 +51,39 @@ export const getNearbyOffers = createSelector(getOffers, (offers) => {
   return offers.slice(0, 3);
 });
 
-export const getUnicOfferNames = createSelector(getOffers, (offers) => {
-  if ((!offers.length)) {
-    return [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+export const getUnicCities = createSelector(getOffers, (offers) => {
+  if (!offers.length) {
+    return [];
   }
-  return offers.reduce((unicNamesList, offer) => {
+  return offers.reduce((list, offer) => {
     if (offer.city) {
-      unicNamesList.push(offer.city);
+      list.push(offer.city);
     }
-    return [...new Set(unicNamesList)];
+    return uniqBy(list, `name`);
   }, []);
+});
+
+export const getSelectedCity = createSelector(getUnicCities, getCurrentCity, (cities, cityName) => {
+  return cities.find((city) => {
+    return cityName === city.name;
+  });
+});
+
+export const getUnicCityNames = createSelector(getUnicCities, (cities) => {
+  return cities.map((city) => {
+    return city.name;
+  });
 });
 
 export const getFiltredByCityOffers = createSelector(
     getCurrentCity,
     getSortedOffers,
     (city, offers) => {
-      return offers.filter((offer) => !city || offer.city === city);
+      return offers.filter((offer) => !city || offer.city.name === city);
     }
 );
 
+export const checkFavorite = (active) => active ? 1 : 0;
+
+export const getWidthIconFavorite = (classCard) => classCard === `place-card` ? `18` : `31`;
+export const getHeightIconFavorite = (classCard) => classCard === `place-card` ? `19` : `33`;

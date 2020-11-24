@@ -1,7 +1,10 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import {connect} from 'react-redux';
+import {login} from '../../store/api-actions';
+import PropTypes from "prop-types";
 
-const Login = () => {
+const Login = ({onSubmit}) => {
 
   return (
     <div className="page page--gray page--login">
@@ -31,7 +34,7 @@ const Login = () => {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post">
+            <form className="login__form form" action="#" method="post" onSubmit={onSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input className="login__input form__input" type="email" name="email" placeholder="Email" required />
@@ -57,4 +60,15 @@ const Login = () => {
   );
 };
 
-export default Login;
+Login.propTypes = {
+  onSubmit: PropTypes.func.isRequired
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit(evt) {
+    evt.preventDefault();
+    const {email, password} = evt.target;
+    dispatch(login({email: email.value, password: password.value}));
+  }
+});
+export default connect(null, mapDispatchToProps)(Login);

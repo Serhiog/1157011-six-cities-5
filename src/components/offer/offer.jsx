@@ -1,16 +1,21 @@
-import React from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
-import {convertRatingToStars} from "../../utils";
 import {Link} from "react-router-dom";
 import MainPage from "../main-page/main-page";
 import ReviewList from "../review-list/review-list";
+import {fetchHotelReviews} from "../../store/api-actions";
 import Map from "../map/map";
 import NearbyOffersList from "../nearby-offers-list/nearby-offers-list";
 import {connect} from "react-redux";
-import {getCurrentOffer, getNearbyOffers} from "../../store/selectors";
+import {getCurrentOffer, getNearbyOffers} from "../../store/offers/selectors";
 import {PropTypes4Offer} from "../../propConsts";
 
-const Offer = ({noLogged = true, actualOffer, offers}) => {
+const Offer = ({noLogged = true, actualOffer, offers, getReviews}) => {
+
+  useEffect(() => {
+    getReviews(actualOffer.id);
+  }, []);
+
   return (
     <div className="page">
       <header className="header">
@@ -54,7 +59,7 @@ const Offer = ({noLogged = true, actualOffer, offers}) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {actualOffer.photos.map((photo, i) => {
+              {actualOffer.images.map((photo, i) => {
                 return (
                   <div key={i} className="property__image-wrapper">
                     <img
@@ -69,7 +74,7 @@ const Offer = ({noLogged = true, actualOffer, offers}) => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {actualOffer.premium ? (
+              {actualOffer.is_premium ? (
                 <div className="property__mark">
                   <span>Premium</span>
                 </div>
@@ -94,11 +99,11 @@ const Offer = ({noLogged = true, actualOffer, offers}) => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: actualOffer.rating}} />
+                  <span style={{width: actualOffer.rating * 10}} />
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">
-                  {convertRatingToStars(actualOffer.rating)}
+                  {actualOffer.rating * 10}
                 </span>
               </div>
               <ul className="property__features">
@@ -106,10 +111,10 @@ const Offer = ({noLogged = true, actualOffer, offers}) => {
                   {actualOffer.type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  {actualOffer.rooms} Bedrooms
+                  {actualOffer.bedrooms} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max {actualOffer.maxCopacity} adults
+                  Max {actualOffer.max_adults} adults
                 </li>
               </ul>
               <div className="property__price">
@@ -119,7 +124,7 @@ const Offer = ({noLogged = true, actualOffer, offers}) => {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {actualOffer.features.map((feature, i) => {
+                  {actualOffer.goods.map((feature, i) => {
                     return (
                       <li key={i} className="property__inside-item">
                         {feature}
@@ -134,14 +139,14 @@ const Offer = ({noLogged = true, actualOffer, offers}) => {
                   <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
                     <img
                       className="property__avatar user__avatar"
-                      src={actualOffer.ownerPhoto}
+                      src={actualOffer.host.avatar_url}
                       width={74}
                       height={74}
                       alt="Host avatar"
                     />
                   </div>
                   <span className="property__user-name">
-                    {actualOffer.ownerName}
+                    {actualOffer.host.name}
                   </span>
                 </div>
                 <div className="property__description">
@@ -176,6 +181,7 @@ Offer.propTypes = {
   noLogged: PropTypes.bool,
   actualOffer: PropTypes.shape(PropTypes4Offer),
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
+  getReviews: PropTypes.func.isRequired
 };
 
 
@@ -184,5 +190,11 @@ const mapToStateProps = (state) => ({
   offers: getNearbyOffers(state),
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  getReviews(offerId) {
+    dispatch(fetchHotelReviews(offerId));
+  },
+});
+
 export {Offer};
-export default connect(mapToStateProps)(Offer);
+export default connect(mapToStateProps, mapDispatchToProps)(Offer);

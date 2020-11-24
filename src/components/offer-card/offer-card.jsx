@@ -2,17 +2,24 @@ import React from "react";
 import {PropTypes4Offer} from "../../propConsts";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import FavoriteButton from "../favorite-btn/favorite-btn";
 
 const Card = ({offer, offerId, handleOfferCard, nearby}) => {
   return (
     <article
       data-id={offerId}
-      className={`${ nearby ? `near-places__card` : `cities__place-card`} place-card `}
+      className={`${
+        nearby ? `near-places__card` : `cities__place-card`
+      } place-card `}
       onMouseOver={(evt) =>
-        handleOfferCard(evt.target.closest(`.${nearby ? `near-places__card` : `cities__place-card`}`).dataset.id)
+        handleOfferCard(
+            evt.target.closest(
+                `.${nearby ? `near-places__card` : `cities__place-card`}`
+            ).dataset.id
+        )
       }
     >
-      {offer.isPremium && (
+      {offer.is_premium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
@@ -23,13 +30,13 @@ const Card = ({offer, offerId, handleOfferCard, nearby}) => {
           nearby ? `near-places__image-wrapper` : `cities__image-wrapper`
         } place-card__image-wrapper`}
       >
-        <Link to="/offer/">
+        <Link to={`/offer/${offerId}`}>
           <img
             className="place-card__image"
-            src={offer.photos[0]}
+            src={offer.preview_image}
             width={260}
             height={200}
-            alt="Place image"
+            alt={offer.title}
           />
         </Link>
       </div>
@@ -39,16 +46,11 @@ const Card = ({offer, offerId, handleOfferCard, nearby}) => {
             <b className="place-card__price-value">€{offer.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
-            <svg className="place-card__bookmark-icon" width={18} height={19}>
-              <use xlinkHref="#icon-bookmark" />
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <FavoriteButton offer={offer} classCard={`place-card`} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: offer.rating}} />
+            <span style={{width: offer.rating * 10}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

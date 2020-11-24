@@ -1,14 +1,13 @@
-import Offers from "../mocks/offers";
-import {extend} from "../utils";
-import {ActionType} from "./action";
+import {extend} from "../../utils";
+import {ActionType} from "../action";
 
 const initialState = {
   city: null,
   hoveredOfferId: null,
-  offerList: Offers,
+  offerList: [],
   currentSort: `Popular`,
-  offers: null,
-  serversHotelList: `null`,
+  comments: [],
+  favoriteOffers: []
 };
 
 export const offerReducer = (state = initialState, action) => {
@@ -27,7 +26,16 @@ export const offerReducer = (state = initialState, action) => {
       });
     case ActionType.LOAD_HOTELS:
       return extend(state, {
-        serversHotelList: action.payload,
+        offerList: action.payload,
+        city: action.payload[0].city.name,
+      });
+    case ActionType.LOAD_REVIEWS:
+      return extend(state, {
+        comments: action.payload,
+      });
+    case ActionType.GET_FAVORITE_OFFERS:
+      return extend(state, {
+        favoriteOffers: action.payload,
       });
     default:
       return extend(state, {

@@ -1,12 +1,10 @@
 import {combineReducers} from "redux";
-import {messageReducer} from "./messageReducer";
-import {offerReducer} from "./offerReducer";
-import {backendReducer} from "./backendReducer";
-import {userStateReducer} from "./userStateReducer";
+import {messageReducer} from "./message/messageReducer";
+import {offerReducer} from "./offers/offerReducer";
+import {userStateReducer} from "./user/userReducer";
 
 export default combineReducers({
   message: messageReducer,
   offers: offerReducer,
-  backend: backendReducer,
-  userStatus: userStateReducer,
+  user: userStateReducer,
 });

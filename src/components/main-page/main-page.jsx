@@ -5,10 +5,11 @@ import Map from "../map/map";
 import CitiesList from "../cities-list/cities-list";
 import MainEmpty from "../main-empty/main-empty";
 import {connect} from "react-redux";
-import {getOffers} from "../../store/selectors";
+import {getOffers} from "../../store/offers/selectors";
 import {PropTypes4Offer} from "../../propConsts";
+import {AuthorizationStatus} from "../../consts";
 
-const MainPage = ({goToFavorites, offers}) => {
+const MainPage = ({goToFavorites, offers, isLogged, email}) => {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -33,12 +34,11 @@ const MainPage = ({goToFavorites, offers}) => {
                 <li className="header__nav-item user">
                   <a
                     className="header__nav-link header__nav-link--profile"
-                    href="#"
                     onClick={goToFavorites}
                   >
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                     <span className="header__user-name user__name">
-                      Oliver.conner@gmail.com
+                      { isLogged === AuthorizationStatus.AUTH ? email : `Sign In`}
                     </span>
                   </a>
                 </li>
@@ -73,10 +73,14 @@ const MainPage = ({goToFavorites, offers}) => {
 MainPage.propTypes = {
   goToFavorites: PropTypes.func,
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
+  isLogged: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired
 };
 
 const mapToStateProps = (state) => ({
   offers: getOffers(state),
+  isLogged: state.user.authorizationStatus,
+  email: state.user.email
 });
 
 export {MainPage};
