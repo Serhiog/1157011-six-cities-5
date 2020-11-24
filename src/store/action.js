@@ -7,6 +7,8 @@ export const ActionType = {
   CHECKING_COMMENT: `CHECKING_COMMENT`,
   SELECT_CITY: `SELECT_CITY`,
   SELECT_SORT: `SELECT_SORT`,
+  LOAD_HOTELS: `LOAD_HOTELS`,
+  USER_LOGGED: `USER_LOGGED`
 };
 
 export const ActionCreator = {
@@ -40,3 +42,13 @@ export const ActionCreator = {
     };
   },
 };
+
+export const loadHotels = (hotels) => ({
+  type: ActionType.LOAD_HOTELS,
+  payload: hotels,
+});
+
+// export const userLogged = (log) => ({
+//   type: ActionType.USER_LOGGED,
+//   payload: log,
+// });

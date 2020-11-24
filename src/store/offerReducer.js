@@ -7,7 +7,8 @@ const initialState = {
   hoveredOfferId: null,
   offerList: Offers,
   currentSort: `Popular`,
-  offers: null
+  offers: null,
+  serversHotelList: `null`,
 };
 
 export const offerReducer = (state = initialState, action) => {
@@ -23,6 +24,10 @@ export const offerReducer = (state = initialState, action) => {
     case ActionType.SELECT_SORT:
       return extend(state, {
         currentSort: action.currentSort,
+      });
+    case ActionType.LOAD_HOTELS:
+      return extend(state, {
+        serversHotelList: action.payload,
       });
     default:
       return extend(state, {
