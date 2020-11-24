@@ -19,3 +19,21 @@ export const SortingTypes = {
 };
 
 export const actualOfferIndex = 1;
+
+export const AppRoute = {
+  ROOT: `/`,
+  LOGIN: `/login`,
+  FAVORITES: `/favorites`,
+  OFFER: `/offer/`,
+  OFFER_ID: `/offer/:id`
+};
+
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
+export const ReviewLength = {
+  MIN: 50,
+  MAX: 300
+};

@@ -1,15 +1,21 @@
-import React from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import MainPage from "../main-page/main-page";
 import ReviewList from "../review-list/review-list";
+import {fetchHotelReviews} from "../../store/api-actions";
 import Map from "../map/map";
 import NearbyOffersList from "../nearby-offers-list/nearby-offers-list";
 import {connect} from "react-redux";
 import {getCurrentOffer, getNearbyOffers} from "../../store/offers/selectors";
 import {PropTypes4Offer} from "../../propConsts";
 
-const Offer = ({ noLogged = true, actualOffer, offers }) => {
+const Offer = ({noLogged = true, actualOffer, offers, getReviews}) => {
+
+  useEffect(() => {
+    getReviews(actualOffer.id);
+  }, []);
+
   return (
     <div className="page">
       <header className="header">
@@ -175,6 +181,7 @@ Offer.propTypes = {
   noLogged: PropTypes.bool,
   actualOffer: PropTypes.shape(PropTypes4Offer),
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
+  getReviews: PropTypes.func.isRequired
 };
 
 
@@ -183,5 +190,11 @@ const mapToStateProps = (state) => ({
   offers: getNearbyOffers(state),
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  getReviews(offerId) {
+    dispatch(fetchHotelReviews(offerId));
+  },
+});
+
 export {Offer};
-export default connect(mapToStateProps)(Offer);
+export default connect(mapToStateProps, mapDispatchToProps)(Offer);

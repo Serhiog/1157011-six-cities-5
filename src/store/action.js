@@ -8,7 +8,12 @@ export const ActionType = {
   SELECT_CITY: `SELECT_CITY`,
   SELECT_SORT: `SELECT_SORT`,
   LOAD_HOTELS: `LOAD_HOTELS`,
-  USER_LOGGED: `USER_LOGGED`
+  USER_LOGGED: `USER_LOGGED`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  SET_USER_EMAIL: `SET_USER_EMAIL`,
+  GET_FAVORITE_OFFERS: `GET_FAVORITE_OFFERS`,
 };
 
 export const ActionCreator = {
@@ -53,7 +58,18 @@ export const loadReviews = (reviews) => ({
   payload: reviews,
 });
 
-// export const userLogged = (log) => ({
-//   type: ActionType.USER_LOGGED,
-//   payload: log,
-// });
+export const redirectToRoute = (url) => ({
+  type: ActionType.REDIRECT_TO_ROUTE,
+  payload: url,
+});
+
+export const requireAuthorization = (status, data) => ({
+  type: ActionType.REQUIRED_AUTHORIZATION,
+  payload: status,
+  email: data.email,
+});
+
+export const getFavoriteOffers = (offers) => ({
+  type: ActionType.GET_FAVORITE_OFFERS,
+  payload: offers,
+});

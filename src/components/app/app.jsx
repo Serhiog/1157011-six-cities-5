@@ -1,20 +1,23 @@
 import React, {Fragment} from "react";
-import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
+import {Router, Switch, Route, Link} from "react-router-dom";
 import MainPage from "../main-page/main-page";
 import EmptyMainPage from "../empty-main-page/empty-main-page";
 import Login from "../login/login";
 import Favorites from "../favorites/favorites";
 import EmptyFavorites from "../empty-favorites/empty-favorites";
 import Offer from "../offer/offer";
+import history from "../../browser-history";
+import PrivateRoute from "../private-route/private-route";
+import {AppRoute} from "../../consts";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <Switch>
         <Route
           exact
           path="/"
-          render={({history}) => (
+          render={({}) => (
             <MainPage goToFavorites={() => history.push(`/favorites`)} />
           )}
         />
@@ -24,15 +27,22 @@ const App = () => {
         <Route exact path="/login">
           <Login />
         </Route>
-        <Route exact path="/favorites">
-          <Favorites />
-        </Route>
+        <PrivateRoute
+          exact path={AppRoute.FAVORITES}
+          render={() => {
+            return <Favorites />;
+          }}
+        />
         <Route exact path="/favorites-empty">
           <EmptyFavorites />
         </Route>
-        <Route exact path="/offer/:id?">
-          <Offer />
-        </Route>
+        <Route
+          exact
+          path="/offer/:id"
+          render={({}) => {
+            return <Offer />;
+          }}
+        />
         <Route
           render={() => (
             <Fragment>
@@ -46,7 +56,7 @@ const App = () => {
           )}
         />
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 };
 
