@@ -37,3 +37,8 @@ export const ReviewLength = {
   MIN: 50,
   MAX: 300
 };
+
+export const Pins = {
+  icon: `/img/pin.svg`,
+  activeIcon: `/img/pin-active.svg`
+};

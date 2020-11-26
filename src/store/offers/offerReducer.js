@@ -7,7 +7,7 @@ const initialState = {
   offerList: [],
   currentSort: `Popular`,
   comments: [],
-  favoriteOffers: []
+  favoriteOffers: [],
 };
 
 export const offerReducer = (state = initialState, action) => {
@@ -36,6 +36,10 @@ export const offerReducer = (state = initialState, action) => {
     case ActionType.GET_FAVORITE_OFFERS:
       return extend(state, {
         favoriteOffers: action.payload,
+      });
+    case ActionType.GET_REVIEWS:
+      return extend(state, {
+        comments: action.payload,
       });
     default:
       return extend(state, {

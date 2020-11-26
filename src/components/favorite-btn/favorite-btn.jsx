@@ -9,7 +9,7 @@ import {checkFavorite, getWidthIconFavorite, getHeightIconFavorite} from "../../
 const FavoriteButton = ({offer, classCard, authorizationStatus, changeFavoriteStatusAction}) => {
 
   const handleFavoriteButtonClick = () => {
-    changeFavoriteStatusAction(offer.id, checkFavorite(!offer.isFavorite));
+    changeFavoriteStatusAction(offer.id, checkFavorite(!offer.is_favorite));
   };
 
   const widthIcon = getWidthIconFavorite(classCard);
@@ -18,7 +18,7 @@ const FavoriteButton = ({offer, classCard, authorizationStatus, changeFavoriteSt
   return (
     <div>
       {authorizationStatus === AuthorizationStatus.AUTH ?
-        <button onClick={handleFavoriteButtonClick} className={`button ${classCard}__bookmark-button ${offer.isFavorite ? `place-card__bookmark-button--active` : ``}`} type="button">
+        <button onClick={handleFavoriteButtonClick} className={`button ${classCard}__bookmark-button ${offer.is_favorite ? `place-card__bookmark-button--active` : ``}`} type="button">
           <svg className={`place-card__bookmark-icon`} width={widthIcon} height={heightIcon}>
             <use xlinkHref="#icon-bookmark"></use>
           </svg>

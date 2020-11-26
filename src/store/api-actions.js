@@ -3,6 +3,8 @@ import {
   loadReviews,
   requireAuthorization,
   getFavoriteOffers,
+  getReviews,
+  updateErrorStatus
 } from "./action";
 import history from "../browser-history";
 
@@ -38,5 +40,14 @@ export const changeFavorite = (offerId, status) => (
   return api.post(`/favorite/${offerId}/${status}`).then(() => {
     dispatch(fetchHotelsList());
     dispatch(fetchFavoriteOffersList());
+  });
+};
+
+export const sendReview = ({comment, rating}, offerId) => (dispatch, _getState, api) => {
+  return api.post(`/comments/${offerId}`, {comment, rating})
+  .then(({data}) => dispatch(getReviews(data)))
+  .catch((err) => {
+    dispatch(updateErrorStatus(true));
+    throw err;
   });
 };

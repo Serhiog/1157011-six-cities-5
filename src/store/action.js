@@ -14,6 +14,9 @@ export const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   SET_USER_EMAIL: `SET_USER_EMAIL`,
   GET_FAVORITE_OFFERS: `GET_FAVORITE_OFFERS`,
+  GET_REVIEWS: `GET_REVIEWS`,
+  RESET_COMMENT: `RESET_COMMENT`,
+  UPDATE_ERROR_STATUS: `UPDATE_ERROR_STATUS`
 };
 
 export const ActionCreator = {
@@ -72,4 +75,24 @@ export const requireAuthorization = (status, data) => ({
 export const getFavoriteOffers = (offers) => ({
   type: ActionType.GET_FAVORITE_OFFERS,
   payload: offers,
+});
+
+export const updateErrorStatus = (answer) => ({
+  type: ActionType.UPDATE_ERROR_STATUS,
+  payload: answer
+});
+
+export const getOffers = (offers) => ({
+  type: ActionType.GET_OFFERS,
+  payload: offers,
+});
+
+export const getReviews = (reviews) => ({
+  type: ActionType.GET_REVIEWS,
+  payload: reviews,
+});
+
+export const resetReview = (defaultData) => ({
+  type: ActionType.RESET_COMMENT,
+  payload: defaultData,
 });

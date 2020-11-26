@@ -38,7 +38,9 @@ const MainPage = ({goToFavorites, offers, isLogged, email}) => {
                   >
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                     <span className="header__user-name user__name">
-                      { isLogged === AuthorizationStatus.AUTH ? email : `Sign In`}
+                      {isLogged === AuthorizationStatus.AUTH
+                        ? email
+                        : `Sign In`}
                     </span>
                   </a>
                 </li>
@@ -48,7 +50,10 @@ const MainPage = ({goToFavorites, offers, isLogged, email}) => {
         </div>
       </header>
       <main
-        className={`${ !offers.length ? `page__main--index-empty` : ``} page__main page__main--index `}>
+        className={`${
+          !offers.length ? `page__main--index-empty` : ``
+        } page__main page__main--index `}
+      >
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList />
         {!offers.length ? (
@@ -59,7 +64,12 @@ const MainPage = ({goToFavorites, offers, isLogged, email}) => {
               <OfferList />
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  <Map />
+                  <Map
+                    offers={offers}
+                    classMap={`cities__map`}
+                    cityCoordinates={[offers[0].city.location.latitude, offers[0].city.location.longitude]}
+                    mapZoom={offers[0].city.location.zoom}
+                  />
                 </section>
               </div>
             </div>
@@ -74,13 +84,13 @@ MainPage.propTypes = {
   goToFavorites: PropTypes.func,
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
   isLogged: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired
+  email: PropTypes.string.isRequired,
 };
 
 const mapToStateProps = (state) => ({
   offers: getOffers(state),
   isLogged: state.user.authorizationStatus,
-  email: state.user.email
+  email: state.user.email,
 });
 
 export {MainPage};
