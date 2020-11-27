@@ -1,39 +1,46 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {PropTypes4Offer} from "../../propConsts";
-import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
-import NearbyOffer from "../nearby-offer/nearby-offer";
+import OfferCard from "../offer-card/offer-card";
 
-const NearbyOffersList = ({offers, handleOfferCard}) => {
+const OfferList = (props) => {
+  const {
+    offers,
+    updateActiveOfferIdAction,
+    classList,
+    classCard,
+    classImageWrapper
+  } = props;
+
   return (
-    <section className="near-places places">
-      <h2 className="near-places__title">Other places in the neighbourhood</h2>
-      <div className="near-places__list places__list">
-        {offers.map((offer) => {
-          return (
-            <NearbyOffer
-              key={offer.id}
-              offer={offer}
-              handleOfferCard={handleOfferCard}
-            />
-          );
-        })}
-      </div>
-    </section>
+    <div
+      onMouseOver={(evt) => {
+        if (typeof updateActiveOfferIdAction === `function`) {
+          if (!evt.target.closest(`.place-card`)) {
+            return;
+          }
+          const offerId = evt.target.closest(`.place-card`).id;
+          updateActiveOfferIdAction(offerId);
+        }
+      }}
+      className={`${classList} ${classList !== `favorites__places` ? `places__list` : ``}`}>
+      {offers.map((offer) => (
+        <OfferCard
+          key={offer.id}
+          offer={offer}
+          classCard={classCard}
+          classImageWrapper={classImageWrapper}
+        />
+      ))}
+    </div>
   );
 };
 
-NearbyOffersList.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
-  handleOfferCard: PropTypes.func,
-  actualOffer: PropTypes.shape(PropTypes4Offer),
+OfferList.propTypes = {
+  offers: PropTypes.arrayOf(PropTypes.object),
+  updateActiveOfferIdAction: PropTypes.func,
+  classList: PropTypes.string.isRequired,
+  classCard: PropTypes.string.isRequired,
+  classImageWrapper: PropTypes.string.isRequired
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  handleOfferCard: (payload) =>
-    dispatch(ActionCreator.handleOfferCard(payload)),
-});
-
-export {NearbyOffersList};
-export default connect(null, mapDispatchToProps)(NearbyOffersList);
+export default OfferList;

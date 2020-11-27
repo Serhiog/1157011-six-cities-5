@@ -25,7 +25,7 @@ export const AppRoute = {
   LOGIN: `/login`,
   FAVORITES: `/favorites`,
   OFFER: `/offer/`,
-  OFFER_ID: `/offer/:id`
+  OFFER_ID: `/offer/:id?`
 };
 
 export const AuthorizationStatus = {
@@ -36,4 +36,18 @@ export const AuthorizationStatus = {
 export const ReviewLength = {
   MIN: 50,
   MAX: 300
+};
+
+export const Pins = {
+  icon: `/img/pin.svg`,
+  activeIcon: `/img/pin-active.svg`
+};
+
+export const CITIES = {
+  PARISH: `Paris`,
+  COLOGNE: `Cologne`,
+  BRUSSELS: `Brussels`,
+  AMSTERDAM: `Amsterdam`,
+  HUMBURG: `Hamburg`,
+  DUSELDORF: `Dusseldorf`,
 };

@@ -9,8 +9,10 @@ import Offer from "../offer/offer";
 import history from "../../browser-history";
 import PrivateRoute from "../private-route/private-route";
 import {AppRoute} from "../../consts";
+import {connect} from "react-redux";
+import {getOffers, getSelectedCity} from "../../store/offers/selectors";
 
-const App = () => {
+const App = ({offers}) => {
   return (
     <Router history={history}>
       <Switch>
@@ -28,7 +30,8 @@ const App = () => {
           <Login />
         </Route>
         <PrivateRoute
-          exact path={AppRoute.FAVORITES}
+          exact
+          path={AppRoute.FAVORITES}
           render={() => {
             return <Favorites />;
           }}
@@ -38,9 +41,10 @@ const App = () => {
         </Route>
         <Route
           exact
-          path="/offer/:id"
-          render={({}) => {
-            return <Offer />;
+          path={AppRoute.OFFER_ID}
+          render={({match}) => {
+            const offer = offers.find((item) => +item.id === +match.params.id);
+            return <Offer offer={offer} param={ match.params.id} goToFavorites={() => history.push(`/favorites`)}/>;
           }}
         />
         <Route
@@ -60,4 +64,9 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  offers: getOffers(state),
+});
+
+export {App};
+export default connect(mapStateToProps)(App);

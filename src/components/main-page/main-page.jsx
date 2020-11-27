@@ -4,12 +4,12 @@ import OfferList from "../offers-list/offer-list";
 import Map from "../map/map";
 import CitiesList from "../cities-list/cities-list";
 import MainEmpty from "../main-empty/main-empty";
-import {connect} from "react-redux";
-import {getOffers} from "../../store/offers/selectors";
-import {PropTypes4Offer} from "../../propConsts";
-import {AuthorizationStatus} from "../../consts";
+import { connect } from "react-redux";
+import { getOffers, getFiltredByCityOffers } from "../../store/offers/selectors";
+import { PropTypes4Offer } from "../../propConsts";
+import { AuthorizationStatus } from "../../consts";
 
-const MainPage = ({goToFavorites, offers, isLogged, email}) => {
+const MainPage = ({ goToFavorites, offers, isLogged, email }) => {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -38,7 +38,9 @@ const MainPage = ({goToFavorites, offers, isLogged, email}) => {
                   >
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                     <span className="header__user-name user__name">
-                      { isLogged === AuthorizationStatus.AUTH ? email : `Sign In`}
+                      {isLogged === AuthorizationStatus.AUTH
+                        ? email
+                        : `Sign In`}
                     </span>
                   </a>
                 </li>
@@ -48,7 +50,10 @@ const MainPage = ({goToFavorites, offers, isLogged, email}) => {
         </div>
       </header>
       <main
-        className={`${ !offers.length ? `page__main--index-empty` : ``} page__main page__main--index `}>
+        className={`${
+          !offers.length ? `page__main--index-empty` : ``
+        } page__main page__main--index `}
+      >
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList />
         {!offers.length ? (
@@ -56,10 +61,24 @@ const MainPage = ({goToFavorites, offers, isLogged, email}) => {
         ) : (
           <div className="cities">
             <div className="cities__places-container container">
-              <OfferList />
+              <OfferList
+                offers={offers}
+                // updateActiveOfferIdAction={updateActiveOfferIdAction}
+                classList={`cities__places-list tabs__content`}
+                classCard={`cities__place-card`}
+                classImageWrapper={`cities__image-wrapper`}
+              />
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  <Map />
+                  <Map
+                    offers={offers}
+                    classMap={`cities__map`}
+                    cityCoordinates={[
+                      offers[0].city.location.latitude,
+                      offers[0].city.location.longitude,
+                    ]}
+                    mapZoom={offers[0].city.location.zoom}
+                  />
                 </section>
               </div>
             </div>
@@ -74,14 +93,14 @@ MainPage.propTypes = {
   goToFavorites: PropTypes.func,
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
   isLogged: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired
+  email: PropTypes.string.isRequired,
 };
 
 const mapToStateProps = (state) => ({
-  offers: getOffers(state),
+  offers: getFiltredByCityOffers(state),
   isLogged: state.user.authorizationStatus,
-  email: state.user.email
+  email: state.user.email,
 });
 
-export {MainPage};
+export { MainPage };
 export default connect(mapToStateProps)(MainPage);

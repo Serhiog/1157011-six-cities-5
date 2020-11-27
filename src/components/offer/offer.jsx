@@ -1,20 +1,42 @@
-import React, {useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import MainPage from "../main-page/main-page";
+import SendComment from "../main-page/main-page";
 import ReviewList from "../review-list/review-list";
-import {fetchHotelReviews} from "../../store/api-actions";
+import {
+  fetchHotelReviews,
+  fetchNearbyOffersList,
+} from "../../store/api-actions";
 import Map from "../map/map";
-import NearbyOffersList from "../nearby-offers-list/nearby-offers-list";
-import {connect} from "react-redux";
-import {getCurrentOffer, getNearbyOffers} from "../../store/offers/selectors";
-import {PropTypes4Offer} from "../../propConsts";
+import OfferList from "../offers-list/offer-list";
+import { connect } from "react-redux";
+import { getCurrentOffer, getNearbyOffers } from "../../store/offers/selectors";
+import { PropTypes4Offer } from "../../propConsts";
+import { FavoriteButton } from "../favorite-btn/favorite-btn";
+import { AuthorizationStatus } from "../../consts";
 
-const Offer = ({noLogged = true, actualOffer, offers, getReviews}) => {
-
+const Offer = ({
+  offer,
+  nearbyOffers,
+  actualOffer,
+  offers,
+  getReviews,
+  reviews,
+  authorizationStatus,
+  isLogged,
+  email,
+  offerId,
+  param,
+  goToFavorites,
+  getNearbyOffers
+}) => {
   useEffect(() => {
-    getReviews(actualOffer.id);
+    getReviews(actualOffer.id, param);
+    getNearbyOffers(actualOffer.id);
   }, []);
+
+  const ratingOfferPercent = Math.round(actualOffer.rating) * 20;
 
   return (
     <div className="page">
@@ -35,20 +57,17 @@ const Offer = ({noLogged = true, actualOffer, offers, getReviews}) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <Link
+                  <a
                     className="header__nav-link header__nav-link--profile"
-                    to={<MainPage />}
+                    onClick={goToFavorites}
                   >
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-
-                    {noLogged ? (
-                      <span className="header__login">Sign in</span>
-                    ) : (
-                      <span className="header__user-name user__name">
-                        Oliver.conner@gmail.com
-                      </span>
-                    )}
-                  </Link>
+                    <span className="header__user-name user__name">
+                      {isLogged === AuthorizationStatus.AUTH
+                        ? email
+                        : `Sign In`}
+                    </span>
+                  </a>
                 </li>
               </ul>
             </nav>
@@ -59,22 +78,22 @@ const Offer = ({noLogged = true, actualOffer, offers, getReviews}) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {actualOffer.images.map((photo, i) => {
-                return (
-                  <div key={i} className="property__image-wrapper">
+              {actualOffer.images
+                .map((picture, i) => (
+                  <div className="property__image-wrapper" key={i}>
                     <img
                       className="property__image"
-                      src={photo}
-                      alt={actualOffer.description}
+                      src={picture}
+                      alt="Place image"
                     />
                   </div>
-                );
-              })}
+                ))
+                .slice(0, 6)}
             </div>
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {actualOffer.is_premium ? (
+              {actualOffer.isPremium ? (
                 <div className="property__mark">
                   <span>Premium</span>
                 </div>
@@ -82,28 +101,21 @@ const Offer = ({noLogged = true, actualOffer, offers, getReviews}) => {
                 ``
               )}
               <div className="property__name-wrapper">
-                <h1 className="property__name">{actualOffer.description}</h1>
-                <button
-                  className="property__bookmark-button button"
-                  type="button"
-                >
-                  <svg
-                    className="property__bookmark-icon"
-                    width={31}
-                    height={33}
-                  >
-                    <use xlinkHref="#icon-bookmark" />
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <h1 className="property__name">{actualOffer.title}</h1>
+
+                <FavoriteButton
+                  offer={actualOffer}
+                  classCard={`property`}
+                  auth={authorizationStatus === AuthorizationStatus.AUTH}
+                />
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: actualOffer.rating * 10}} />
+                  <span style={{ width: `${ratingOfferPercent}%` }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">
-                  {actualOffer.rating * 10}
+                  {actualOffer.rating}
                 </span>
               </div>
               <ul className="property__features">
@@ -118,30 +130,36 @@ const Offer = ({noLogged = true, actualOffer, offers, getReviews}) => {
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">€{actualOffer.price}</b>
+                <b className="property__price-value">
+                  &euro;{actualOffer.price}
+                </b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {actualOffer.goods.map((feature, i) => {
-                    return (
-                      <li key={i} className="property__inside-item">
-                        {feature}
-                      </li>
-                    );
-                  })}
+                  {actualOffer.goods.map((thing, i) => (
+                    <li className="property__inside-item" key={i}>
+                      {thing}
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
+                  <div
+                    className={
+                      actualOffer.host.is_pro
+                        ? `property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper`
+                        : `property__avatar-wrapper user__avatar-wrapper`
+                    }
+                  >
                     <img
                       className="property__avatar user__avatar"
-                      src={actualOffer.host.avatar_url}
-                      width={74}
-                      height={74}
+                      src={`/` + actualOffer.host.avatar_url}
+                      width="74"
+                      height="74"
                       alt="Host avatar"
                     />
                   </div>
@@ -150,27 +168,42 @@ const Offer = ({noLogged = true, actualOffer, offers, getReviews}) => {
                   </span>
                 </div>
                 <div className="property__description">
-                  <p className="property__text">
-                    A quiet cozy and picturesque that hides behind a a river by
-                    the unique lightness of Amsterdam. The building is green and
-                    from 18th century.
-                  </p>
-                  <p className="property__text">
-                    An independent House, strategically located between Rembrand
-                    Square and National Opera, but where the bustle of the city
-                    comes to rest in this alley flowery and colorful.
-                  </p>
+                  <p className="property__text">{actualOffer.description}</p>
                 </div>
               </div>
-              <ReviewList offer={actualOffer} />
+              <section className="property__reviews reviews">
+                <ReviewList reviews={reviews} />
+              </section>
             </div>
           </div>
-          <section className="property__map map">
-            <Map offers={offers} />
-          </section>
+
+          <Map
+            forOffer={true}
+            mainOffer={offer}
+            offers={nearbyOffers}
+            classMap={`property__map`}
+            cityCoordinates={[
+              +offer.city.location.latitude,
+              +offer.city.location.longitude,
+            ]}
+            mapZoom={+offer.city.location.zoom}
+          />
         </section>
         <div className="container">
-          <NearbyOffersList offers={offers} actualOffer={actualOffer} />
+          <section className="near-places places">
+            <h2 className="near-places__title">
+              Other places in the neighbourhood
+            </h2>
+
+            <OfferList
+              offers={nearbyOffers}
+              classList={`near-places__list`}
+              classCard={`near-places__card`}
+              classImageWrapper={`near-places__image-wrapper`}
+              forFavorites={true}
+              nearby={true}
+            />
+          </section>
         </div>
       </main>
     </div>
@@ -181,20 +214,27 @@ Offer.propTypes = {
   noLogged: PropTypes.bool,
   actualOffer: PropTypes.shape(PropTypes4Offer),
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
-  getReviews: PropTypes.func.isRequired
+  getReviews: PropTypes.func.isRequired,
+  nearbyOffers: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
-
 
 const mapToStateProps = (state) => ({
   actualOffer: getCurrentOffer(state),
-  offers: getNearbyOffers(state),
+  authorizationStatus: state.user.authorizationStatus,
+  isLogged: state.user.authorizationStatus,
+  email: state.user.email,
+  reviews: state.offers.comments,
+  nearbyOffers: getNearbyOffers(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getReviews(offerId) {
-    dispatch(fetchHotelReviews(offerId));
+  getReviews(offerId, param) {
+    dispatch(fetchHotelReviews(offerId, param));
+  },
+  getNearbyOffers(offerId) {
+    dispatch(fetchNearbyOffersList(offerId));
   },
 });
 
-export {Offer};
+export { Offer };
 export default connect(mapToStateProps, mapDispatchToProps)(Offer);

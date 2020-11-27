@@ -1,38 +1,68 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import {connect} from 'react-redux';
-import {Link} from "react-router-dom";
-import {changeFavorite} from "../../store/api-actions";
-import {AuthorizationStatus} from "../../consts";
-import {checkFavorite, getWidthIconFavorite, getHeightIconFavorite} from "../../store/offers/selectors";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { changeFavorite } from "../../store/api-actions";
+import { AuthorizationStatus } from "../../consts";
+import {
+  checkFavorite,
+  getWidthIconFavorite,
+  getHeightIconFavorite,
+} from "../../store/offers/selectors";
 
-const FavoriteButton = ({offer, classCard, authorizationStatus, changeFavoriteStatusAction}) => {
-
+const FavoriteButton = ({
+  offer,
+  classCard,
+  authorizationStatus,
+  changeFavoriteStatusAction,
+  auth,
+}) => {
   const handleFavoriteButtonClick = () => {
-    changeFavoriteStatusAction(offer.id, checkFavorite(!offer.isFavorite));
+    changeFavoriteStatusAction(offer.id, checkFavorite(!offer.is_favorite));
   };
 
   const widthIcon = getWidthIconFavorite(classCard);
   const heightIcon = getHeightIconFavorite(classCard);
 
+  // useEffect(() => {
+  // }, []);
+
   return (
-    <div>
-      {authorizationStatus === AuthorizationStatus.AUTH ?
-        <button onClick={handleFavoriteButtonClick} className={`button ${classCard}__bookmark-button ${offer.isFavorite ? `place-card__bookmark-button--active` : ``}`} type="button">
-          <svg className={`place-card__bookmark-icon`} width={widthIcon} height={heightIcon}>
+    <React.Fragment>
+      {auth ? (
+        <button
+          onClick={handleFavoriteButtonClick}
+          className={`button ${classCard}__bookmark-button ${
+            offer.is_favorite ? `place-card__bookmark-button--active` : ``
+          }`}
+          type="button"
+        >
+          <svg
+            className={`place-card__bookmark-icon`}
+            width={widthIcon}
+            height={heightIcon}
+          >
             <use xlinkHref="#icon-bookmark"></use>
           </svg>
           <span className="visually-hidden">In bookmarks</span>
         </button>
-        :
-        <Link to="/login" className={`button ${classCard}__bookmark-button`} type="button">
-          <svg className={`${classCard}__bookmark-icon`} width={widthIcon} height={heightIcon}>
+      ) : (
+        <Link
+          to="/login"
+          className={`button ${classCard}__bookmark-button`}
+          type="button"
+        >
+          <svg
+            className={`${classCard}__bookmark-icon`}
+            width={widthIcon}
+            height={heightIcon}
+          >
             <use xlinkHref="#icon-bookmark"></use>
           </svg>
           <span className="visually-hidden">In bookmarks</span>
         </Link>
-      }
-    </div >
+      )}
+    </React.Fragment>
   );
 };
 
@@ -43,16 +73,15 @@ FavoriteButton.propTypes = {
   changeFavoriteStatusAction: PropTypes.func.isRequired,
 };
 
-
-const mapStateToProps = ({user}) => ({
-  authorizationStatus: user.authorizationStatus
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.user.authorizationStatus,
 });
 
-const mapDispatchToProps = ((dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   changeFavoriteStatusAction(id, bool) {
     dispatch(changeFavorite(id, bool));
-  }
-}));
+  },
+});
 
-export {FavoriteButton};
+export { FavoriteButton };
 export default connect(mapStateToProps, mapDispatchToProps)(FavoriteButton);

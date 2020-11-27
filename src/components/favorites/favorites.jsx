@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import FavoriteItem from "../favorites-items/favorite-item";
 import PropTypes from "prop-types";
 import {PropTypes4Offer} from "../../propConsts";
@@ -7,10 +7,10 @@ import {connect} from "react-redux";
 import {fetchFavoriteOffersList} from "../../store/api-actions";
 import {AuthorizationStatus} from "../../consts";
 
-const Favorites = ({favoriteOffers, isLogged, email}) => {
-  // useEffect(() => {
-  //   getFavoriteOffers();
-  // }, []);
+const Favorites = ({favoriteOffers, isLogged, email, getFavoriteOffers}) => {
+  useEffect(() => {
+    getFavoriteOffers();
+  }, []);
 
   return (
     <div className="page">

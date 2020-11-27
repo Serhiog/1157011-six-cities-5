@@ -14,8 +14,6 @@ export const userStateReducer = (state = initialState, action) => {
         email: action.email,
       });
     default:
-      return extend(state, {
-        authorizationStatus: `AUTH`,
-      });
+      return state;
   }
 };

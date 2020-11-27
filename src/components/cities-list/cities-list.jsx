@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
-import {getUnicCityNames} from "../../store/offers/selectors";
+import { connect } from "react-redux";
+import { ActionCreator } from "../../store/action";
+import { getUnicCityNames } from "../../store/offers/selectors";
+import { changeCity } from "../../store/action";
 
-let CitiesList = ({unicCities, handleCity}) => {
+let CitiesList = ({ unicCities, currentCity, handleCity }) => {
   return (
     <div className="tabs">
       <section className="locations container">
@@ -14,7 +15,9 @@ let CitiesList = ({unicCities, handleCity}) => {
               <li key={i} className="locations__item">
                 <a
                   onClick={handleCity}
-                  className="locations__item-link tabs__item"
+                  className={`locations__item-link tabs__item ${
+                    currentCity === unicCity ? `tabs__item--active` : ``
+                  }`}
                   href="#"
                   data-city={unicCity}
                 >
@@ -32,18 +35,23 @@ let CitiesList = ({unicCities, handleCity}) => {
 CitiesList.propTypes = {
   unicCities: PropTypes.array,
   handleCity: PropTypes.func,
+  isCurrent: PropTypes.bool.isRequired,
+  currentCity: PropTypes.string.isRequired,
 };
 
 const mapToStateProps = (state) => ({
   unicCities: getUnicCityNames(state),
+  currentCity: state.offers.selectedCity,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   handleCity(evt) {
+    evt.target.parentNode.classList.toggle(`tabs__item--active`);
     const city = evt.target.closest(`.locations__item-link`).dataset.city;
     dispatch(ActionCreator.handleCity(city));
+    dispatch(changeCity(city));
   },
 });
 
-export {CitiesList};
+export { CitiesList };
 export default connect(mapToStateProps, mapDispatchToProps)(CitiesList);
