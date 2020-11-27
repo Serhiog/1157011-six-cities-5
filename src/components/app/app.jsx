@@ -70,7 +70,7 @@ const mapStateToProps = (state) => ({
   offers: getOffers(state),
 });
 
-Favorites.propTypes = {
+App.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
 };
 
