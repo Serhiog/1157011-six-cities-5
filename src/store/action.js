@@ -14,7 +14,17 @@ export const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   SET_USER_EMAIL: `SET_USER_EMAIL`,
   GET_FAVORITE_OFFERS: `GET_FAVORITE_OFFERS`,
+  GET_REVIEWS: `GET_REVIEWS`,
+  RESET_COMMENT: `RESET_COMMENT`,
+  UPDATE_ERROR_STATUS: `UPDATE_ERROR_STATUS`,
+  CHANGE_CITY: `CHANGE_CITY`,
+  GET_NEARBY_OFFERS: `GET_NEARBY_OFFERS`
 };
+
+export const changeCity = (city) => ({
+  type: ActionType.CHANGE_CITY,
+  payload: city,
+});
 
 export const ActionCreator = {
   handleOfferCard: (payload) => ({
@@ -53,9 +63,10 @@ export const loadHotels = (hotels) => ({
   payload: hotels,
 });
 
-export const loadReviews = (reviews) => ({
+export const loadReviews = (reviews, param) => ({
   type: ActionType.LOAD_REVIEWS,
   payload: reviews,
+  param,
 });
 
 export const redirectToRoute = (url) => ({
@@ -63,13 +74,39 @@ export const redirectToRoute = (url) => ({
   payload: url,
 });
 
-export const requireAuthorization = (status, data) => ({
+export const requireAuthorization = (status, email) => ({
   type: ActionType.REQUIRED_AUTHORIZATION,
   payload: status,
-  email: data.email,
+  email,
 });
 
 export const getFavoriteOffers = (offers) => ({
   type: ActionType.GET_FAVORITE_OFFERS,
   payload: offers,
 });
+
+export const updateErrorStatus = (answer) => ({
+  type: ActionType.UPDATE_ERROR_STATUS,
+  payload: answer,
+});
+
+export const getOffers = (offers) => ({
+  type: ActionType.GET_OFFERS,
+  payload: offers,
+});
+
+export const getReviews = (reviews) => ({
+  type: ActionType.GET_REVIEWS,
+  payload: reviews,
+});
+
+export const resetReview = (defaultData) => ({
+  type: ActionType.RESET_COMMENT,
+  payload: defaultData,
+});
+
+export const getNearbyOffers = (offers) => ({
+  type: ActionType.GET_NEARBY_OFFERS,
+  payload: offers,
+});
+

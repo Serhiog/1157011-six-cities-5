@@ -1,5 +1,6 @@
 import {extend} from "../../utils";
 import {ActionType} from "../action";
+import {CITIES} from "../../consts";
 
 const initialState = {
   city: null,
@@ -7,7 +8,10 @@ const initialState = {
   offerList: [],
   currentSort: `Popular`,
   comments: [],
-  favoriteOffers: []
+  favoriteOffers: [],
+  param: null,
+  selectedCity: CITIES.COLOGNE,
+  nearbyOffers: []
 };
 
 export const offerReducer = (state = initialState, action) => {
@@ -32,10 +36,23 @@ export const offerReducer = (state = initialState, action) => {
     case ActionType.LOAD_REVIEWS:
       return extend(state, {
         comments: action.payload,
+        param: action.param,
       });
     case ActionType.GET_FAVORITE_OFFERS:
       return extend(state, {
         favoriteOffers: action.payload,
+      });
+    case ActionType.GET_REVIEWS:
+      return extend(state, {
+        comments: action.payload,
+      });
+    case ActionType.CHANGE_CITY:
+      return extend(state, {
+        selectedCity: action.payload,
+      });
+    case ActionType.GET_NEARBY_OFFERS:
+      return extend(state, {
+        nearbyOffers: action.payload,
       });
     default:
       return extend(state, {

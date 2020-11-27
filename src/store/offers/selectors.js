@@ -1,4 +1,4 @@
-import {SortingTypes, actualOfferIndex} from "../../consts";
+import {SortingTypes} from "../../consts";
 import {createSelector} from "reselect";
 import uniqBy from "lodash/uniqBy";
 
@@ -6,11 +6,19 @@ export const getOffers = (state) => {
   return state.offers.offerList;
 };
 
-export const getCurrentOffer = createSelector(getOffers, (offers) => {
-  return offers.find((offer) => {
-    return offer.id === actualOfferIndex;
-  });
-});
+export const getActualOfferId = (state) => {
+  return state.offers.hoveredOfferId;
+};
+
+export const getCurrentOffer = createSelector(
+    getOffers,
+    getActualOfferId,
+    (offers, actualOfferId) => {
+      return offers.find((offer) => {
+        return +offer.id === +actualOfferId;
+      });
+    }
+);
 
 export const getCurrentSort = (state) => {
   return state.offers.currentSort;
@@ -47,9 +55,9 @@ export const getSortedOffers = createSelector(
     }
 );
 
-export const getNearbyOffers = createSelector(getOffers, (offers) => {
-  return offers.slice(0, 3);
-});
+export const getNearbyOffers = (state) => {
+  return state.offers.nearbyOffers;
+};
 
 export const getUnicCities = createSelector(getOffers, (offers) => {
   if (!offers.length) {
@@ -63,11 +71,15 @@ export const getUnicCities = createSelector(getOffers, (offers) => {
   }, []);
 });
 
-export const getSelectedCity = createSelector(getUnicCities, getCurrentCity, (cities, cityName) => {
-  return cities.find((city) => {
-    return cityName === city.name;
-  });
-});
+export const getSelectedCity = createSelector(
+    getUnicCities,
+    getCurrentCity,
+    (cities, cityName) => {
+      return cities.find((city) => {
+        return cityName === city.name;
+      });
+    }
+);
 
 export const getUnicCityNames = createSelector(getUnicCities, (cities) => {
   return cities.map((city) => {
@@ -83,7 +95,9 @@ export const getFiltredByCityOffers = createSelector(
     }
 );
 
-export const checkFavorite = (active) => active ? 1 : 0;
+export const checkFavorite = (active) => (active ? 1 : 0);
 
-export const getWidthIconFavorite = (classCard) => classCard === `place-card` ? `18` : `31`;
-export const getHeightIconFavorite = (classCard) => classCard === `place-card` ? `19` : `33`;
+export const getWidthIconFavorite = (classCard) =>
+  classCard === `place-card` ? `18` : `31`;
+export const getHeightIconFavorite = (classCard) =>
+  classCard === `place-card` ? `19` : `33`;

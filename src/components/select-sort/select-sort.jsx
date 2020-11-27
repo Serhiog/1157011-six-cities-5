@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 
+
 const SelectSort = ({handleSorting}) => {
   return (
     <form className="places__sorting" action="#" method="get">

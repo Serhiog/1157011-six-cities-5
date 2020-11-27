@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import {MapSizes} from "../../consts";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
-import {getOffers, getSelectedCity} from "../../store/offers/selectors";
+import {getSelectedCity} from "../../store/offers/selectors";
 
 class Map extends React.PureComponent {
   constructor(props) {
@@ -87,22 +87,18 @@ class Map extends React.PureComponent {
     ];
     const zoom = selectedCity.location.zoom;
 
-    this.map.setView(center, zoom);
+    this.map.flyTo(center, zoom);
     offers.forEach((offer) => {
       let marker;
       if (+offer.id === +hoveredOfferId) {
         marker = leaflet
-          .marker(
-              [offer.location.latitude, offer.location.longitude],
-              {icon: iconActive}
-          )
+          .marker([offer.location.latitude, offer.location.longitude], {
+            icon: iconActive,
+          })
           .addTo(this.map);
       } else {
         marker = leaflet
-          .marker(
-              [offer.location.latitude, offer.location.longitude],
-              {icon}
-          )
+          .marker([offer.location.latitude, offer.location.longitude], {icon})
           .addTo(this.map);
       }
       this.markers.push(marker);
@@ -110,12 +106,16 @@ class Map extends React.PureComponent {
   }
 
   render() {
-    return <div id="map" style={{height: MapSizes.mainPage}} />;
+    return (
+      <div id="map" style={{
+        height: `${this.props.forOffer ? MapSizes.offerPage : MapSizes.mainPage}`,
+        marginBottom: `${this.props.forOffer ? `40px` : ``}`
+      }} />
+    );
   }
 }
 
 const mapToStateProps = (state) => ({
-  offers: getOffers(state),
   hoveredOfferId: state.offers.hoveredOfferId,
   selectedCity: getSelectedCity(state),
 });
@@ -132,6 +132,7 @@ Map.propTypes = {
   mapSize: PropTypes.string,
   hoveredOfferId: PropTypes.string,
   selectedCity: PropTypes.object,
+  forOffer: PropTypes.bool,
 };
 
 export {Map};
