@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { OfferList } from "../offers-list/offer-list";
-import { AppRoute } from "../../consts";
+import {Link} from "react-router-dom";
+import {OfferList} from "../offers-list/offer-list";
+import {AppRoute} from "../../consts";
 
 const getCityOffers = (offers, cityName) =>
   offers.slice().filter((offer) => offer.city.name === cityName);
 
-const FavoriteItem = ({ offers }) => {
+const FavoriteItem = ({offers}) => {
   const cities = [...new Set(offers.map((offer) => offer.city.name))];
   return (
     <main className="page__main page__main--favorites">

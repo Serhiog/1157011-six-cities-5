@@ -85,7 +85,7 @@ Favorites.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
   favoriteOffers: PropTypes.arrayOf(PropTypes.object).isRequired,
   getFavoriteOffers: PropTypes.func.isRequired,
-  isLogged: PropTypes.bool.isRequired,
+  isLogged: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
 };
 

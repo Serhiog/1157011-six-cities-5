@@ -8,7 +8,7 @@ import rootReducer from "./store/rootReducer";
 import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
 import {fetchHotelsList, checkAuth} from "./store/api-actions";
-import {loadHotels, requireAuthorization} from "./store/action";
+import {requireAuthorization} from "./store/action";
 
 const api = createAPI(() =>
   store.dispatch(requireAuthorization(`NO_AUTH`))

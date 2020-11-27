@@ -1,6 +1,6 @@
-import { extend } from "../../utils";
-import { ActionType } from "../action";
-import { CITIES } from "../../consts";
+import {extend} from "../../utils";
+import {ActionType} from "../action";
+import {CITIES} from "../../consts";
 
 const initialState = {
   city: null,
@@ -51,7 +51,6 @@ export const offerReducer = (state = initialState, action) => {
         selectedCity: action.payload,
       });
     case ActionType.GET_NEARBY_OFFERS:
-      console.log(action.payload);
       return extend(state, {
         nearbyOffers: action.payload,
       });

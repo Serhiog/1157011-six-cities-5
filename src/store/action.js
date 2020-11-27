@@ -1,5 +1,5 @@
-import { MaxLengthMessage } from "../consts";
-import { SortingTypes } from "../consts";
+import {MaxLengthMessage} from "../consts";
+import {SortingTypes} from "../consts";
 
 export const ActionType = {
   MOUSE_OVER: `MOUSE_OVER`,

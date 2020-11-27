@@ -1,5 +1,5 @@
-import { SortingTypes, actualOfferIndex } from "../../consts";
-import { createSelector } from "reselect";
+import {SortingTypes} from "../../consts";
+import {createSelector} from "reselect";
 import uniqBy from "lodash/uniqBy";
 
 export const getOffers = (state) => {
@@ -11,13 +11,13 @@ export const getActualOfferId = (state) => {
 };
 
 export const getCurrentOffer = createSelector(
-  getOffers,
-  getActualOfferId,
-  (offers, actualOfferId) => {
-    return offers.find((offer) => {
-      return +offer.id === +actualOfferId;
-    });
-  }
+    getOffers,
+    getActualOfferId,
+    (offers, actualOfferId) => {
+      return offers.find((offer) => {
+        return +offer.id === +actualOfferId;
+      });
+    }
 );
 
 export const getCurrentSort = (state) => {
@@ -29,30 +29,30 @@ export const getCurrentCity = (state) => {
 };
 
 export const getSortedOffers = createSelector(
-  getOffers,
-  getCurrentSort,
-  (offers, currentSort) => {
-    const superOffers = [...offers];
-    switch (currentSort) {
-      case SortingTypes.toHigh:
-        return superOffers.sort((a, b) => {
-          return a.price - b.price;
-        });
-      case SortingTypes.toLow:
-        return superOffers.sort((a, b) => {
-          return b.price - a.price;
-        });
-      case SortingTypes.popular:
-        return superOffers;
-      case SortingTypes.topRated:
-        return superOffers.sort((a, b) => {
-          return b.rating - a.rating;
-        });
+    getOffers,
+    getCurrentSort,
+    (offers, currentSort) => {
+      const superOffers = [...offers];
+      switch (currentSort) {
+        case SortingTypes.toHigh:
+          return superOffers.sort((a, b) => {
+            return a.price - b.price;
+          });
+        case SortingTypes.toLow:
+          return superOffers.sort((a, b) => {
+            return b.price - a.price;
+          });
+        case SortingTypes.popular:
+          return superOffers;
+        case SortingTypes.topRated:
+          return superOffers.sort((a, b) => {
+            return b.rating - a.rating;
+          });
 
-      default:
-        return superOffers;
+        default:
+          return superOffers;
+      }
     }
-  }
 );
 
 export const getNearbyOffers = (state) => {
@@ -72,13 +72,13 @@ export const getUnicCities = createSelector(getOffers, (offers) => {
 });
 
 export const getSelectedCity = createSelector(
-  getUnicCities,
-  getCurrentCity,
-  (cities, cityName) => {
-    return cities.find((city) => {
-      return cityName === city.name;
-    });
-  }
+    getUnicCities,
+    getCurrentCity,
+    (cities, cityName) => {
+      return cities.find((city) => {
+        return cityName === city.name;
+      });
+    }
 );
 
 export const getUnicCityNames = createSelector(getUnicCities, (cities) => {
@@ -88,11 +88,11 @@ export const getUnicCityNames = createSelector(getUnicCities, (cities) => {
 });
 
 export const getFiltredByCityOffers = createSelector(
-  getCurrentCity,
-  getSortedOffers,
-  (city, offers) => {
-    return offers.filter((offer) => !city || offer.city.name === city);
-  }
+    getCurrentCity,
+    getSortedOffers,
+    (city, offers) => {
+      return offers.filter((offer) => !city || offer.city.name === city);
+    }
 );
 
 export const checkFavorite = (active) => (active ? 1 : 0);

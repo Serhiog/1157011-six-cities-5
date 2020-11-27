@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import MainPage from "../main-page/main-page";
-import SendComment from "../main-page/main-page";
+import {Link} from "react-router-dom";
 import ReviewList from "../review-list/review-list";
 import {
   fetchHotelReviews,
@@ -10,26 +8,24 @@ import {
 } from "../../store/api-actions";
 import Map from "../map/map";
 import OfferList from "../offers-list/offer-list";
-import { connect } from "react-redux";
-import { getCurrentOffer, getNearbyOffers } from "../../store/offers/selectors";
-import { PropTypes4Offer } from "../../propConsts";
-import { FavoriteButton } from "../favorite-btn/favorite-btn";
-import { AuthorizationStatus } from "../../consts";
+import {connect} from "react-redux";
+import {getCurrentOffer, getNearbyOffers} from "../../store/offers/selectors";
+import {PropTypes4Offer} from "../../propConsts";
+import {FavoriteButton} from "../favorite-btn/favorite-btn";
+import {AuthorizationStatus} from "../../consts";
 
 const Offer = ({
   offer,
   nearbyOffers,
   actualOffer,
-  offers,
   getReviews,
   reviews,
   authorizationStatus,
   isLogged,
   email,
-  offerId,
   param,
   goToFavorites,
-  getNearbyOffers
+  getNearbyOffers,
 }) => {
   useEffect(() => {
     getReviews(actualOffer.id, param);
@@ -111,7 +107,7 @@ const Offer = ({
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{ width: `${ratingOfferPercent}%` }}></span>
+                  <span style={{width: `${ratingOfferPercent}%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">
@@ -216,6 +212,14 @@ Offer.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
   getReviews: PropTypes.func.isRequired,
   nearbyOffers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  offer: PropTypes.shape(PropTypes4Offer),
+  reviews: PropTypes.array,
+  authorizationStatus: PropTypes.string.isRequired,
+  isLogged: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  param: PropTypes.string.isRequired,
+  goToFavorites: PropTypes.func.isRequired,
+  getNearbyOffers: PropTypes.func.isRequired,
 };
 
 const mapToStateProps = (state) => ({
@@ -236,5 +240,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export { Offer };
+export {Offer};
 export default connect(mapToStateProps, mapDispatchToProps)(Offer);

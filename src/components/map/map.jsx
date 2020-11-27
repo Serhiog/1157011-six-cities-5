@@ -1,12 +1,12 @@
 import React from "react";
 import leaflet from "leaflet";
 import ".../../leaflet/dist/leaflet.css";
-import { PropTypes4Offer } from "../../propConsts";
+import {PropTypes4Offer} from "../../propConsts";
 import PropTypes from "prop-types";
-import { MapSizes } from "../../consts";
-import { connect } from "react-redux";
-import { ActionCreator } from "../../store/action";
-import { getOffers, getSelectedCity } from "../../store/offers/selectors";
+import {MapSizes} from "../../consts";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
+import {getSelectedCity} from "../../store/offers/selectors";
 
 class Map extends React.PureComponent {
   constructor(props) {
@@ -18,7 +18,7 @@ class Map extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { selectedCity } = this.props;
+    const {selectedCity} = this.props;
     const offers = this.getCityOffers();
     const icon = leaflet.icon({
       iconUrl: `/img/pin.svg`,
@@ -42,10 +42,10 @@ class Map extends React.PureComponent {
 
     this.layer = leaflet
       .tileLayer(
-        `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
-        {
-          attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`,
-        }
+          `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
+          {
+            attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`,
+          }
       )
       .addTo(this.map);
 
@@ -61,13 +61,13 @@ class Map extends React.PureComponent {
 
   getCityOffers() {
     return this.props.offers.filter(
-      (offer) => offer.city.name === this.props.selectedCity.name
+        (offer) => offer.city.name === this.props.selectedCity.name
     );
   }
 
   componentDidUpdate() {
     const offers = this.getCityOffers();
-    const { selectedCity, hoveredOfferId } = this.props;
+    const {selectedCity, hoveredOfferId} = this.props;
     const icon = leaflet.icon({
       iconUrl: `/img/pin.svg`,
       iconSize: [30, 30],
@@ -98,7 +98,7 @@ class Map extends React.PureComponent {
           .addTo(this.map);
       } else {
         marker = leaflet
-          .marker([offer.location.latitude, offer.location.longitude], { icon })
+          .marker([offer.location.latitude, offer.location.longitude], {icon})
           .addTo(this.map);
       }
       this.markers.push(marker);
@@ -116,7 +116,6 @@ class Map extends React.PureComponent {
 }
 
 const mapToStateProps = (state) => ({
-  // offers: getOffers(state),
   hoveredOfferId: state.offers.hoveredOfferId,
   selectedCity: getSelectedCity(state),
 });
@@ -133,7 +132,8 @@ Map.propTypes = {
   mapSize: PropTypes.string,
   hoveredOfferId: PropTypes.string,
   selectedCity: PropTypes.object,
+  forOffer: PropTypes.bool,
 };
 
-export { Map };
+export {Map};
 export default connect(mapToStateProps, mapDispatchToProps)(Map);

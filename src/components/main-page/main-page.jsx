@@ -4,12 +4,12 @@ import OfferList from "../offers-list/offer-list";
 import Map from "../map/map";
 import CitiesList from "../cities-list/cities-list";
 import MainEmpty from "../main-empty/main-empty";
-import { connect } from "react-redux";
-import { getOffers, getFiltredByCityOffers } from "../../store/offers/selectors";
-import { PropTypes4Offer } from "../../propConsts";
-import { AuthorizationStatus } from "../../consts";
+import {connect} from "react-redux";
+import {getFiltredByCityOffers} from "../../store/offers/selectors";
+import {PropTypes4Offer} from "../../propConsts";
+import {AuthorizationStatus} from "../../consts";
 
-const MainPage = ({ goToFavorites, offers, isLogged, email }) => {
+const MainPage = ({goToFavorites, offers, isLogged, email}) => {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -102,5 +102,5 @@ const mapToStateProps = (state) => ({
   email: state.user.email,
 });
 
-export { MainPage };
+export {MainPage};
 export default connect(mapToStateProps)(MainPage);

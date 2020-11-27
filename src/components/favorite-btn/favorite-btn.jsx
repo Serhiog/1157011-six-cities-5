@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { changeFavorite } from "../../store/api-actions";
-import { AuthorizationStatus } from "../../consts";
+import {connect} from "react-redux";
+import {Link} from "react-router-dom";
+import {changeFavorite} from "../../store/api-actions";
 import {
   checkFavorite,
   getWidthIconFavorite,
@@ -13,9 +12,8 @@ import {
 const FavoriteButton = ({
   offer,
   classCard,
-  authorizationStatus,
   changeFavoriteStatusAction,
-  auth,
+  auth
 }) => {
   const handleFavoriteButtonClick = () => {
     changeFavoriteStatusAction(offer.id, checkFavorite(!offer.is_favorite));
@@ -23,9 +21,6 @@ const FavoriteButton = ({
 
   const widthIcon = getWidthIconFavorite(classCard);
   const heightIcon = getHeightIconFavorite(classCard);
-
-  // useEffect(() => {
-  // }, []);
 
   return (
     <React.Fragment>
@@ -69,8 +64,9 @@ const FavoriteButton = ({
 FavoriteButton.propTypes = {
   offer: PropTypes.object.isRequired,
   classCard: PropTypes.string.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
-  changeFavoriteStatusAction: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string,
+  changeFavoriteStatusAction: PropTypes.func,
+  auth: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
@@ -83,5 +79,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export { FavoriteButton };
+export {FavoriteButton};
 export default connect(mapStateToProps, mapDispatchToProps)(FavoriteButton);

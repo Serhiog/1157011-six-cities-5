@@ -1,11 +1,11 @@
 import React from "react";
-import { PropTypes4Offer } from "../../propConsts";
+import {PropTypes4Offer} from "../../propConsts";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import FavoriteButton from "../favorite-btn/favorite-btn";
-import { connect } from "react-redux";
-import { ActionCreator } from "../../store/action";
-import { AuthorizationStatus } from "../../consts";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
+import {AuthorizationStatus} from "../../consts";
 
 const Card = ({
   offer,
@@ -14,7 +14,6 @@ const Card = ({
   nearby,
   classCard,
   classImageWrapper,
-  forFavorites,
   authorizationStatus,
 }) => {
   const widthImg = classCard !== `favorites__card` ? 260 : 150;
@@ -25,9 +24,9 @@ const Card = ({
       className={`${nearby ? `near-places__card` : `${classCard}`} place-card`}
       onMouseOver={(evt) =>
         handleOfferCard(
-          evt.target.closest(
-            `.${nearby ? `near-places__card` : `${classCard}`}`
-          ).dataset.id
+            evt.target.closest(
+                `.${nearby ? `near-places__card` : `${classCard}`}`
+            ).dataset.id
         )
       }
     >
@@ -70,7 +69,7 @@ const Card = ({
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: offer.rating * 10 }} />
+            <span style={{width: offer.rating * 10}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -92,7 +91,7 @@ Card.propTypes = {
   nearby: PropTypes.bool,
   classCard: PropTypes.string.isRequired,
   classImageWrapper: PropTypes.string.isRequired,
-  authorizationStatus: PropTypes.bool,
+  authorizationStatus: PropTypes.string,
 };
 
 const mapToStateProps = (state) => ({
@@ -105,5 +104,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export { Card };
+export {Card};
 export default connect(mapToStateProps, mapDispatchToProps)(Card);

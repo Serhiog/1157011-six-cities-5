@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { ActionCreator } from "../../store/action";
-import { getUnicCityNames } from "../../store/offers/selectors";
-import { changeCity } from "../../store/action";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
+import {getUnicCityNames} from "../../store/offers/selectors";
+import {changeCity} from "../../store/action";
 
-let CitiesList = ({ unicCities, currentCity, handleCity }) => {
+let CitiesList = ({unicCities, currentCity, handleCity}) => {
   return (
     <div className="tabs">
       <section className="locations container">
@@ -35,7 +35,6 @@ let CitiesList = ({ unicCities, currentCity, handleCity }) => {
 CitiesList.propTypes = {
   unicCities: PropTypes.array,
   handleCity: PropTypes.func,
-  isCurrent: PropTypes.bool.isRequired,
   currentCity: PropTypes.string.isRequired,
 };
 
@@ -53,5 +52,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export { CitiesList };
+export {CitiesList};
 export default connect(mapToStateProps, mapDispatchToProps)(CitiesList);

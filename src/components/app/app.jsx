@@ -10,7 +10,9 @@ import history from "../../browser-history";
 import PrivateRoute from "../private-route/private-route";
 import {AppRoute} from "../../consts";
 import {connect} from "react-redux";
-import {getOffers, getSelectedCity} from "../../store/offers/selectors";
+import {getOffers} from "../../store/offers/selectors";
+import PropTypes from "prop-types";
+import {PropTypes4Offer} from "../../propConsts";
 
 const App = ({offers}) => {
   return (
@@ -67,6 +69,10 @@ const App = ({offers}) => {
 const mapStateToProps = (state) => ({
   offers: getOffers(state),
 });
+
+Favorites.propTypes = {
+  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
+};
 
 export {App};
 export default connect(mapStateToProps)(App);

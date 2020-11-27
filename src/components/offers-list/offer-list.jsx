@@ -1,18 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { PropTypes4Offer } from "../../propConsts";
+import {PropTypes4Offer} from "../../propConsts";
 import OfferCard from "../offer-card/offer-card";
-import { connect } from "react-redux";
-import { ActionCreator } from "../../store/action";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
 import SelectSort from "../select-sort/select-sort";
 import {
-  getFiltredByCityOffers,
   getCurrentCity,
 } from "../../store/offers/selectors";
 
 const OfferList = ({
   offers,
-  handleOfferCard,
   city,
   classList,
   classCard,
@@ -22,7 +20,7 @@ const OfferList = ({
 }) => {
   return (
     <section
-      style={{ width: `${nearby ? `auto` : ``}` }}
+      style={{width: `${nearby ? `auto` : ``}`}}
       className="cities__places places"
     >
       {forFavorites ? (
@@ -66,11 +64,12 @@ OfferList.propTypes = {
   classCard: PropTypes.string.isRequired,
   classImageWrapper: PropTypes.string.isRequired,
   forFavorites: PropTypes.bool,
+  getFiltredByCityOffers: PropTypes.shape(PropTypes4Offer),
+  nearby: PropTypes.bool
 };
 
 const mapToStateProps = (state) => ({
   city: getCurrentCity(state),
-  // offers: getFiltredByCityOffers(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -79,5 +78,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export { OfferList };
+export {OfferList};
 export default connect(mapToStateProps, mapDispatchToProps)(OfferList);
