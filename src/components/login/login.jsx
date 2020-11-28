@@ -34,7 +34,7 @@ const Login = ({onSubmit}) => {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post" onSubmit={onSubmit}>
+            <form className="login__form form" action="#" method="post" onSubmit={ё}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input className="login__input form__input" type="email" name="email" placeholder="Email" required />
@@ -71,4 +71,5 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(login({email: email.value, password: password.value}));
   }
 });
+export { Login}
 export default connect(null, mapDispatchToProps)(Login);

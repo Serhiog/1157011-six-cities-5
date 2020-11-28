@@ -71,7 +71,7 @@ const mapStateToProps = (state) => ({
 });
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
+  offers: PropTypes.array,
 };
 
 export {App};

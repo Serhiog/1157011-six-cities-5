@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OfferList render Should Offer render correctly 1`] = `
+<section
+  className="cities__places places"
+  style={
+    Object {
+      "width": "auto",
+    }
+  }
+>
+  <h2
+    className="visually-hidden"
+  >
+    Places
+  </h2>
+  <b
+    className="places__found"
+  >
+    2
+     places to stay in 
+    Paris
+  </b>
+  <SelectSort />
+  <div
+    className="near-places__list places__list"
+  >
+    <OfferCard
+      classCard="favorites__card"
+      classImageWrapper="favorites__image-wrapper"
+      forFavorites={false}
+      nearby={true}
+      offer={
+        Object {
+          "bedrooms": 3,
+          "city": Object {
+            "location": Object {
+              "latitude": 52.370216,
+              "longitude": 4.895168,
+              "zoom": 10,
+            },
+            "name": "Amsterdam",
+          },
+          "description": "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.",
+          "goods": Array [
+            "Heating",
+            "Kitchen",
+            "Cable TV",
+            "Washing machine",
+            "Coffee machine",
+            "Dishwasher",
+          ],
+          "host": Object {
+            "avatar_url": "img/1.png",
+            "id": 3,
+            "is_pro": true,
+            "name": "Angelina",
+          },
+          "id": 1,
+          "images": Array [
+            "img/1.png",
+            "img/2.png",
+          ],
+          "is_favorite": false,
+          "is_premium": false,
+          "location": Object {
+            "latitude": 52.35514938496378,
+            "longitude": 4.673877537499948,
+            "zoom": 8,
+          },
+          "max_adults": 4,
+          "preview_image": "img/1.png",
+          "price": 120,
+          "rating": 4.8,
+          "title": "Beautiful & luxurious studio at great location",
+          "type": "apartment",
+        }
+      }
+      offerId={1}
+    />
+    <OfferCard
+      classCard="favorites__card"
+      classImageWrapper="favorites__image-wrapper"
+      forFavorites={false}
+      nearby={true}
+      offer={
+        Object {
+          "bedrooms": 4,
+          "city": Object {
+            "location": Object {
+              "latitude": 52.370216,
+              "longitude": 4.895168,
+              "zoom": 10,
+            },
+            "name": "Amsterdam",
+          },
+          "description": "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.",
+          "goods": Array [
+            "Heating",
+            "Kitchen",
+            "Cable TV",
+            "Washing machine",
+            "Coffee machine",
+            "Dishwasher",
+          ],
+          "host": Object {
+            "avatar_url": "img/1.png",
+            "id": 3,
+            "is_pro": true,
+            "name": "Angelina",
+          },
+          "id": 2,
+          "images": Array [
+            "img/1.png",
+            "img/2.png",
+          ],
+          "is_favorite": false,
+          "is_premium": true,
+          "location": Object {
+            "latitude": 52.35514938496378,
+            "longitude": 4.673877537499948,
+            "zoom": 8,
+          },
+          "max_adults": 4,
+          "preview_image": "img/1.png",
+          "price": 100,
+          "rating": 4.8,
+          "title": "Beautiful & luxurious studio at great location",
+          "type": "apartment",
+        }
+      }
+      offerId={2}
+    />
+  </div>
+</section>
+`;

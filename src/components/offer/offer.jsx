@@ -1,6 +1,6 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+import { Link, Router } from "react-router-dom";
 import ReviewList from "../review-list/review-list";
 import {
   fetchHotelReviews,
@@ -8,11 +8,11 @@ import {
 } from "../../store/api-actions";
 import Map from "../map/map";
 import OfferList from "../offers-list/offer-list";
-import {connect} from "react-redux";
-import {getCurrentOffer, getNearbyOffers} from "../../store/offers/selectors";
-import {PropTypes4Offer} from "../../propConsts";
-import {FavoriteButton} from "../favorite-btn/favorite-btn";
-import {AuthorizationStatus} from "../../consts";
+import { connect } from "react-redux";
+import { getCurrentOffer, getNearbyOffers } from "../../store/offers/selectors";
+import { PropTypes4Offer } from "../../propConsts";
+import FavoriteButton from "../favorite-btn/favorite-btn";
+import { AuthorizationStatus } from "../../consts";
 
 const Offer = ({
   offer,
@@ -40,15 +40,17 @@ const Offer = ({
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link className="header__logo-link" to={`/`}>
-                <img
-                  className="header__logo"
-                  src="/img/logo.svg"
-                  alt="6 cities logo"
-                  width={81}
-                  height={41}
-                />
-              </Link>
+              <Router history={history}>
+                <Link className="header__logo-link" to={`/`}>
+                  <img
+                    className="header__logo"
+                    src="/img/logo.svg"
+                    alt="6 cities logo"
+                    width={81}
+                    height={41}
+                  />
+                </Link>
+              </Router>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -107,7 +109,7 @@ const Offer = ({
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: `${ratingOfferPercent}%`}}></span>
+                  <span style={{ width: `${ratingOfferPercent}%` }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">
@@ -215,11 +217,11 @@ Offer.propTypes = {
   offer: PropTypes.shape(PropTypes4Offer),
   reviews: PropTypes.array,
   authorizationStatus: PropTypes.string.isRequired,
-  isLogged: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  param: PropTypes.string.isRequired,
+  isLogged: PropTypes.any,
+  email: PropTypes.string,
+  param: PropTypes.string,
   goToFavorites: PropTypes.func.isRequired,
-  getNearbyOffers: PropTypes.func.isRequired,
+  getNearbyOffers: PropTypes.any,
 };
 
 const mapToStateProps = (state) => ({
@@ -240,5 +242,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {Offer};
+export { Offer };
 export default connect(mapToStateProps, mapDispatchToProps)(Offer);

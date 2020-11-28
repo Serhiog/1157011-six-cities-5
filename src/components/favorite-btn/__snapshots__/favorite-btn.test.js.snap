@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FavoriteButton render AuthScreen with authorization 1`] = `
+<button
+  className="button place-card__bookmark-button "
+  onClick={[Function]}
+  type="button"
+>
+  <svg
+    className="place-card__bookmark-icon"
+    height="19"
+    width="18"
+  >
+    <use
+      xlinkHref="#icon-bookmark"
+    />
+  </svg>
+  <span
+    className="visually-hidden"
+  >
+    In bookmarks
+  </span>
+</button>
+`;
+
+exports[`FavoriteButton render FavoriteButton without authorization 1`] = `
+<a
+  className="button place-card__bookmark-button"
+  href="/login"
+  onClick={[Function]}
+  type="button"
+>
+  <svg
+    className="place-card__bookmark-icon"
+    height="19"
+    width="18"
+  >
+    <use
+      xlinkHref="#icon-bookmark"
+    />
+  </svg>
+  <span
+    className="visually-hidden"
+  >
+    In bookmarks
+  </span>
+</a>
+`;
