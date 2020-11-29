@@ -71,4 +71,5 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(login({email: email.value, password: password.value}));
   }
 });
+export {Login};
 export default connect(null, mapDispatchToProps)(Login);

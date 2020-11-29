@@ -1,12 +1,10 @@
 import React from "react";
 import leaflet from "leaflet";
-import ".../../leaflet/dist/leaflet.css";
 import {PropTypes4Offer} from "../../propConsts";
 import PropTypes from "prop-types";
 import {MapSizes} from "../../consts";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
-import {getSelectedCity} from "../../store/offers/selectors";
 
 class Map extends React.PureComponent {
   constructor(props) {
@@ -117,7 +115,7 @@ class Map extends React.PureComponent {
 
 const mapToStateProps = (state) => ({
   hoveredOfferId: state.offers.hoveredOfferId,
-  selectedCity: getSelectedCity(state),
+  // selectedCity: getSelectedCity(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

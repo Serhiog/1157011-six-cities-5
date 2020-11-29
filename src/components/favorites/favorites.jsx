@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import FavoriteItem from "../favorites-items/favorite-item";
+import FavoriteItem from "../favorite-item/favorite-item";
 import PropTypes from "prop-types";
 import {PropTypes4Offer} from "../../propConsts";
 import {Link} from "react-router-dom";
@@ -85,7 +85,7 @@ Favorites.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
   favoriteOffers: PropTypes.arrayOf(PropTypes.object).isRequired,
   getFavoriteOffers: PropTypes.func.isRequired,
-  isLogged: PropTypes.string.isRequired,
+  isLogged: PropTypes.any,
   email: PropTypes.string.isRequired,
 };
 
