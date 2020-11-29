@@ -95,7 +95,7 @@ MainPage.propTypes = {
   city: PropTypes.object.isRequired,
   goToFavorites: PropTypes.func,
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
-  isLogged: PropTypes.bool,
+  isLogged: PropTypes.any,
   email: PropTypes.string.isRequired,
 };
 

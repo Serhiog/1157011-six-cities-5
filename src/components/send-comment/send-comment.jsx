@@ -161,7 +161,7 @@ SendComment.propTypes = {
   onReviewSubmit: PropTypes.func.isRequired,
   onTextFieldChange: PropTypes.func.isRequired,
   onRatingChange: PropTypes.func.isRequired,
-  offerId: PropTypes.string.isRequired,
+  offerId: PropTypes.any,
   resetState: PropTypes.func.isRequired,
   isErrorToSubmit: PropTypes.bool.isRequired,
   updateErrorStatusAction: PropTypes.func.isRequired
