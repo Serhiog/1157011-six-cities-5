@@ -167,6 +167,7 @@ SendComment.propTypes = {
   updateErrorStatusAction: PropTypes.func.isRequired
 };
 
+
 const mapStateToProps = (state) => ({
   isErrorToSubmit: state.message.isErrorToSubmit
 });
