@@ -155,7 +155,6 @@ class SendComment extends PureComponent {
   }
 }
 
-
 SendComment.propTypes = {
   rating: PropTypes.string.isRequired,
   review: PropTypes.string.isRequired,
