@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
-import { Link, Router } from "react-router-dom";
+import {Link} from "react-router-dom";
 import ReviewList from "../review-list/review-list";
 import {
   fetchHotelReviews,
@@ -8,16 +8,15 @@ import {
 } from "../../store/api-actions";
 import Map from "../map/map";
 import OfferList from "../offers-list/offer-list";
-import { connect } from "react-redux";
-import { getCurrentOffer, getNearbyOffers } from "../../store/offers/selectors";
-import { PropTypes4Offer } from "../../propConsts";
+import {connect} from "react-redux";
+import {getNearbyOffersHotel} from "../../store/offers/selectors";
+import {PropTypes4Offer} from "../../propConsts";
 import FavoriteButton from "../favorite-btn/favorite-btn";
-import { AuthorizationStatus } from "../../consts";
+import {AuthorizationStatus} from "../../consts";
 
 const Offer = ({
   offer,
   nearbyOffers,
-  actualOffer,
   getReviews,
   reviews,
   authorizationStatus,
@@ -28,11 +27,11 @@ const Offer = ({
   getNearbyOffers,
 }) => {
   useEffect(() => {
-    getReviews(actualOffer.id, param);
-    getNearbyOffers(actualOffer.id);
+    getReviews(offer.id, param);
+    getNearbyOffers(offer.id);
   }, []);
 
-  const ratingOfferPercent = Math.round(actualOffer.rating) * 20;
+  const ratingOfferPercent = Math.round(offer.rating) * 20;
 
   return (
     <div className="page">
@@ -40,17 +39,15 @@ const Offer = ({
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Router history={history}>
-                <Link className="header__logo-link" to={`/`}>
-                  <img
-                    className="header__logo"
-                    src="/img/logo.svg"
-                    alt="6 cities logo"
-                    width={81}
-                    height={41}
-                  />
-                </Link>
-              </Router>
+              <Link className="header__logo-link" to={`/`}>
+                <img
+                  className="header__logo"
+                  src="/img/logo.svg"
+                  alt="6 cities logo"
+                  width={81}
+                  height={41}
+                />
+              </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -76,7 +73,7 @@ const Offer = ({
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {actualOffer.images
+              {offer.images
                 .map((picture, i) => (
                   <div className="property__image-wrapper" key={i}>
                     <img
@@ -91,7 +88,7 @@ const Offer = ({
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {actualOffer.isPremium ? (
+              {offer.isPremium ? (
                 <div className="property__mark">
                   <span>Premium</span>
                 </div>
@@ -99,44 +96,44 @@ const Offer = ({
                 ``
               )}
               <div className="property__name-wrapper">
-                <h1 className="property__name">{actualOffer.title}</h1>
+                <h1 className="property__name">{offer.title}</h1>
 
                 <FavoriteButton
-                  offer={actualOffer}
+                  offer={offer}
                   classCard={`property`}
                   auth={authorizationStatus === AuthorizationStatus.AUTH}
                 />
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{ width: `${ratingOfferPercent}%` }}></span>
+                  <span style={{width: `${ratingOfferPercent}%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">
-                  {actualOffer.rating}
+                  {offer.rating}
                 </span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {actualOffer.type}
+                  {offer.type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  {actualOffer.bedrooms} Bedrooms
+                  {offer.bedrooms} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max {actualOffer.max_adults} adults
+                  Max {offer.max_adults} adults
                 </li>
               </ul>
               <div className="property__price">
                 <b className="property__price-value">
-                  &euro;{actualOffer.price}
+                  &euro;{offer.price}
                 </b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {actualOffer.goods.map((thing, i) => (
+                  {offer.goods.map((thing, i) => (
                     <li className="property__inside-item" key={i}>
                       {thing}
                     </li>
@@ -148,29 +145,29 @@ const Offer = ({
                 <div className="property__host-user user">
                   <div
                     className={
-                      actualOffer.host.is_pro
+                      offer.host.is_pro
                         ? `property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper`
                         : `property__avatar-wrapper user__avatar-wrapper`
                     }
                   >
                     <img
                       className="property__avatar user__avatar"
-                      src={`/` + actualOffer.host.avatar_url}
+                      src={`/` + offer.host.avatar_url}
                       width="74"
                       height="74"
                       alt="Host avatar"
                     />
                   </div>
                   <span className="property__user-name">
-                    {actualOffer.host.name}
+                    {offer.host.name}
                   </span>
                 </div>
                 <div className="property__description">
-                  <p className="property__text">{actualOffer.description}</p>
+                  <p className="property__text">{offer.description}</p>
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <ReviewList reviews={reviews} />
+                <ReviewList reviews={reviews} offerId={offer.id} />
               </section>
             </div>
           </div>
@@ -180,6 +177,7 @@ const Offer = ({
             mainOffer={offer}
             offers={nearbyOffers}
             classMap={`property__map`}
+            selectedCity={offer.city}
             cityCoordinates={[
               +offer.city.location.latitude,
               +offer.city.location.longitude,
@@ -210,7 +208,6 @@ const Offer = ({
 
 Offer.propTypes = {
   noLogged: PropTypes.bool,
-  actualOffer: PropTypes.shape(PropTypes4Offer),
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
   getReviews: PropTypes.func.isRequired,
   nearbyOffers: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -225,12 +222,11 @@ Offer.propTypes = {
 };
 
 const mapToStateProps = (state) => ({
-  actualOffer: getCurrentOffer(state),
   authorizationStatus: state.user.authorizationStatus,
   isLogged: state.user.authorizationStatus,
   email: state.user.email,
   reviews: state.offers.comments,
-  nearbyOffers: getNearbyOffers(state),
+  nearbyOffers: getNearbyOffersHotel(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -242,5 +238,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export { Offer };
+export {Offer};
 export default connect(mapToStateProps, mapDispatchToProps)(Offer);

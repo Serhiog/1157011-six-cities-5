@@ -1,20 +1,25 @@
+import {resetReview} from "../action";
 
-import { createAPI } from "../../services/api";
-import { messageReducer } from "./messageReducer";
+import {messageReducer} from "./messageReducer";
 
-const api = createAPI(() => {});
 
 it(`Reducer updates`, () => {
   expect(
-    messageReducer(
-      {
-        comment: ``,
-      },
-      {
-        payload: `Oliver.conner@gmail.com`,
-      }
-    )
+      messageReducer(
+          {
+            comment: `Hello`,
+            rating: `5`,
+            blockSendBtn: true,
+            isErrorToSubmit: false,
+            offers: [],
+          },
+          resetReview({defaultData: {rating: ``, review: ``}})
+      )
   ).toEqual({
-    comment: `Oliver.conner@gmail.com`,
+    comment: ``,
+    rating: ``,
+    blockSendBtn: true,
+    isErrorToSubmit: false,
+    offers: [],
   });
 });

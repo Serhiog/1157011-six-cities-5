@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Review from "../review/review";
-import { serverReviews } from "../../mocks/data";
+import {serverReviews} from "../../mocks/data";
 
 describe(`Review render`, () => {
   it(`Should Offer render correctly`, () => {

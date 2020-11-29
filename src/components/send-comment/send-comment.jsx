@@ -155,6 +155,7 @@ class SendComment extends PureComponent {
   }
 }
 
+
 SendComment.propTypes = {
   rating: PropTypes.string.isRequired,
   review: PropTypes.string.isRequired,
@@ -168,7 +169,6 @@ SendComment.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offerId: state.offers.hoveredOfferId,
   isErrorToSubmit: state.message.isErrorToSubmit
 });
 

@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card render Should Offer render correctly 1`] = `
+<article
+  className="near-places__card place-card"
+  data-id={1}
+  onMouseOver={[Function]}
+>
+  <div
+    className="near-places__image-wrapper place-card__image-wrapper"
+  >
+    <a
+      href="/offer/1"
+      onClick={[Function]}
+    >
+      <img
+        alt="Beautiful & luxurious studio at great location"
+        className="place-card__image"
+        height={200}
+        src="img/1.png"
+        width={260}
+      />
+    </a>
+  </div>
+  <div
+    className=" place-card__info"
+  >
+    <div
+      className="place-card__price-wrapper"
+    >
+      <div
+        className="place-card__price"
+      >
+        <b
+          className="place-card__price-value"
+        >
+          €
+          120
+        </b>
+        <span
+          className="place-card__price-text"
+        >
+          / night
+        </span>
+      </div>
+      <FavoriteButton
+        auth={true}
+        classCard="place-card"
+        offer={
+          Object {
+            "bedrooms": 3,
+            "city": Object {
+              "location": Object {
+                "latitude": 52.370216,
+                "longitude": 4.895168,
+                "zoom": 10,
+              },
+              "name": "Amsterdam",
+            },
+            "description": "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.",
+            "goods": Array [
+              "Heating",
+              "Kitchen",
+              "Cable TV",
+              "Washing machine",
+              "Coffee machine",
+              "Dishwasher",
+            ],
+            "host": Object {
+              "avatar_url": "img/1.png",
+              "id": 3,
+              "is_pro": true,
+              "name": "Angelina",
+            },
+            "id": 1,
+            "images": Array [
+              "img/1.png",
+              "img/2.png",
+            ],
+            "is_favorite": false,
+            "is_premium": false,
+            "location": Object {
+              "latitude": 52.35514938496378,
+              "longitude": 4.673877537499948,
+              "zoom": 8,
+            },
+            "max_adults": 4,
+            "preview_image": "img/1.png",
+            "price": 120,
+            "rating": 4.8,
+            "title": "Beautiful & luxurious studio at great location",
+            "type": "apartment",
+          }
+        }
+      />
+    </div>
+    <div
+      className="place-card__rating rating"
+    >
+      <div
+        className="place-card__stars rating__stars"
+      >
+        <span
+          style={
+            Object {
+              "width": 48,
+            }
+          }
+        />
+        <span
+          className="visually-hidden"
+        >
+          Rating
+        </span>
+      </div>
+    </div>
+    <h2
+      className="place-card__name"
+    >
+      <a
+        href="#"
+      >
+        Beautiful & luxurious studio at great location
+      </a>
+    </h2>
+    <p
+      className="place-card__type"
+    >
+      apartment
+    </p>
+  </div>
+</article>
+`;

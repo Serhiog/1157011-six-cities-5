@@ -5,8 +5,8 @@ import MainEmpty from "./main-empty";
 it(`MainEmpty render`, () => {
   const tree = renderer
     .create(
-      <MainEmpty
-      />
+        <MainEmpty
+        />
     )
     .toJSON();
 

@@ -1,21 +1,17 @@
-
-import { createAPI } from "../../services/api";
-import { userStateReducer } from "./userReducer";
-import { ActionType } from "../action";
-
-const api = createAPI(() => {});
+import {userStateReducer} from "./userReducer";
+import {ActionType} from "../action";
 
 it(`Reducer updates`, () => {
   expect(
-    userStateReducer(
-      {
-        email: ``,
-      },
-      {
-        type: ActionType.SAVE_EMAIL,
-        payload: ``,
-      }
-    )
+      userStateReducer(
+          {
+            email: ``,
+          },
+          {
+            type: ActionType.SAVE_EMAIL,
+            payload: ``,
+          }
+      )
   ).toEqual({
     email: ``,
   });

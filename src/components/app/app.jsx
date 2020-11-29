@@ -12,7 +12,6 @@ import {AppRoute} from "../../consts";
 import {connect} from "react-redux";
 import {getOffers} from "../../store/offers/selectors";
 import PropTypes from "prop-types";
-import {PropTypes4Offer} from "../../propConsts";
 
 const App = ({offers}) => {
   return (
@@ -46,7 +45,7 @@ const App = ({offers}) => {
           path={AppRoute.OFFER_ID}
           render={({match}) => {
             const offer = offers.find((item) => +item.id === +match.params.id);
-            return <Offer offer={offer} param={ match.params.id} goToFavorites={() => history.push(`/favorites`)}/>;
+            return <Offer offer={offer} param={match.params.id} goToFavorites={() => history.push(`/favorites`)}/>;
           }}
         />
         <Route

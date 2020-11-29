@@ -59,6 +59,11 @@ export const getNearbyOffers = (state) => {
   return state.offers.nearbyOffers;
 };
 
+export const getNearbyOffersHotel = (state) => {
+  return state.offers.nearbyOffers;
+};
+
+
 export const getUnicCities = createSelector(getOffers, (offers) => {
   if (!offers.length) {
     return [];

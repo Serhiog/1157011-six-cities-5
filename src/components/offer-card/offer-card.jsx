@@ -1,11 +1,11 @@
 import React from "react";
-import { PropTypes4Offer } from "../../propConsts";
+import {PropTypes4Offer} from "../../propConsts";
 import PropTypes from "prop-types";
-import { Link, Router } from "react-router-dom";
+import {Link} from "react-router-dom";
 import FavoriteButton from "../favorite-btn/favorite-btn";
-import { connect } from "react-redux";
-import { ActionCreator } from "../../store/action";
-import { AuthorizationStatus } from "../../consts";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
+import {AuthorizationStatus} from "../../consts";
 
 const Card = ({
   offer,
@@ -24,9 +24,9 @@ const Card = ({
       className={`${nearby ? `near-places__card` : `${classCard}`} place-card`}
       onMouseOver={(evt) =>
         handleOfferCard(
-          evt.target.closest(
-            `.${nearby ? `near-places__card` : `${classCard}`}`
-          ).dataset.id
+            evt.target.closest(
+                `.${nearby ? `near-places__card` : `${classCard}`}`
+            ).dataset.id
         )
       }
     >
@@ -41,17 +41,15 @@ const Card = ({
           nearby ? `near-places__image-wrapper` : `${classImageWrapper}`
         } place-card__image-wrapper`}
       >
-        <Router history={history}>
-          <Link to={`/offer/${offerId}`}>
-            <img
-              className="place-card__image"
-              src={offer.preview_image}
-              width={widthImg}
-              height={heightImg}
-              alt={offer.title}
-            />
-          </Link>
-        </Router>
+        <Link to={`/offer/${offerId}`}>
+          <img
+            className="place-card__image"
+            src={offer.preview_image}
+            width={widthImg}
+            height={heightImg}
+            alt={offer.title}
+          />
+        </Link>
       </div>
       <div
         className={`${
@@ -71,7 +69,7 @@ const Card = ({
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: offer.rating * 10 }} />
+            <span style={{width: offer.rating * 10}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -106,5 +104,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export { Card };
+export {Card};
 export default connect(mapToStateProps, mapDispatchToProps)(Card);

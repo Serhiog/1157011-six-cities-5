@@ -2,11 +2,10 @@ import React from "react";
 import SendComment from "../send-comment/send-comment";
 import Review from "../review/review";
 import PropTypes from "prop-types";
-import {PropTypes4Offer} from "../../propConsts";
 import {AuthorizationStatus} from "../../consts";
 import {connect} from "react-redux";
 
-const ReviewList = ({reviews, authorizationStatus}) => {
+const ReviewList = ({offerId, reviews, authorizationStatus}) => {
 
   return (
     <section className="property__reviews reviews">
@@ -17,13 +16,15 @@ const ReviewList = ({reviews, authorizationStatus}) => {
       <ul className="reviews__list">
         <Review reviewList={reviews} />
       </ul>
-      {authorizationStatus === AuthorizationStatus.AUTH ? <SendComment /> : ``}
+      {authorizationStatus === AuthorizationStatus.AUTH ? <SendComment offerId={offerId} /> : ``}
     </section>
   );
 };
 
 ReviewList.propTypes = {
-  offer: PropTypes.shape(PropTypes4Offer),
+  offerId: PropTypes.number,
+  reviews: PropTypes.array,
+  authorizationStatus: PropTypes.string
 };
 
 const mapToStateProps = (state) => ({

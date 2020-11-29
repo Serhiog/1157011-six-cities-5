@@ -5,12 +5,13 @@ import Map from "../map/map";
 import CitiesList from "../cities-list/cities-list";
 import MainEmpty from "../main-empty/main-empty";
 import {connect} from "react-redux";
-import {getFiltredByCityOffers} from "../../store/offers/selectors";
+import {getFiltredByCityOffers, getSelectedCity} from "../../store/offers/selectors";
+
 import {PropTypes4Offer} from "../../propConsts";
 import {AuthorizationStatus} from "../../consts";
 
-const MainPage = ({ goToFavorites, offers, isLogged, email }) => {
-  const city = offers[0].city
+
+const MainPage = ({goToFavorites, city, offers, isLogged, email}) => {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -71,6 +72,7 @@ const MainPage = ({ goToFavorites, offers, isLogged, email }) => {
               <div className="cities__right-section">
                 <section className="cities__map map">
                   <Map
+                    selectedCity={city}
                     offers={offers}
                     classMap={`cities__map`}
                     cityCoordinates={[
@@ -90,9 +92,10 @@ const MainPage = ({ goToFavorites, offers, isLogged, email }) => {
 };
 
 MainPage.propTypes = {
+  city: PropTypes.object.isRequired,
   goToFavorites: PropTypes.func,
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
-  isLogged: PropTypes.string,
+  isLogged: PropTypes.bool,
   email: PropTypes.string.isRequired,
 };
 
@@ -100,6 +103,7 @@ const mapToStateProps = (state) => ({
   offers: getFiltredByCityOffers(state),
   isLogged: state.user.authorizationStatus,
   email: state.user.email,
+  city: getSelectedCity(state)
 });
 
 export {MainPage};

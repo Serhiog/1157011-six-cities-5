@@ -3,7 +3,7 @@ import {ActionType} from "../action";
 import {CITIES} from "../../consts";
 
 const initialState = {
-  city: null,
+  city: CITIES.COLOGNE,
   hoveredOfferId: null,
   offerList: [],
   currentSort: `Popular`,

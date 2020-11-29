@@ -2,7 +2,6 @@ import {
   ActionType,
   changeCity,
   redirectToRoute,
-  requireAuthorization,
   getFavoriteOffers,
   updateErrorStatus,
   getOffers,
@@ -10,7 +9,7 @@ import {
   getNearbyOffers,
 } from './action';
 
-import {offers, reviews, reviewData} from "../mocks/data";
+import {offers, reviews} from "../mocks/data";
 
 describe(`Action creators work correctly`, () => {
   it(`Action creator for changeCity returns correct action`, () => {
