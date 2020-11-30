@@ -1,4 +1,4 @@
-import {MAXLENGTHMESSAGE} from "../consts";
+import {MAX_LENGTH_MESSAGE} from "../consts";
 import {SortingTypes} from "../consts";
 
 export const ActionType = {
@@ -8,7 +8,6 @@ export const ActionType = {
   SELECT_CITY: `SELECT_CITY`,
   SELECT_SORT: `SELECT_SORT`,
   LOAD_HOTELS: `LOAD_HOTELS`,
-  USER_LOGGED: `USER_LOGGED`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
@@ -40,7 +39,7 @@ export const ActionCreator = {
   handleLengthMessage: (messageLength) => {
     return {
       type: ActionType.CHECKING_COMMENT,
-      messageLength: messageLength < MAXLENGTHMESSAGE,
+      messageLength: messageLength < MAX_LENGTH_MESSAGE,
     };
   },
   handleCity: (city) => {

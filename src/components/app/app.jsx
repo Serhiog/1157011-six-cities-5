@@ -66,13 +66,13 @@ const App = ({offers}) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  offers: getOffers(state),
-});
-
 App.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4ServerOffer)).isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  offers: getOffers(state),
+});
 
 export {App};
 export default connect(mapStateToProps)(App);
