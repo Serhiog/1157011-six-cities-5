@@ -57,12 +57,6 @@ class Map extends React.PureComponent {
     });
   }
 
-  getCityOffers() {
-    return this.props.offers.filter(
-        (offer) => offer.city.name === this.props.selectedCity.name
-    );
-  }
-
   componentDidUpdate() {
     const offers = this.getCityOffers();
     const {selectedCity, hoveredOfferId} = this.props;
@@ -103,6 +97,13 @@ class Map extends React.PureComponent {
     });
   }
 
+  getCityOffers() {
+    return this.props.offers.filter(
+        (offer) => offer.city.name === this.props.selectedCity.name
+    );
+  }
+
+
   render() {
     return (
       <div id="map" style={{
@@ -113,9 +114,16 @@ class Map extends React.PureComponent {
   }
 }
 
+Map.propTypes = {
+  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
+  mapSize: PropTypes.string,
+  hoveredOfferId: PropTypes.string,
+  selectedCity: PropTypes.object,
+  forOffer: PropTypes.bool,
+};
+
 const mapToStateProps = (state) => ({
   hoveredOfferId: state.offers.hoveredOfferId,
-  // selectedCity: getSelectedCity(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -124,14 +132,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.handleCity(city));
   },
 });
-
-Map.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
-  mapSize: PropTypes.string,
-  hoveredOfferId: PropTypes.string,
-  selectedCity: PropTypes.object,
-  forOffer: PropTypes.bool,
-};
 
 export {Map};
 export default connect(mapToStateProps, mapDispatchToProps)(Map);

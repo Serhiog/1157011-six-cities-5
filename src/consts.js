@@ -1,4 +1,4 @@
-export const MaxLengthMessage = 50;
+export const MAXLENGTHMESSAGE = 50;
 
 export const MapSizes = {
   mainPage: `100%`,
@@ -18,7 +18,7 @@ export const SortingTypes = {
   Dusseldorf: `Dusseldorf`
 };
 
-export const actualOfferIndex = 1;
+export const ACTUALOFFERINDEX = 1;
 
 export const AppRoute = {
   ROOT: `/`,

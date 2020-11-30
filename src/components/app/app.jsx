@@ -12,6 +12,7 @@ import {AppRoute} from "../../consts";
 import {connect} from "react-redux";
 import {getOffers} from "../../store/offers/selectors";
 import PropTypes from "prop-types";
+import {PropTypes4ServerOffer} from "../../propConsts";
 
 const App = ({offers}) => {
   return (
@@ -70,7 +71,7 @@ const mapStateToProps = (state) => ({
 });
 
 App.propTypes = {
-  offers: PropTypes.array,
+  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4ServerOffer)).isRequired,
 };
 
 export {App};

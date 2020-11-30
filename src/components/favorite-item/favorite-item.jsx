@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {OfferList} from "../offers-list/offer-list";
+import OfferList from "../offers-list/offer-list";
 import {AppRoute} from "../../consts";
 
 const getCityOffers = (offers, cityName) =>
@@ -48,4 +48,5 @@ FavoriteItem.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
+export {FavoriteItem};
 export default FavoriteItem;

@@ -114,15 +114,20 @@ exports[`Card render Should Offer render correctly 1`] = `
         </span>
       </div>
     </div>
-    <h2
-      className="place-card__name"
+    <a
+      href="/offer/1"
+      onClick={[Function]}
     >
-      <a
-        href="#"
+      <h2
+        className="place-card__name"
       >
-        Beautiful & luxurious studio at great location
-      </a>
-    </h2>
+        <span
+          href="#"
+        >
+          Beautiful & luxurious studio at great location
+        </span>
+      </h2>
+    </a>
     <p
       className="place-card__type"
     >

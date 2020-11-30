@@ -33,7 +33,7 @@ let CitiesList = ({unicCities, currentCity, handleCity}) => {
 };
 
 CitiesList.propTypes = {
-  unicCities: PropTypes.array,
+  unicCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   handleCity: PropTypes.func,
   currentCity: PropTypes.string.isRequired,
 };

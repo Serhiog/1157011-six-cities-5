@@ -2,7 +2,7 @@
 
 exports[`FavoriteButton render AuthScreen with authorization 1`] = `
 <button
-  className="button place-card__bookmark-button "
+  className="button place-card__bookmark-button place-card__bookmark-button--active"
   onClick={[Function]}
   type="button"
 >

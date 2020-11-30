@@ -3,18 +3,17 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 
-
 const SelectSort = ({handleSorting}) => {
   return (
     <form className="places__sorting" action="#" method="get">
-      <span className="places__sorting-caption">Sort by</span>
-      <span className="places__sorting-type" tabIndex={0}>
-        Popular
-        <svg className="places__sorting-arrow" width={7} height={4}>
-          <use xlinkHref="#icon-arrow-select" />
-        </svg>
+      <span style={{marginRight: `10px`}} className="places__sorting-caption">
+        Sort by
       </span>
-      <select onChange={handleSorting} className="places__sorting-type" id="places-sorting">
+      <select
+        onChange={handleSorting}
+        className="places__sorting-type"
+        id="places-sorting"
+      >
         <option className="places__option" value="popular" defaultValue="">
           Popular
         </option>

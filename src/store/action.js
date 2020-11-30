@@ -1,4 +1,4 @@
-import {MaxLengthMessage} from "../consts";
+import {MAXLENGTHMESSAGE} from "../consts";
 import {SortingTypes} from "../consts";
 
 export const ActionType = {
@@ -13,7 +13,7 @@ export const ActionType = {
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   SET_USER_EMAIL: `SET_USER_EMAIL`,
-  GET_FAVORITE_OFFERS: `GET_FAVORITE_OFFERS`,
+  ADD_TO_FAVORITES: `ADD_TO_FAVORITES`,
   GET_REVIEWS: `GET_REVIEWS`,
   RESET_COMMENT: `RESET_COMMENT`,
   UPDATE_ERROR_STATUS: `UPDATE_ERROR_STATUS`,
@@ -31,17 +31,16 @@ export const ActionCreator = {
     type: ActionType.MOUSE_OVER,
     payload,
   }),
-  handleFormSubmit: (data) => {
+  handleFormSubmit: (comment, rating) => {
     return {
       type: ActionType.SEND_COMMENT,
-      comment: data.get(`review`),
-      rating: data.get(`rating`),
+      payload: comment, rating,
     };
   },
   handleLengthMessage: (messageLength) => {
     return {
       type: ActionType.CHECKING_COMMENT,
-      messageLength: messageLength < MaxLengthMessage,
+      messageLength: messageLength < MAXLENGTHMESSAGE,
     };
   },
   handleCity: (city) => {
@@ -81,7 +80,7 @@ export const requireAuthorization = (status, email) => ({
 });
 
 export const getFavoriteOffers = (offers) => ({
-  type: ActionType.GET_FAVORITE_OFFERS,
+  type: ActionType.ADD_TO_FAVORITES,
   payload: offers,
 });
 

@@ -73,9 +73,11 @@ const Card = ({
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2 className="place-card__name">
-          <a href="#">{offer.title}</a>
-        </h2>
+        <Link to={`/offer/${offerId}`}>
+          <h2 className="place-card__name">
+            <span href="#">{offer.title}</span>
+          </h2>
+        </Link>
         <p className="place-card__type">{offer.type}</p>
       </div>
     </article>

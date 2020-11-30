@@ -4,6 +4,7 @@ import Review from "../review/review";
 import PropTypes from "prop-types";
 import {AuthorizationStatus} from "../../consts";
 import {connect} from "react-redux";
+import {PropsTypes4Reviews} from "../../propConsts";
 
 const ReviewList = ({offerId, reviews, authorizationStatus}) => {
 
@@ -23,7 +24,7 @@ const ReviewList = ({offerId, reviews, authorizationStatus}) => {
 
 ReviewList.propTypes = {
   offerId: PropTypes.number,
-  reviews: PropTypes.array,
+  reviews: PropTypes.arrayOf(PropTypes.shape(PropsTypes4Reviews)),
   authorizationStatus: PropTypes.string
 };
 

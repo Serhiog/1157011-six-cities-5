@@ -13,6 +13,7 @@ import {getNearbyOffersHotel} from "../../store/offers/selectors";
 import {PropTypes4Offer} from "../../propConsts";
 import FavoriteButton from "../favorite-btn/favorite-btn";
 import {AuthorizationStatus} from "../../consts";
+import {PropsTypes4Reviews} from "../../propConsts";
 
 const Offer = ({
   offer,
@@ -212,7 +213,7 @@ Offer.propTypes = {
   getReviews: PropTypes.func.isRequired,
   nearbyOffers: PropTypes.arrayOf(PropTypes.object).isRequired,
   offer: PropTypes.shape(PropTypes4Offer),
-  reviews: PropTypes.array,
+  reviews: PropTypes.arrayOf(PropTypes.shape(PropsTypes4Reviews)),
   authorizationStatus: PropTypes.string.isRequired,
   isLogged: PropTypes.any,
   email: PropTypes.string,

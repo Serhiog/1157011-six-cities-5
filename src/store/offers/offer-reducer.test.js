@@ -36,38 +36,6 @@ describe(`Offer Actions Reducer testing`, () => {
     });
   });
 
-  // it(`Reducer updates activeOfferId`, () => {
-  //   expect(
-  //       offerReducer(
-  //           {
-  //             activeOfferId: `1`,
-  //           },
-  //           {
-  //             type: ActionType.UPDATE_ACTIVE_OFFER_ID,
-  //             payload: `10`,
-  //           }
-  //       )
-  //   ).toEqual({
-  //     activeOfferId: `10`,
-  //   });
-  // });
-
-  // it(`Reducer updates openSort`, () => {
-  //   expect(
-  //       offerReducer(
-  //           {
-  //             openSort: false,
-  //           },
-  //           {
-  //             type: ActionType.OPEN_SORT,
-  //             payload: true,
-  //           }
-  //       )
-  //   ).toEqual({
-  //     openSort: true,
-  //   });
-  // });
-
   it(`Reducer updates reviews`, () => {
     expect(
         offerReducer(
@@ -84,23 +52,6 @@ describe(`Offer Actions Reducer testing`, () => {
     });
   });
 
-  // it(`Reducer updates sort type by change sort type`, () => {
-  //   expect(
-  //       offerReducer(
-  //           {
-  //             currentSort: `Popular`,
-  //           },
-  //           {
-  //             type: ActionType.UPDATE_SORT,
-  //             payload: `Rating`,
-  //           }
-  //       )
-  //   ).toEqual({
-  //     currentSort: `Rating`,
-  //     openSort: false,
-  //   });
-  // });
-
   it(`Reducer updates favorites by load favorites`, () => {
     expect(
         offerReducer(
@@ -108,7 +59,7 @@ describe(`Offer Actions Reducer testing`, () => {
               favoriteOffers: [],
             },
             {
-              type: ActionType.GET_FAVORITE_OFFERS,
+              type: ActionType.ADD_TO_FAVORITES,
               payload: adaptedOffers,
             }
         )
@@ -161,27 +112,11 @@ describe(`Testing related to offers async operations`, () => {
     return favoriteOfferLoader(dispatch, () => {}, api).then(() => {
       expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
-        type: ActionType.GET_FAVORITE_OFFERS,
+        type: ActionType.ADD_TO_FAVORITES,
         payload: adaptedOffers,
       });
     });
   });
-
-  // it(`makes a correct API call for reviews`, () => {
-  //   const apiMock = new MockAdapter(api);
-  //   const dispatch = jest.fn();
-  //   const reviewsLoader = fetchReviewsList(`1`);
-
-  //   apiMock.onGet(`/comments/1`).reply(SUCCESS_CODE_REQUEST, serverReviews);
-
-  //   return reviewsLoader(dispatch, () => {}, api).then(() => {
-  //     expect(dispatch).toHaveBeenCalledTimes(1);
-  //     expect(dispatch).toHaveBeenNthCalledWith(1, {
-  //       type: ActionType.GET_REVIEWS,
-  //       payload: adaptedReviews,
-  //     });
-  //   });
-  // });
 
   it(`makes a correct API call for handling favorite offers`, () => {
     const apiMock = new MockAdapter(api);

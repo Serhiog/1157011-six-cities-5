@@ -31,14 +31,14 @@ export const offerReducer = (state = initialState, action) => {
     case ActionType.LOAD_HOTELS:
       return extend(state, {
         offerList: action.payload,
-        city: action.payload[0].city.name,
+        city: state.city ? state.city : action.payload[0].city.name,
       });
     case ActionType.LOAD_REVIEWS:
       return extend(state, {
         comments: action.payload,
         param: action.param,
       });
-    case ActionType.GET_FAVORITE_OFFERS:
+    case ActionType.ADD_TO_FAVORITES:
       return extend(state, {
         favoriteOffers: action.payload,
       });

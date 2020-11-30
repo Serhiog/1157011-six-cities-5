@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {PropTypes4Offer} from "../../propConsts";
+import {PropTypes4ServerOffer} from "../../propConsts";
 import OfferCard from "../offer-card/offer-card";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
@@ -57,14 +57,14 @@ const OfferList = ({
 };
 
 OfferList.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4Offer)),
+  offers: PropTypes.arrayOf(PropTypes.shape(PropTypes4ServerOffer)).isRequired,
   handleOfferCard: PropTypes.func,
   city: PropTypes.string,
   classList: PropTypes.string.isRequired,
   classCard: PropTypes.string.isRequired,
   classImageWrapper: PropTypes.string.isRequired,
   forFavorites: PropTypes.bool,
-  getFiltredByCityOffers: PropTypes.shape(PropTypes4Offer),
+  getFiltredByCityOffers: PropTypes.shape(PropTypes4ServerOffer),
   nearby: PropTypes.bool
 };
 
