@@ -1,13 +1,25 @@
+import {extend} from "../../utils";
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../services/api";
 import {offerReducer} from "./offerReducer";
-import {ActionType} from "../action";
+import {
+  ActionType,
+  ActionCreator,
+  loadHotels,
+  getFavoriteOffers,
+  loadReviews,
+  getNearbyOffers,
+  getReviews,
+  changeCity,
+} from "../action";
 import {
   serverReviews,
   serverOffers,
   reviewData,
   adaptedOffers,
   adaptedReviews,
+  offers,
+  comments,
 } from "../../mocks/data";
 import {
   fetchNearbyOffersList,
@@ -15,14 +27,25 @@ import {
   changeFavorite,
   sendReview,
 } from "../api-actions";
-import {CITIES} from '../../consts';
+import {CITIES, SortingTypes} from "../../consts";
 
 const SUCCESS_CODE_REQUEST = 200;
 
 const api = createAPI(() => {});
 
-
 describe(`Offer Actions Reducer testing`, () => {
+  const initialState = {
+    city: CITIES.COLOGNE,
+    hoveredOfferId: null,
+    offerList: [],
+    currentSort: `to-high`,
+    comments: [],
+    favoriteOffers: [],
+    param: null,
+    selectedCity: CITIES.COLOGNE,
+    nearbyOffers: [],
+  };
+
   it(`Reducer without additional parameters returns initial state`, () => {
     expect(offerReducer(void 0, {})).toEqual({
       city: CITIES.COLOGNE,
@@ -33,8 +56,43 @@ describe(`Offer Actions Reducer testing`, () => {
       favoriteOffers: [],
       param: null,
       selectedCity: CITIES.COLOGNE,
-      nearbyOffers: []
+      nearbyOffers: [],
     });
+  });
+
+  it(`Reducer updates hoveredOfferId`, () => {
+    expect(
+        offerReducer(initialState, ActionCreator.handleOfferCard(1))
+    ).toEqual(extend(initialState, {hoveredOfferId: 1}));
+  });
+
+  it(`Reducer updates selected city`, () => {
+    expect(
+        offerReducer(initialState, ActionCreator.handleCity(CITIES.AMSTERDAM))
+    ).toEqual(Object.assign(initialState, {city: CITIES.AMSTERDAM}));
+  });
+
+  it(`Reducer updates selected sort`, () => {
+    expect(
+        offerReducer(
+            initialState,
+            ActionCreator.handleSorting(SortingTypes.toHigh)
+        )
+    ).toEqual(
+        Object.assign(initialState, {currentSort: SortingTypes.toHigh})
+    );
+  });
+
+  it(`Reducer updates offer list`, () => {
+    expect(offerReducer(initialState, loadHotels(offers))).toEqual(
+        Object.assign(initialState, {offerList: offers})
+    );
+  });
+
+  it(`Reducer updates comments list`, () => {
+    expect(offerReducer(initialState, loadReviews(comments, 1))).toEqual(
+        Object.assign(initialState, {comments, param: 1})
+    );
   });
 
   it(`Reducer updates reviews`, () => {
@@ -55,34 +113,32 @@ describe(`Offer Actions Reducer testing`, () => {
 
   it(`Reducer updates favorites by load favorites`, () => {
     expect(
-        offerReducer(
-            {
-              favoriteOffers: [],
-            },
-            {
-              type: ActionType.ADD_TO_FAVORITES,
-              payload: adaptedOffers,
-            }
-        )
-    ).toEqual({
-      favoriteOffers: adaptedOffers,
-    });
+        offerReducer(initialState, getFavoriteOffers(adaptedOffers))
+    ).toEqual(Object.assign(initialState, {favoriteOffers: adaptedOffers}));
+  });
+
+  it(`Reducer updates reviews`, () => {
+    expect(offerReducer(initialState, getReviews(comments))).toEqual(
+        Object.assign(initialState, {comments})
+    );
+  });
+
+  it(`Reducer updates selected city`, () => {
+    expect(offerReducer(initialState, changeCity(CITIES.DUSELDORF))).toEqual(
+        Object.assign(initialState, {selectedCity: CITIES.DUSELDORF})
+    );
   });
 
   it(`Reducer updates nearby offers by load offers`, () => {
-    expect(
-        offerReducer(
-            {
-              nearbyOffers: [],
-            },
-            {
-              type: ActionType.GET_NEARBY_OFFERS,
-              payload: adaptedOffers,
-            }
-        )
-    ).toEqual({
-      nearbyOffers: adaptedOffers,
-    });
+    expect(offerReducer(initialState, getNearbyOffers(adaptedOffers))).toEqual(
+        Object.assign(initialState, {nearbyOffers: adaptedOffers})
+    );
+  });
+
+  it(`Reducer return current state for unsupported action`, () => {
+    expect(offerReducer(initialState, {type: `UNKNOWN_ACTION`})).toEqual(
+        initialState
+    );
   });
 });
 

@@ -18,7 +18,7 @@ export const messageReducer = (state = initialState, action) => {
     case ActionType.SEND_COMMENT:
       return extend(state, {
         rating: action.rating,
-        comment: action.comment,
+        comment: action.payload,
       });
     case ActionType.UPDATE_ERROR_STATUS:
       return extend(state, {
