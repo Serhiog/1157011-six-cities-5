@@ -21,6 +21,7 @@ const SUCCESS_CODE_REQUEST = 200;
 
 const api = createAPI(() => {});
 
+
 describe(`Offer Actions Reducer testing`, () => {
   it(`Reducer without additional parameters returns initial state`, () => {
     expect(offerReducer(void 0, {})).toEqual({
