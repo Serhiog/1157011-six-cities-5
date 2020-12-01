@@ -1,3 +1,4 @@
+import {extend} from "../../utils";
 import {
   ActionCreator,
   resetReview,
@@ -19,33 +20,33 @@ describe(`Message reducer testing`, () => {
   it(`Reducer reset comment and rating`, () => {
     expect(
         messageReducer(
-            Object.assign(initialState, {comment: `Hello`, rating: 4}),
+            extend(initialState, {comment: `Hello`, rating: 4}),
             resetReview({defaultData: {rating: 0, review: ``}})
         )
-    ).toEqual(Object.assign(initialState, {comment: ``, rating: 0}));
+    ).toEqual(extend(initialState, {comment: ``, rating: 0}));
   });
 
   it(`Reducer update send button flag`, () => {
     expect(
         messageReducer(initialState, ActionCreator.handleLengthMessage(60))
-    ).toEqual(Object.assign(initialState, {blockSendBtn: false}));
+    ).toEqual(extend(initialState, {blockSendBtn: false}));
   });
 
   it(`Reducer update comment and rating`, () => {
     expect(
         messageReducer(initialState, ActionCreator.handleFormSubmit(`Hello`, 4))
-    ).toEqual(Object.assign(initialState, {comment: `Hello`, rating: 4}));
+    ).toEqual(extend(initialState, {comment: `Hello`, rating: 4}));
   });
 
   it(`Reducer reset comment and rating`, () => {
     expect(messageReducer(initialState, updateErrorStatus(true))).toEqual(
-        Object.assign(initialState, {isErrorToSubmit: true})
+        extend(initialState, {isErrorToSubmit: true})
     );
   });
 
   it(`Reducer update offers`, () => {
     expect(messageReducer(initialState, getOffers(offers))).toEqual(
-        Object.assign(initialState, {offers})
+        extend(initialState, {offers})
     );
   });
 

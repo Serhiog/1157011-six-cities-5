@@ -38,7 +38,7 @@ describe(`Offer Actions Reducer testing`, () => {
     city: CITIES.COLOGNE,
     hoveredOfferId: null,
     offerList: [],
-    currentSort: `to-high`,
+    currentSort: `Popular`,
     comments: [],
     favoriteOffers: [],
     param: null,
@@ -69,7 +69,7 @@ describe(`Offer Actions Reducer testing`, () => {
   it(`Reducer updates selected city`, () => {
     expect(
         offerReducer(initialState, ActionCreator.handleCity(CITIES.AMSTERDAM))
-    ).toEqual(Object.assign(initialState, {city: CITIES.AMSTERDAM}));
+    ).toEqual(extend(initialState, {city: CITIES.AMSTERDAM}));
   });
 
   it(`Reducer updates selected sort`, () => {
@@ -79,19 +79,19 @@ describe(`Offer Actions Reducer testing`, () => {
             ActionCreator.handleSorting(SortingTypes.toHigh)
         )
     ).toEqual(
-        Object.assign(initialState, {currentSort: SortingTypes.toHigh})
+        extend(initialState, {currentSort: SortingTypes.toHigh})
     );
   });
 
   it(`Reducer updates offer list`, () => {
     expect(offerReducer(initialState, loadHotels(offers))).toEqual(
-        Object.assign(initialState, {offerList: offers})
+        extend(initialState, {offerList: offers})
     );
   });
 
   it(`Reducer updates comments list`, () => {
     expect(offerReducer(initialState, loadReviews(comments, 1))).toEqual(
-        Object.assign(initialState, {comments, param: 1})
+        extend(initialState, {comments, param: 1})
     );
   });
 
@@ -114,24 +114,24 @@ describe(`Offer Actions Reducer testing`, () => {
   it(`Reducer updates favorites by load favorites`, () => {
     expect(
         offerReducer(initialState, getFavoriteOffers(adaptedOffers))
-    ).toEqual(Object.assign(initialState, {favoriteOffers: adaptedOffers}));
+    ).toEqual(extend(initialState, {favoriteOffers: adaptedOffers}));
   });
 
   it(`Reducer updates reviews`, () => {
     expect(offerReducer(initialState, getReviews(comments))).toEqual(
-        Object.assign(initialState, {comments})
+        extend(initialState, {comments})
     );
   });
 
   it(`Reducer updates selected city`, () => {
     expect(offerReducer(initialState, changeCity(CITIES.DUSELDORF))).toEqual(
-        Object.assign(initialState, {selectedCity: CITIES.DUSELDORF})
+        extend(initialState, {selectedCity: CITIES.DUSELDORF})
     );
   });
 
   it(`Reducer updates nearby offers by load offers`, () => {
     expect(offerReducer(initialState, getNearbyOffers(adaptedOffers))).toEqual(
-        Object.assign(initialState, {nearbyOffers: adaptedOffers})
+        extend(initialState, {nearbyOffers: adaptedOffers})
     );
   });
 
