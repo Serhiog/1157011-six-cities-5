@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import {Router, Switch, Route, Link} from "react-router-dom";
+import {Router, Switch, Route, Redirect} from "react-router-dom";
 import MainPage from "../main-page/main-page";
 import EmptyMainPage from "../empty-main-page/empty-main-page";
 import Login from "../login/login";
@@ -51,14 +51,7 @@ const App = ({offers}) => {
         />
         <Route
           render={() => (
-            <Fragment>
-              <h1>
-                404.
-                <br />
-                <small>Page not found</small>
-              </h1>
-              <Link to="/">Go to main page</Link>
-            </Fragment>
+            <Redirect to={AppRoute.ROOT} />
           )}
         />
       </Switch>
