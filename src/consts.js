@@ -15,7 +15,7 @@ export const SortingTypes = {
   Brussels: `Brussels`,
   Amsterdam: `Amsterdam`,
   Hamburg: `Hamburg`,
-  Dusseldorf: `Dusseldorf`
+  Dusseldorf: `Dusseldorf`,
 };
 
 export const ACTUAL_OFFER_INDEX = 1;
@@ -25,7 +25,7 @@ export const AppRoute = {
   LOGIN: `/login`,
   FAVORITES: `/favorites`,
   OFFER: `/offer/`,
-  OFFER_ID: `/offer/:id?`
+  OFFER_ID: `/offer/:id?`,
 };
 
 export const AuthorizationStatus = {
@@ -35,14 +35,8 @@ export const AuthorizationStatus = {
 
 export const ReviewLength = {
   MIN: 50,
-  MAX: 300
+  MAX: 300,
 };
-
-export const Pins = {
-  icon: `img/pin.svg`,
-  activeIcon: `img/pin-active.svg`
-};
-
 
 export const CITIES = {
   PARISH: `Paris`,
@@ -51,4 +45,9 @@ export const CITIES = {
   AMSTERDAM: `Amsterdam`,
   HUMBURG: `Hamburg`,
   DUSELDORF: `Dusseldorf`,
+};
+
+export const Pins = {
+  icon: `img/pin.svg`,
+  activeIcon: `img/pin-active.svg`,
 };
