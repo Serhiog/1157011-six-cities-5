@@ -39,8 +39,8 @@ export const ReviewLength = {
 };
 
 export const Pins = {
-  icon: `/img/pin.svg`,
-  activeIcon: `/img/pin-active.svg`
+  icon: `img/pin.svg`,
+  activeIcon: `img/pin-active.svg`
 };
 
 export const CITIES = {
