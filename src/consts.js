@@ -43,6 +43,7 @@ export const Pins = {
   activeIcon: `img/pin-active.svg`
 };
 
+
 export const CITIES = {
   PARISH: `Paris`,
   COLOGNE: `Cologne`,
