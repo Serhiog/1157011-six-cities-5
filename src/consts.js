@@ -38,6 +38,13 @@ export const ReviewLength = {
   MAX: 300,
 };
 
+export const Pins = {
+  nums: `/`,
+  icon: `img/pin.svg`,
+  activeIcon: `img/pin-active.svg`,
+  num: `/`,
+};
+
 export const CITIES = {
   PARISH: `Paris`,
   COLOGNE: `Cologne`,
@@ -45,9 +52,4 @@ export const CITIES = {
   AMSTERDAM: `Amsterdam`,
   HUMBURG: `Hamburg`,
   DUSELDORF: `Dusseldorf`,
-};
-
-export const Pins = {
-  icon: `img/pin.svg`,
-  activeIcon: `img/pin-active.svg`,
 };
